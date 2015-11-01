@@ -9,13 +9,44 @@
 
 $width: 100%;
 $height: 100%;
+$blur: 20px;
 
 html, body {
 	width: $width;
 	height: $height;
 }
-
 body {
-	background: url('../images/background.jpg');
-	@include background-image(radial-gradient(45px 45px, cyan 10px, white 30px));
+	@include background(radial-gradient(45px 45px, cyan 10px, transparent 30px));
+}
+
+#cas {
+	position: absolute;
+	width: $width;
+	height: $height;
+	@include background-image(radial-gradient(10% 10%, #ffffff 300px, #111 900px));
+}
+
+.blur {
+	width: $width;
+	height: $height;
+	position: absolute;
+	@include background(url('../images/background.jpg') no-repeat left bottom/100% 100%);
+	@include filter(blur($blur));
+
+	@include animation(removeFilter 3s 4);
+	@at-root {
+		@keyframes removeFilter {
+			@for $i from 1 through 20 {
+				#{$i}% {
+					$blur: (20-$i);
+					@include filter(blur($blur));
+				} 
+			}
+		}
+	}
+
+}
+
+.blog-name {
+	
 }
