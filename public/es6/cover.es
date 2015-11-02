@@ -37,29 +37,81 @@
 			GLOBAL.LEFT ++;
 
 			// requestAnimationFrame(drawCurtain);
-			setTimeout(drawCurtain, 10);
-			// drawCurtain();
 		}
 
 		function drawRainbow() {
 
 			let [width, height] = [+ctx.canvas.width, +ctx.canvas.height];
 			// let gradient = ctx.createLinearGradient(0, 0, 0, height);
-			let gradient = ctx.createRadialGradient(100,100,100,100,100,0);
-			gradient.addColorStop(0, 'red');
-			gradient.addColorStop(0.25, 'green');
-			gradient.addColorStop(0.5, 'blue');
-			gradient.addColorStop(0.75, 'yellow');
+			let gradient = ctx.createRadialGradient(width / 2, height, width / 3.5, width / 2, height, width / 4);
+			let percent = 1 / 7;
+
+			gradient.addColorStop(percent * 0, 'red');
+			gradient.addColorStop(percent * 1, 'orange');
+			gradient.addColorStop(percent * 2, 'yellow');
+			gradient.addColorStop(percent * 3, 'green');
+			gradient.addColorStop(percent * 4, 'cyan');
+			gradient.addColorStop(percent * 5, 'blue');
+			gradient.addColorStop(percent * 6, 'purple');
+
+			ctx.save();
+			ctx.beginPath();
+			ctx.translate(0, - height * 0.2);
+			ctx.arc(width / 2, height, width / 3.7, Math.PI, 2 * Math.PI);
+			ctx.lineWidth = 55;
+			ctx.strokeStyle = gradient;
+			ctx.globalAlpha = 0.5;
+			ctx.stroke();
+			ctx.closePath();
+		}
+
+		function drawGlass() {
+
+			let [width, height] = [+ctx.canvas.width, +ctx.canvas.height];
+			let gradient = ctx.createLinearGradient(0, height * 0.76, 0, height);
+
+			gradient.addColorStop(0, '#88F7B0');
+			gradient.addColorStop(1, 'green');
+
+			ctx.fillStyle = gradient;
+			ctx.fillRect(0, height * 0.76, width, height);
+		}
+
+		function drawSky() {
+
+			let [width, height] = [+ctx.canvas.width, +ctx.canvas.height];
+			let gradient = ctx.createLinearGradient(width, 0, 0, height * 0.76);
+
+			gradient.addColorStop(0, '#09B9FF');
 			gradient.addColorStop(1, 'white');
 
-			ctx.beginPath();
-			ctx.moveTo(0, height);
-			ctx.bezierCurveTo(width / 2, 30, width / 2, height / 2 , width, height);
-			ctx.lineWidth = 30;
-			ctx.strokeStyle = gradient;
-			ctx.stroke();
+			ctx.restore();
+			ctx.fillStyle = gradient;
+			ctx.fillRect(0, 0, width, height * 0.76);
 
 		}
+
+		function drawCloud() {
+
+			let img = new Image();
+			let [width, height] = [+ctx.canvas.width, +ctx.canvas.height];
+
+			img.src = '../public/images/cloud.png';
+			img.onload = () => {
+
+				ctx.restore();
+
+				for(let i = 0;i < 5;i ++) {
+					let [randomX, randomY] = [width * random(), height * 0.76 * Math.random() - img.height];
+					ctx.drawImage(img, width * Math.random(), height * 0.76 * Math.random() - img.height, img.width, img.height);
+				}
+			};
+
+		}
+
+		drawSky();
+		drawCloud();
+		drawGlass();
 		drawRainbow();
 
 		// drawCurtain();

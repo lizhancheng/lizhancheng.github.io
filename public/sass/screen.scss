@@ -16,14 +16,14 @@ html, body {
 	height: $height;
 }
 body {
-	@include background(radial-gradient(45px 45px, cyan 10px, transparent 30px));
+	// @include background(radial-gradient(45px 45px, cyan 10px, transparent 30px));
 }
 
 #cas {
 	position: absolute;
 	width: $width;
 	height: $height;
-	@include background-image(radial-gradient(10% 10%, #ffffff 300px, #111 900px));
+	// @include background-image(radial-gradient(10% 10%, #ffffff 300px, #111 900px));
 }
 
 .blur {
