@@ -107,7 +107,19 @@
 									ctx.restore();
 
 									for (var i = 0; i < 5; i++) {
-												ctx.drawImage(img, width * Math.random(), height * 0.76 * Math.random() - img.height, img.width, img.height);
+												var randomX = width * Math.random();
+												var randomY = height * 0.76 * Math.random() - img.height;
+
+												var percent = randomY / (height * 0.5);
+
+												if (percent < 1) {
+
+															percent = 1 - percent;
+															var imgWidth = img.width;
+															var imgHeight = img.height * percent;
+
+															ctx.drawImage(img, randomX, randomY, imgWidth, imgHeight);
+												}
 									}
 						};
 			}

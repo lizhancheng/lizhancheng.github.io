@@ -102,8 +102,15 @@
 				ctx.restore();
 
 				for(let i = 0;i < 5;i ++) {
-					let [randomX, randomY] = [width * random(), height * 0.76 * Math.random() - img.height];
-					ctx.drawImage(img, width * Math.random(), height * 0.76 * Math.random() - img.height, img.width, img.height);
+					let [randomX, randomY] = [width * Math.random(), height * 0.76 * Math.random() - img.height];
+					let percent = randomY / (height * 0.5);
+
+					if(percent < 1) {
+
+						percent = 1 - percent;
+						let [imgWidth, imgHeight] = [img.width, img.height * percent];
+						ctx.drawImage(img, randomX, randomY, imgWidth, imgHeight);
+					}
 				}
 			};
 
