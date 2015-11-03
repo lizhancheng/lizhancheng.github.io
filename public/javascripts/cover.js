@@ -4,16 +4,73 @@
 
 'use strict';
 
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ('value' in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
 (function () {
 
 			var GLOBAL = {
-						LEFT: 0
+						LEFT: 0,
+						CLOUDS: [],
+						NOW: new Date()
 			};
 
 			var cas = document.getElementById('cas');
 			var ctx = cas.getContext('2d');
 			ctx.canvas.width = document.documentElement.clientWidth;
 			ctx.canvas.height = document.documentElement.clientHeight;
+
+			var Cloud = (function () {
+						function Cloud(x, y, width, height, image) {
+									_classCallCheck(this, Cloud);
+
+									this.x = x;
+									this.y = y;
+									this.width = width;
+									this.height = height;
+									this.image = image;
+
+									this.update();
+						}
+
+						_createClass(Cloud, [{
+									key: 'scale',
+									value: function scale() {
+
+												var self = this;
+												var width = +ctx.canvas.width;
+												var height = +ctx.canvas.height;
+
+												self.y += 10;
+
+												var percent = self.y / (height * 0.5);
+												if (percent < 1) {
+															percent = 1 - percent;
+															var imgWidth = self.width * (2 + percent);
+															var imgHeight = self.height * percent;
+
+															ctx.drawImage(self.image, self.x, self.y, imgWidth, imgHeight);
+												}
+									}
+						}, {
+									key: 'update',
+									value: function update() {
+
+												var self = this;
+												var width = +ctx.canvas.width;
+												var height = +ctx.canvas.height;
+
+												self.scale();
+												if (self.y > height * 0.5) {
+															self.y = -self.height;
+															self.x = width * Math.random();
+												}
+									}
+						}]);
+
+						return Cloud;
+			})();
 
 			function drawCurtain() {
 
@@ -106,22 +163,46 @@
 
 									ctx.restore();
 
-									for (var i = 0; i < 5; i++) {
+									// let [randomX, randomY] = [width * Math.random(), height * 0.76 * Math.random() - img.height];
+									if (GLOBAL.CLOUDS.length < 20 && Math.random() > 0.7) {
 												var randomX = width * Math.random();
-												var randomY = height * 0.76 * Math.random() - img.height;
+												var randomY = -img.height;
 
-												var percent = randomY / (height * 0.5);
-
-												if (percent < 1) {
-
-															percent = 1 - percent;
-															var imgWidth = img.width;
-															var imgHeight = img.height * percent;
-
-															ctx.drawImage(img, randomX, randomY, imgWidth, imgHeight);
-												}
+												GLOBAL.CLOUDS[GLOBAL.CLOUDS.length] = new Cloud(randomX, randomY, img.width, img.height, img);
 									}
 						};
+
+						for (var i = 0; i < GLOBAL.CLOUDS.length; i++) {
+
+									var cloud = GLOBAL.CLOUDS[i];
+									cloud.update.bind(cloud)();
+						}
+						requestAnimationFrame(function () {
+									drawSky();
+									drawCloud();
+									drawGlass();
+									drawRainbow();
+						});
+			}
+
+			function drawWindow() {
+						var width = +ctx.canvas.width;
+						var height = +ctx.canvas.height;
+
+						ctx.restore();
+						ctx.beginPath();
+						ctx.lineWidth = 120;
+						ctx.rect(0, 0, width, height);
+						ctx.strokeStyle = '#aaa';
+						ctx.stroke();
+						ctx.closePath();
+
+						ctx.beginPath();
+						ctx.lineWidth = 100;
+						ctx.rect(0, 0, width, height);
+						ctx.strokeStyle = '#eee';
+						ctx.stroke();
+						ctx.closePath();
 			}
 
 			drawSky();

@@ -7,13 +7,55 @@
 	(() => {
 
 		let GLOBAL = {
-			LEFT: 0
+			LEFT: 0, 
+			CLOUDS: [], 
+			NOW: new Date()
 		};
 
 		let cas = document.getElementById('cas');
 		let ctx = cas.getContext('2d');
 		ctx.canvas.width = document.documentElement.clientWidth;
 		ctx.canvas.height = document.documentElement.clientHeight;
+
+		class Cloud {
+
+			constructor(x, y, width, height, image) {
+
+				this.x = x;
+				this.y = y;
+				this.width = width;
+				this.height = height;
+				this.image = image;
+
+				this.update();
+			}
+
+			scale() {
+
+				let self = this;
+				let [width, height] = [+ctx.canvas.width, +ctx.canvas.height];
+
+				self.y += 10;
+
+				let percent = self.y / (height * 0.5);
+				if(percent < 1) {
+					percent = 1 - percent;
+					let [imgWidth, imgHeight] = [self.width * (2 + percent), self.height * percent];
+					ctx.drawImage(self.image, self.x, self.y, imgWidth, imgHeight);
+				}
+			}
+
+			update() {
+
+				let self = this;
+				let [width, height] = [+ctx.canvas.width, +ctx.canvas.height];
+				self.scale();
+				if(self.y > height * 0.5) {
+					self.y = -self.height;
+					self.x = width * Math.random();
+				}
+			}
+		}
 
 		function drawCurtain() {
 
@@ -101,23 +143,67 @@
 
 				ctx.restore();
 
-				for(let i = 0;i < 5;i ++) {
-					let [randomX, randomY] = [width * Math.random(), height * 0.76 * Math.random() - img.height];
-					let percent = randomY / (height * 0.5);
-
-					if(percent < 1) {
-
-						percent = 1 - percent;
-						let [imgWidth, imgHeight] = [img.width, img.height * percent];
-						ctx.drawImage(img, randomX, randomY, imgWidth, imgHeight);
-					}
+				// let [randomX, randomY] = [width * Math.random(), height * 0.76 * Math.random() - img.height];
+				if(GLOBAL.CLOUDS.length < 20 && Math.random() > 0.7) {
+					let [randomX, randomY] = [width * Math.random(), -img.height];
+					GLOBAL.CLOUDS[GLOBAL.CLOUDS.length] = new Cloud(randomX, randomY, img.width, img.height, img);
 				}
 			};
 
+			for(let i = 0;i < GLOBAL.CLOUDS.length;i ++) {
+
+				let cloud = GLOBAL.CLOUDS[i];
+				cloud.update.bind(cloud)();
+			}
+			requestAnimationFrame(function(){
+				drawSky();
+				drawCloud();
+				drawGlass();
+				drawRainbow();
+			});
+
+		}
+
+		function drawWindow() {
+
+			let [width, height] = [+ctx.canvas.width, +ctx.canvas.height];
+
+			ctx.restore();
+			ctx.beginPath();
+			ctx.lineWidth = 120;
+			ctx.rect(0, 0, width, height);
+			ctx.strokeStyle = '#aaa';
+			ctx.stroke();
+			ctx.closePath();
+
+			ctx.beginPath();
+			ctx.lineWidth = 100;			
+			ctx.rect(0, 0, width, height);
+			ctx.strokeStyle = '#eee';
+			ctx.stroke();
+			ctx.closePath();
+
+		}
+
+		class Brand {
+
+			constructor(x, y, width, height, image) {
+
+				this.x = x;
+				this.y = y;
+				this.width = width;
+				this.height = height;
+				this.image = image;
+			}
+
+			draw() {
+
+
+			}
 		}
 
 		drawSky();
-		drawCloud();
+		// drawCloud();
 		drawGlass();
 		drawRainbow();
 
