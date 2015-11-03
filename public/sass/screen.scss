@@ -48,6 +48,43 @@ body {
 
 }
 
-.blog-name {
-	
+.brand {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	width: 326.656px;
+	height: 290.328px;
+	transform-origin: 0% -50%;
+
+	@include background(url('../images/name.png') no-repeat left bottom/100% 100%);
+	@include transform(translate(-50%, -50%));
+
+	@include opacity(1);
+	@include transition(transform 1s);
+
+	@include animation(showBrand 5s);
+	@at-root {
+		@keyframes showBrand {
+			0% {
+				@include opacity(0);
+			}
+			@for $i from 1 through 10 {
+				#{$i * 10}% {
+					@include opacity($i * 0.1);
+					@if $i % 2 == 0 {
+						$deg: $i - 10;
+						@include transform(rotate(#{$deg}deg) translate(-50%, -50%));
+					}@else {
+						$deg: 10 - $i;
+						@include transform(rotate(#{$deg}deg) translate(-50%, -50%));
+					}
+				}
+			}
+		}
+	}
+
+	&:hover {
+		@include transform(rotateX(-60deg) translate(-50%, -50%));
+	}
 }
+
