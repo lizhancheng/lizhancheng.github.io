@@ -13,7 +13,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 			var GLOBAL = {
 						LEFT: 0,
 						CLOUDS: [],
-						NOW: new Date()
+						NOW: new Date(),
+						ALPHA: 1,
+						ALPHA_STATUS: false
 			};
 
 			var cas = document.getElementById('cas');
@@ -118,9 +120,24 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 						ctx.beginPath();
 						ctx.translate(0, -height * 0.2);
 						ctx.arc(width / 2, height, width / 3.7, Math.PI, 2 * Math.PI);
-						ctx.lineWidth = 55;
+						if (navigator.userAgent.indexOf('Mobile') > -1) {
+									ctx.lineWidth = 25;
+						} else {
+									ctx.lineWidth = 55;
+						}
 						ctx.strokeStyle = gradient;
-						ctx.globalAlpha = 0.5;
+						if (!GLOBAL.ALPHA_STATUS) {
+									GLOBAL.ALPHA -= 0.005;
+									if (GLOBAL.ALPHA <= 0.01) {
+												GLOBAL.ALPHA_STATUS = !GLOBAL.ALPHA_STATUS;
+									}
+						} else {
+									GLOBAL.ALPHA += 0.005;
+									if (GLOBAL.ALPHA >= 0.5) {
+												GLOBAL.ALPHA_STATUS = !GLOBAL.ALPHA_STATUS;
+									}
+						}
+						ctx.globalAlpha = GLOBAL.ALPHA;
 						ctx.stroke();
 						ctx.closePath();
 			}

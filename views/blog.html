@@ -1,15 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<base href="index.html" />
+	<base target="_self" />
 	<meta charset="UTF-8">
+	<!-- 启用WebApp全屏模式 -->
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<!-- 隐藏状态栏 -->
+	<meta name="apple-mobile-web-app-title" content="black-translucent">
+	<meta name="apple-touch-fullscreen" content="yes">
+	<!-- 针对手持设备优化，主要针对一些老的不识别viewport的浏览器，比如黑莓 -->
+	<meta name="HandheldFriendly" content="true">
+	<!-- QQ强制全屏 -->
+	<meta name="x5-fullscreen" content="true">
+	<!-- UC强制全屏 -->
+	<meta name="full-screen" content="yes">
+	<!-- windowsPhone点击无高光 -->
+	<meta name="msapplication-tap-highlight" content="no">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<title>MyBlog</title>
-	<link href="../public/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
+	<link href="../public/stylesheets/screen.css?v=7" media="screen, projection" rel="stylesheet" type="text/css" />
 </head>
 <body>
-
+	<canvas id="mongolia"></canvas>
+<!-- header -->
 	<header>
 		
 	</header>
-	
+
+	<script src="../public/javascripts/mongolia.js?v=9"></script>
 </body>
 </html>
