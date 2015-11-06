@@ -37,7 +37,7 @@
 				let self = this;
 				let [width, height] = [+ctx.canvas.width, +ctx.canvas.height];
 
-				self.y += 10;
+				self.y += 0.05;
 
 				let percent = self.y / (height * 0.5);
 				if(percent < 1) {
@@ -162,8 +162,16 @@
 
 				// let [randomX, randomY] = [width * Math.random(), height * 0.76 * Math.random() - img.height];
 				if(GLOBAL.CLOUDS.length < 20 && Math.random() > 0.7) {
-					let [randomX, randomY] = [width * Math.random(), -img.height];
-					GLOBAL.CLOUDS[GLOBAL.CLOUDS.length] = new Cloud(randomX, randomY, img.width, img.height, img);
+					let len = GLOBAL.CLOUDS.length;
+					if(len > 0) {
+						if(GLOBAL.CLOUDS[GLOBAL.CLOUDS.length - 1].y > height * Math.random()) {
+							let [randomX, randomY] = [width * Math.random(), -img.height];
+							GLOBAL.CLOUDS[GLOBAL.CLOUDS.length] = new Cloud(randomX, randomY, img.width, img.height, img);		
+						}
+					}else {
+						let [randomX, randomY] = [width * Math.random(), -img.height];
+						GLOBAL.CLOUDS[GLOBAL.CLOUDS.length] = new Cloud(randomX, randomY, img.width, img.height, img);
+					}
 				}
 			};
 
