@@ -171,12 +171,30 @@ body {
 }
 
 @mixin load {
-	from {
-		@include transform(rotate(0deg) translate(-50%, -50%));
-	}
-	to {
-		@include transform(rotate(360deg) translate(-50%, -50%));
-	}
+	 0% {
+        @include box-shadow(0 -0.83em 0 -0.4em #fff,0 -0.83em 0 -0.42em #fff,0 -0.83em 0 -0.44em #fff,0 -0.83em 0 -0.46em #fff,0 -0.83em 0 -0.477em #fff);
+    }
+
+    5%,95% {
+        @include box-shadow(0 -0.83em 0 -0.4em #fff,0 -0.83em 0 -0.42em #fff,0 -0.83em 0 -0.44em #fff,0 -0.83em 0 -0.46em #fff,0 -0.83em 0 -0.477em #fff);
+    }
+
+    10%,59% {
+        @include box-shadow(0 -0.83em 0 -0.4em #fff,-0.087em -0.825em 0 -0.42em #fff,-0.173em -0.812em 0 -0.44em #fff,-0.256em -0.789em 0 -0.46em #fff,-0.297em -0.775em 0 -0.477em #fff);
+    }
+
+    20% {
+        @include box-shadow(0 -0.83em 0 -0.4em #fff,-0.338em -0.758em 0 -0.42em #fff,-0.555em -0.617em 0 -0.44em #fff,-0.671em -0.488em 0 -0.46em #fff,-0.749em -0.34em 0 -0.477em #fff);
+    }
+
+    38% {
+        @include box-shadow(0 -0.83em 0 -0.4em #fff,-0.377em -0.74em 0 -0.42em #fff,-0.645em -0.522em 0 -0.44em #fff,-0.775em -0.297em 0 -0.46em #fff,-0.82em -0.09em 0 -0.477em #fff);
+    }
+
+    100% {
+        @include transform(rotate(360deg) translate(-50%, -50%));
+        @include box-shadow(0 -0.83em 0 -0.4em #fff,0 -0.83em 0 -0.42em #fff,0 -0.83em 0 -0.44em #fff,0 -0.83em 0 -0.46em #fff,0 -0.83em 0 -0.477em #fff);
+    }
 }
 
 .loading {
@@ -186,22 +204,24 @@ body {
 	z-index: 11;
 
 	&:before {
+		font-size: 5em;
 		content: '';
 		display: block;
 		position: absolute;
 		left: 50%;
 		top: 50%;
-		width: 50px;
-		height: 50px;
-		background: red;
+		width: 1em;
+		height: 1em;
+		background: transparent;
 		
-		transform-origin: 10px;
-		-webkit-transform-origin: 10px;
-		-moz-transform-origin: 10px;
-		-o-transform-origin: 10px;
-		-ms-transform-origin: 10px;
-		@include transform(translate(-50%, -50%));
-		@include animation(loader 10s linear);
+		transform-origin: 0% 0%;
+		-webkit-transform-origin: 0% 0%;
+		-moz-transform-origin: 0% 0%;
+		-o-transform-origin: 0% 0%;
+		-ms-transform-origin: 0% 0%;
+		@include transform(rotate(0deg) translate(-50%, -50%));
+		@include animation(loader 1s ease-out infinite);
+		@include border-radius(1em);
 	}
 
 	@at-root {
