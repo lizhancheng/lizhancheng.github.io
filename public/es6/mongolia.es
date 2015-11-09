@@ -16,9 +16,17 @@
 
  			let [width, height] = [+ctx.canvas.width, +ctx.canvas.height];
 
- 			ctx.fillStyle = "#ccc";
+ 			/*ctx.fillStyle = "#ccc";
  			ctx.fillRect(0, 0, width, height);
- 			ctx.stroke();
+ 			ctx.stroke();*/
+
+ 			var img = new Image();
+ 			img.src = '../public/images/background.jpg';
+
+ 			img.onload = () => {
+
+	 			ctx.drawImage(img, 0, 0, width, height);
+ 			}
  		}
 
  		function initEvent() {

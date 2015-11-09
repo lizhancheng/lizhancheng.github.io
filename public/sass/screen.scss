@@ -157,6 +157,8 @@ body {
 	width: $width;
 	height: $height;
 	z-index: 10;
+
+	@include filter(blur(10px));
 }
 
 /* loading animation */
