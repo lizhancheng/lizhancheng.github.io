@@ -7,10 +7,23 @@
  	(() => {
 
  		let cas = document.getElementById('mongolia');
- 		let ctx = cas.getContext('2d');
 
- 		ctx.canvas.width = document.documentElement.clientWidth;
- 		ctx.canvas.height = document.documentElement.clientHeight;
+ 		try {
+ 			var ctx = cas.getContext('2d');
+ 		}catch (e) {
+ 			console.log(e);
+ 		}
+
+ 		let GLOBAL = {
+ 			VANISH: false
+ 		};
+
+ 		try {
+	 		ctx.canvas.width = document.documentElement.clientWidth;
+	 		ctx.canvas.height = document.documentElement.clientHeight;
+	 	}catch (e) {
+	 		console.log(e);
+	 	}
 
  		function drawMongolia() {
 
@@ -20,12 +33,31 @@
  			ctx.fillRect(0, 0, width, height);
  			ctx.stroke();*/
 
- 			var img = new Image();
- 			img.src = '../public/images/background.jpg';
+ 			var img = [], len = img.length;
+ 			var source = [];
+ 			if(width > 800) {
+ 				source.push('../public/images/background.jpg');
+ 				source.push('../public/images/face_mongo.png');
+ 			}else {
+ 				source.push('../public/images/background.png');
+ 			}
+ 			for(let value of source) {
+ 				len = img.length;
+	 			img[len] = new Image();
+	 			img[len].src = value;
 
- 			img.onload = () => {
+	 			img[len].onload = (len) => {
 
-	 			ctx.drawImage(img, 0, 0, width, height);
+	 				return () => {
+		 				let [imgWidth, imgHeight] = [img[len].width, img[len].height];
+		 				if(!/background/.test(value)) {
+		 				console.log(imgWidth, imgHeight);
+		 					ctx.drawImage(img[len], (width - imgWidth) * 0.5, height * 0.08, imgWidth, imgHeight);
+		 				}else {
+				 			ctx.drawImage(img[len], 0, 0, width, height);
+			 			}
+		 			}
+	 			}(len)
  			}
  		}
 
@@ -47,13 +79,22 @@
 		 				event.x || event.pageX || event.layerX, 
 		 				event.y || event.pageY || event.layerY
 	 				];
+					if(!GLOBAL.VANISH) {
+						vanish();
+						GLOBAL.VANISH = !GLOBAL.VANISH;
+					}
  				}else if(event.type === 'touchmove') {
  					[x, y] = [
 	 					event.targetTouches[0].pageX || event.targetTouches[0].clientX, 
 	 					event.targetTouches[0].pageY || event.targetTouches[0].clientY
  					];
+					if(!GLOBAL.VANISH) {
+						vanish();
+						GLOBAL.VANISH = !GLOBAL.VANISH;
+					}
  				}
 				draw(x, y);
+
  			}
  			function draw(x, y) {
 
@@ -74,6 +115,15 @@
  				cas[eventType]('touchstart', down);
  				cas[eventType]('touchmove', move);
  			}
+ 			function vanish() {
+ 				
+ 				let mongo = document.getElementById('mongolia');
+ 				// mongo.classList.add('hide');
+ 				setTimeout(function() {
+
+	 				mongo.style.display = "none";
+ 				}, 9000);
+ 			}
 
  			if(window.attachEvent) {
  				eventList('attachEvent');
@@ -82,7 +132,11 @@
  			}
  		}
 
- 		drawMongolia();
- 		initEvent();
+ 		try {
+	 		drawMongolia();
+	 		initEvent();
+	 	} catch (e) {
+	 		console.log(e);
+	 	}
 
  	})();

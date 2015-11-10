@@ -6,7 +6,7 @@
 
 function removeLoad() {
 
-  document.querySelector('.loading').remove();
+  document.getElementById('loading').style.display = "none";
 }
 
 setTimeout(function () {

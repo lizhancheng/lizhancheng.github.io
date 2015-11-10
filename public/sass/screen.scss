@@ -27,6 +27,31 @@ body {
 	// @include background-image(radial-gradient(10% 10%, #ffffff 300px, #111 900px));
 }
 
+@mixin keyframes-compat($name) {
+	@keyframes #{$name} {
+		@content;
+	}
+	@-webkit-keyframes #{$name} {
+		@content;
+	}
+	@-moz-keyframes #{$name} {
+		@content;
+	}
+	@-o-keyframes #{$name} {
+		@content;
+	}
+	@-ms-keyframes #{$name} {
+		@content;
+	}
+}
+@mixin transform-origin-compat($value) {
+	transform-origin: $value;
+	-webkit-transform-origin: $value;
+	-moz-transform-origin: $value;
+	-o-transform-origin: $value;
+	-ms-transform-origin: $value;
+}
+
 .blur {
 	width: $width;
 	height: $height;
@@ -71,11 +96,8 @@ body {
 	max-height: 290.328px;
 	width: $width * 0.4;
 	height: $height * 0.2;
-	transform-origin: 0% -50%;
-	-ms-transform-origin: 0% -50%;
-	-webkit-transform-origin: 0% -50%;
-	-moz-transform-origin: 0% -50%;
-	-o-transform-origin: 0% -50%;
+	
+	@include transform-origin-compat(0% -50%);
 
 	@include background(url('../images/name.png') no-repeat left bottom/100% 100%);
 	@include transform(translate(-50%, -50%));
@@ -85,19 +107,7 @@ body {
 
 	@include animation(showBrand 5s);
 	@at-root {
-		@keyframes showBrand {
-			@include swing;
-		}
-		@-webkit-keyframes showBrand {
-			@include swing;
-		}
-		@-moz-keyframes showBrand {
-			@include swing;
-		}
-		@-o-keyframes showBrand {
-			@include swing;
-		}
-		@-ms-keyframes showBrand {
+		@include keyframes-compat(showBrand) {
 			@include swing;
 		}
 	}
@@ -158,7 +168,13 @@ body {
 	height: $height;
 	z-index: 10;
 
+	@include transition(opacity 5s ease-out 4s);
 	@include filter(blur(10px));
+}
+
+.hide {
+	
+	@include opacity(0);
 }
 
 /* loading animation */
@@ -174,6 +190,7 @@ body {
 
 @mixin load {
 	 0% {
+        @include transform(rotate(30deg) translate(-50%, -50%));
         @include box-shadow(0 -0.83em 0 -0.4em #fff,0 -0.83em 0 -0.42em #fff,0 -0.83em 0 -0.44em #fff,0 -0.83em 0 -0.46em #fff,0 -0.83em 0 -0.477em #fff);
     }
 
@@ -205,9 +222,30 @@ body {
 	height: $height;
 	z-index: 11;
 
-	&:before {
+	/*&:before {
 		font-size: 5em;
-		content: '';
+		content: '123';
+		display: block;
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		width: 1em;
+		height: 1em;
+		background: green;
+		
+		transform-origin: 0% 0%;
+		-webkit-transform-origin: 0% 0%;
+		-moz-transform-origin: 0% 0%;
+		-o-transform-origin: 0% 0%;
+		-ms-transform-origin: 0% 0%;
+		@include transform(rotate(0deg) translate(-50%, -50%));
+		@include border-radius(1em);
+
+		@include animation(bgchange 1s);
+	}*/
+
+	.before {
+		font-size: 5em;
 		display: block;
 		position: absolute;
 		left: 50%;
@@ -216,31 +254,29 @@ body {
 		height: 1em;
 		background: transparent;
 		
-		transform-origin: 0% 0%;
-		-webkit-transform-origin: 0% 0%;
-		-moz-transform-origin: 0% 0%;
-		-o-transform-origin: 0% 0%;
-		-ms-transform-origin: 0% 0%;
+		@include transform-origin-compat(0% 0%);
 		@include transform(rotate(0deg) translate(-50%, -50%));
-		@include animation(loader 1s ease-out infinite);
 		@include border-radius(1em);
+
+		@include animation(loader 1s ease-out 5);
 	}
 
 	@at-root {
-		@keyframes loader {
+		@include keyframes-compat(loader) {
 			@include load;
 		}
-		@-webkit-keyframes loader {
-			@include load;
+	}
+}
+
+@mixin background-image-compat($selector, $image) {
+	@media (min-device-width: 601px) {
+		#{$selector} {
+			background: url('../images/pc_#{$image}') no-repeat;
 		}
-		@-moz-keyframes loader {
-			@include load;
-		}
-		@-o-keyframes loader {
-			@include load;
-		}
-		@-ms-keyframes loader {
-			@include load;
+	}
+	@media (max-device-width: 600px) {
+		#{$selector} {
+			background: url('../images/#{$image}') no-repeat;
 		}
 	}
 }
@@ -250,13 +286,22 @@ header {
 	z-index: 1;
 	height: $height;
 	font-size: 0;
-	.left-side {
-		
+	@include background(url('../images/background.jpg') no-repeat left bottom/100% 100%);
+	
+	.head {
+		position: absolute;
+	    width: 40%;
+	    height: 21%;
+	    max-width: 124px;
+	    max-height: 124px;
+	    left: 50%;
+	    top: 8%;
+	    
+	    @include background(url('../images/face.png') no-repeat center/100% 100%);
+	    @include transform(translate(-50%, 0));
 	}
-
-	.right-side {
-
-	}
-
 }
+
+
+
 
