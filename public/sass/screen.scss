@@ -27,6 +27,24 @@ body {
 	// @include background-image(radial-gradient(10% 10%, #ffffff 300px, #111 900px));
 }
 
+@mixin prefix($selector) {
+	#{$selector} {
+		@content;
+	}
+	-webkit-#{$selector} {
+		@content;
+	}
+	-moz-#{$selector} {
+		@content;
+	}
+	-o-#{$selector} {
+		@content;
+	}
+	-ms-#{selector} {
+		@content;
+	}
+}
+
 @mixin keyframes-compat($name) {
 	@keyframes #{$name} {
 		@content;
@@ -286,7 +304,8 @@ header {
 	z-index: 1;
 	height: $height;
 	font-size: 0;
-	@include background(url('../images/background.jpg') no-repeat left bottom/100% 100%);
+	background: #dddddd;
+	// @include background(url('../images/background.jpg') no-repeat left bottom/100% 100%);
 	
 	.head {
 		position: absolute;
@@ -299,6 +318,14 @@ header {
 	    
 	    @include background(url('../images/face.png') no-repeat center/100% 100%);
 	    @include transform(translate(-50%, 0));
+	}
+
+	.left {
+		width: $width * 0.65;
+		height: $height;
+
+		@include background(url('../images/background.jpg') no-repeat left bottom/100% 100%);
+		@include transform(skew(5deg));
 	}
 }
 
