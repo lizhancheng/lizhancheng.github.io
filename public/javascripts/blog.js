@@ -8,7 +8,3 @@ function removeLoad() {
 
   document.getElementById('loading').style.display = "none";
 }
-
-setTimeout(function () {
-  removeLoad();
-}, 2000);

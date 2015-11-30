@@ -12,6 +12,7 @@ $height: 100%;
 $blur: 20px;
 
 html, body {
+	font-family: 'Segoe Print';
 	width: $width;
 	height: $height;
 }
@@ -233,6 +234,17 @@ body {
         @include box-shadow(0 -0.83em 0 -0.4em #fff,0 -0.83em 0 -0.42em #fff,0 -0.83em 0 -0.44em #fff,0 -0.83em 0 -0.46em #fff,0 -0.83em 0 -0.477em #fff);
     }
 }
+@mixin welcome-letter {
+	0% {
+		@include opacity(0);
+	}
+	50% {
+		@include opacity(1);
+	}
+	100% {
+		@include opacity(0);
+	}
+}
 
 .loading {
 	position: fixed;
@@ -271,12 +283,28 @@ body {
 		width: 1em;
 		height: 1em;
 		background: transparent;
+		color: white;
 		
 		@include transform-origin-compat(0% 0%);
 		@include transform(rotate(0deg) translate(-50%, -50%));
 		@include border-radius(1em);
 
-		@include animation(loader 1s ease-out 5);
+		@include animation(loader 1.5s ease-out 5);
+
+		span {
+			font-size: 0.5em;
+			font-family: 'Segoe Print';
+			
+			@include opacity(0);
+
+			@include animation(welcome 10s linear 7.5s);
+		}
+
+		@at-root {
+			@include keyframes-compat(welcome) {
+				@include welcome-letter;
+			}
+		}
 	}
 
 	@at-root {
@@ -304,7 +332,7 @@ header {
 	z-index: 1;
 	height: $height;
 	font-size: 0;
-	background: #dddddd;
+	background: #00ABFF;
 	// @include background(url('../images/background.jpg') no-repeat left bottom/100% 100%);
 	
 	.head {
@@ -320,13 +348,6 @@ header {
 	    @include transform(translate(-50%, 0));
 	}
 
-	.left {
-		width: $width * 0.65;
-		height: $height;
-
-		@include background(url('../images/background.jpg') no-repeat left bottom/100% 100%);
-		@include transform(skew(5deg));
-	}
 }
 
 
