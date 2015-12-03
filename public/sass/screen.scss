@@ -238,41 +238,43 @@ body {
 	0% {
 		@include opacity(0);
 	}
-	50% {
+	10% {
 		@include opacity(1);
 	}
 	100% {
 		@include opacity(0);
 	}
 }
+@mixin vanish {
+	0% {
+		@include opacity(1);
+	}
+	50% {
+		@include opacity(0);
+		height: 100%;
+	}
+	100% {
+		@include opacity(0);
+		height: 0;
+	}
+}
 
 .loading {
+	display: none;
 	position: fixed;
 	width: $width;
 	height: $height;
+	text-align: center;
 	z-index: 11;
 
-	/*&:before {
-		font-size: 5em;
-		content: '123';
-		display: block;
-		position: absolute;
-		left: 50%;
-		top: 50%;
-		width: 1em;
-		height: 1em;
-		background: green;
-		
-		transform-origin: 0% 0%;
-		-webkit-transform-origin: 0% 0%;
-		-moz-transform-origin: 0% 0%;
-		-o-transform-origin: 0% 0%;
-		-ms-transform-origin: 0% 0%;
-		@include transform(rotate(0deg) translate(-50%, -50%));
-		@include border-radius(1em);
+	@include background(#20D4FF);
+	@include animation(disappear 1s linear 18s forwards);
 
-		@include animation(bgchange 1s);
-	}*/
+	at-root {
+		@include keyframes-compat(disappear) {
+			@include vanish;
+		}
+	}
 
 	.before {
 		font-size: 5em;
@@ -291,19 +293,23 @@ body {
 
 		@include animation(loader 1.5s ease-out 5);
 
-		span {
-			font-size: 0.5em;
-			font-family: 'Segoe Print';
-			
-			@include opacity(0);
+		
+	}
 
-			@include animation(welcome 10s linear 7.5s);
-		}
+	p {
+		display: table-cell;
+		vertical-align: middle;
+		color: white;
+		font-size: 3em;
+		font-family: 'Segoe Print';
+		
+		@include opacity(0);
+		@include animation(welcome 10s linear 7.5s);
+	}
 
-		@at-root {
-			@include keyframes-compat(welcome) {
-				@include welcome-letter;
-			}
+	@at-root {
+		@include keyframes-compat(welcome) {
+			@include welcome-letter;
 		}
 	}
 
@@ -327,27 +333,37 @@ body {
 	}
 }
 
-header {
-	position: relative;
-	z-index: 1;
+@mixin show {
+	from {
+		@include opacity(0);
+	}
+	to {
+		@include opacity(1);
+	}
+}
+
+.desktop {
+	width: $width;
 	height: $height;
-	font-size: 0;
-	background: #00ABFF;
-	// @include background(url('../images/background.jpg') no-repeat left bottom/100% 100%);
-	
-	.head {
-		position: absolute;
-	    width: 40%;
-	    height: 21%;
-	    max-width: 124px;
-	    max-height: 124px;
-	    left: 50%;
-	    top: 8%;
-	    
-	    @include background(url('../images/face.png') no-repeat center/100% 100%);
-	    @include transform(translate(-50%, 0));
+
+	@include background(linear-gradient(to bottom left, #011E3E, #85D4FF));
+	//@include animation(appear 2s linear 18s);
+
+	@at-root {
+		@include keyframes-compat(appear) {
+			@include show;
+		}
 	}
 
+	footer {
+		display: block;
+		width: 100%;
+		height: 5%;
+		position: fixed;
+		bottom: 0;
+
+		@include background(rgba(0, 5, 10, 0.7));
+	}
 }
 
 

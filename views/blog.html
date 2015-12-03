@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="blog">
 <head>
 	<base href="index.html" />
 	<base target="_self" />
@@ -20,23 +20,46 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	<title>MyBlog</title>
 	<link href="../public/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" />
+	<script src="../public/bower_components/requirejs/require.js"></script>
+	<script src="../public/javascripts/config.js"></script>
 </head>
 <body>
 	<!-- 蒙层 -->
 	<!-- <canvas id="mongolia"></canvas> -->
 	<!-- 加载图标 -->
 	<div class="loading" id="loading">
-		<div class="before">
-			<span>Welcome</span>
-		</div>
+		<div class="before"></div>
+		<p>Welcome</p>
 	</div>
-<!-- header -->
-	<header>
-		<!-- 头像 -->
-		<!-- <div class="head"></div> -->
-	</header>
 
+	<div class="desktop">
+		<!-- header -->
+		<header></header>
+
+		<!-- footer -->
+		<footer>
+			
+			<ul>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+		</footer>
+	</div>
 	<!-- <script src="../public/javascripts/mongolia.js"></script> -->
-	<script src="../public/javascripts/blog.js"></script>
+	<script type="text/javascript">
+		var blog;
+		require(['ngRoute'], function(ng) {
+			console.log(angular);
+			// blog = angular.module('blog', []);
+		});
+	</script>
+	<script src="../public/javascripts/blog/blog.js"></script>
+	<!-- <script src="../public/javascripts/libs/angularjs/angular.js"></script>
+	<script src="../public/javascripts/libs/angular-route/angular-route.min.js"></script>
+	<script type="text/javascript">
+	var app = angular.module('blog', []);
+	</script> -->
 </body>
 </html>

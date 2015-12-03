@@ -685,35 +685,100 @@ html, body {
 }
 
 /* loading animation */
-/* line 249, ../sass/screen.scss */
+/* line 262, ../sass/screen.scss */
 .loading {
+  display: none;
   position: fixed;
   width: 100%;
   height: 100%;
+  text-align: center;
   z-index: 11;
-  	/*&:before {
-  		font-size: 5em;
-  		content: '123';
-  		display: block;
-  		position: absolute;
-  		left: 50%;
-  		top: 50%;
-  		width: 1em;
-  		height: 1em;
-  		background: green;
-  		
-  		transform-origin: 0% 0%;
-  		-webkit-transform-origin: 0% 0%;
-  		-moz-transform-origin: 0% 0%;
-  		-o-transform-origin: 0% 0%;
-  		-ms-transform-origin: 0% 0%;
-  		@include transform(rotate(0deg) translate(-50%, -50%));
-  		@include border-radius(1em);
-  
-  		@include animation(bgchange 1s);
-  	}*/
+  background: #20D4FF;
+  -moz-animation: disappear 1s linear 18s forwards;
+  -webkit-animation: disappear 1s linear 18s forwards;
+  animation: disappear 1s linear 18s forwards;
 }
-/* line 277, ../sass/screen.scss */
+@keyframes disappear {
+  0% {
+    filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+    opacity: 1;
+  }
+  50% {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+    height: 100%;
+  }
+  100% {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+    height: 0;
+  }
+}
+@-webkit-keyframes disappear {
+  0% {
+    filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+    opacity: 1;
+  }
+  50% {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+    height: 100%;
+  }
+  100% {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+    height: 0;
+  }
+}
+@-moz-keyframes disappear {
+  0% {
+    filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+    opacity: 1;
+  }
+  50% {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+    height: 100%;
+  }
+  100% {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+    height: 0;
+  }
+}
+@-o-keyframes disappear {
+  0% {
+    filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+    opacity: 1;
+  }
+  50% {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+    height: 100%;
+  }
+  100% {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+    height: 0;
+  }
+}
+@-ms-keyframes disappear {
+  0% {
+    filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+    opacity: 1;
+  }
+  50% {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+    height: 100%;
+  }
+  100% {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+    height: 0;
+  }
+}
+/* line 279, ../sass/screen.scss */
 .loading .before {
   font-size: 5em;
   display: block;
@@ -740,9 +805,12 @@ html, body {
   -webkit-animation: loader 1.5s ease-out 5;
   animation: loader 1.5s ease-out 5;
 }
-/* line 294, ../sass/screen.scss */
-.loading .before span {
-  font-size: 0.5em;
+/* line 299, ../sass/screen.scss */
+.loading p {
+  display: table-cell;
+  vertical-align: middle;
+  color: white;
+  font-size: 3em;
   font-family: 'Segoe Print';
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
   opacity: 0;
@@ -755,7 +823,7 @@ html, body {
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
     opacity: 0;
   }
-  50% {
+  10% {
     filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
     opacity: 1;
   }
@@ -769,7 +837,7 @@ html, body {
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
     opacity: 0;
   }
-  50% {
+  10% {
     filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
     opacity: 1;
   }
@@ -783,7 +851,7 @@ html, body {
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
     opacity: 0;
   }
-  50% {
+  10% {
     filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
     opacity: 1;
   }
@@ -797,7 +865,7 @@ html, body {
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
     opacity: 0;
   }
-  50% {
+  10% {
     filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
     opacity: 1;
   }
@@ -811,7 +879,7 @@ html, body {
     filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
     opacity: 0;
   }
-  50% {
+  10% {
     filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
     opacity: 1;
   }
@@ -1020,26 +1088,72 @@ html, body {
     box-shadow: 0 -0.83em 0 -0.4em #fff, 0 -0.83em 0 -0.42em #fff, 0 -0.83em 0 -0.44em #fff, 0 -0.83em 0 -0.46em #fff, 0 -0.83em 0 -0.477em #fff;
   }
 }
-/* line 330, ../sass/screen.scss */
-header {
-  position: relative;
-  z-index: 1;
+/* line 345, ../sass/screen.scss */
+.desktop {
+  width: 100%;
   height: 100%;
-  font-size: 0;
-  background: #00ABFF;
+  background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjEuMCIgeTE9IjAuMCIgeDI9IjAuMCIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzAxMWUzZSIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzg1ZDRmZiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
+  background: -webkit-gradient(linear, 100% 0%, 0% 100%, color-stop(0%, #011e3e), color-stop(100%, #85d4ff));
+  background: -moz-linear-gradient(top, #011e3e, #85d4ff);
+  background: -webkit-linear-gradient(top, #011e3e, #85d4ff);
+  background: linear-gradient(to bottom left, #011e3e, #85d4ff);
 }
-/* line 338, ../sass/screen.scss */
-header .head {
-  position: absolute;
-  width: 40%;
-  height: 21%;
-  max-width: 124px;
-  max-height: 124px;
-  left: 50%;
-  top: 8%;
-  background: url("../images/face.png") no-repeat center/100% 100%;
-  -moz-transform: translate(-50%, 0);
-  -ms-transform: translate(-50%, 0);
-  -webkit-transform: translate(-50%, 0);
-  transform: translate(-50%, 0);
+@keyframes appear {
+  from {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+  }
+  to {
+    filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+    opacity: 1;
+  }
+}
+@-webkit-keyframes appear {
+  from {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+  }
+  to {
+    filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+    opacity: 1;
+  }
+}
+@-moz-keyframes appear {
+  from {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+  }
+  to {
+    filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+    opacity: 1;
+  }
+}
+@-o-keyframes appear {
+  from {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+  }
+  to {
+    filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+    opacity: 1;
+  }
+}
+@-ms-keyframes appear {
+  from {
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+    opacity: 0;
+  }
+  to {
+    filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+    opacity: 1;
+  }
+}
+/* line 358, ../sass/screen.scss */
+.desktop footer {
+  display: block;
+  width: 100%;
+  height: 5%;
+  position: fixed;
+  bottom: 0;
+  background: rgba(0, 5, 10, 0.7);
 }
