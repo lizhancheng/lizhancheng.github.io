@@ -4,13 +4,29 @@
 
 'use strict';
 
-define(['require', 'app', 'angular', 'angular-route'], function (require, app, angular) {
+define(['require', 'app', 'angular', 'angular-route', 'angular-ui-router'], function (require, app, angular) {
 
 	'use strict';
 	require(['domReady!'], function (document) {
-		app.controller('MenuCtrl', function ($scope) {
-			$scope.names = ['Tom', 'Jack', 'Demo'];
+		app.config(function ($stateProvider, $urlRouterProvider) {
+
+			// $urlRouterProvider.otherwise('/default');
+			$stateProvider.state('index', {
+				url: '',
+				views: {
+					'': {
+						templateUrl: 'blog_template/index.html'
+					},
+					'desktop@index': {
+						templateUrl: 'blog_template/desktop.html'
+					},
+					'menubar@index': {
+						templateUrl: 'blog_template/menubar.html'
+					}
+				}
+			});
 		});
+
 		angular.bootstrap(document, ['app']);
 	});
 });

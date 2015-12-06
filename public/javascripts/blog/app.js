@@ -4,8 +4,8 @@
 
 'use strict';
 
-define(['angular', 'angular-route'], function (angular) {
+define(['angular', 'angular-route', 'angular-ui-router'], function (angular) {
 
 	'use strict';
-	return angular.module('app', ['ngRoute']);
+	return angular.module('app', ['ngRoute', 'ui.router']);
 });
