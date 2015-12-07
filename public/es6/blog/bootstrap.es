@@ -2,7 +2,7 @@
  * CREATED BY ZHANCHENG.LI IN 2015/12/04
  */
 
-	define(['require', 'app', 'angular', 'angular-route', 'angular-ui-router'], (require, app, angular) => {
+	define(['require', 'app', 'angular', 'angular-route', 'angular-ui-router', 'controllers'], (require, app, angular) => {
 
 		'use strict';
 		require(['domReady!'], document => {
@@ -21,7 +21,8 @@
 									templateUrl: 'blog_template/desktop.html'
 								}, 
 								'menubar@index': {
-									templateUrl: 'blog_template/menubar.html'
+									templateUrl: 'blog_template/menubar.html', 
+									controller: 'MenuCtrl'
 								}
 							}
 						})

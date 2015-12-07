@@ -4,7 +4,7 @@
 
 'use strict';
 
-define(['require', 'app', 'angular', 'angular-route', 'angular-ui-router'], function (require, app, angular) {
+define(['require', 'app', 'angular', 'angular-route', 'angular-ui-router', 'controllers'], function (require, app, angular) {
 
 	'use strict';
 	require(['domReady!'], function (document) {
@@ -21,7 +21,8 @@ define(['require', 'app', 'angular', 'angular-route', 'angular-ui-router'], func
 						templateUrl: 'blog_template/desktop.html'
 					},
 					'menubar@index': {
-						templateUrl: 'blog_template/menubar.html'
+						templateUrl: 'blog_template/menubar.html',
+						controller: 'MenuCtrl'
 					}
 				}
 			});
