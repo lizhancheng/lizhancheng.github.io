@@ -67,7 +67,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   display: block;
 }
 
-/* line 14, ../sass/screen.scss */
+/* line 19, ../sass/screen.scss */
 html, body, .view-init, .blog-index {
   font-family: 'Segoe Print';
   color: white;
@@ -75,24 +75,24 @@ html, body, .view-init, .blog-index {
   height: 100%;
 }
 
-/* line 23, ../sass/screen.scss */
+/* line 27, ../sass/screen.scss */
 a {
   text-decoration: none;
   color: white;
 }
 
-/* line 28, ../sass/screen.scss */
+/* line 32, ../sass/screen.scss */
 #cas {
   position: absolute;
   width: 100%;
   height: 100%;
 }
 
-/* line 79, ../sass/screen.scss */
+/* line 64, ../sass/screen.scss */
 .blur {
+  position: absolute;
   width: 100%;
   height: 100%;
-  position: absolute;
   background: url("../images/background.jpg") no-repeat left bottom/100% 100%;
   -webkit-filter: blur(20px);
   filter: blur(20px);
@@ -182,7 +182,7 @@ a {
     filter: blur(0);
   }
 }
-/* line 115, ../sass/screen.scss */
+/* line 99, ../sass/screen.scss */
 .brand {
   position: absolute;
   left: 50%;
@@ -661,7 +661,7 @@ a {
     transform: rotate(0deg) translate(-50%, -50%);
   }
 }
-/* line 139, ../sass/screen.scss */
+/* line 119, ../sass/screen.scss */
 .brand:active {
   -moz-transform: rotateX(-60deg) translate(-50%, -50%);
   -ms-transform: rotateX(-60deg) translate(-50%, -50%);
@@ -670,12 +670,12 @@ a {
 }
 
 /* logo mixin */
-/* line 189, ../sass/screen.scss */
+/* line 168, ../sass/screen.scss */
 #mongolia {
   position: absolute;
+  z-index: 10;
   width: 100%;
   height: 100%;
-  z-index: 10;
   -moz-transition: opacity 5s ease-out 4s;
   -o-transition: opacity 5s ease-out 4s;
   -webkit-transition: opacity 5s ease-out;
@@ -685,21 +685,21 @@ a {
   filter: blur(10px);
 }
 
-/* line 199, ../sass/screen.scss */
+/* line 177, ../sass/screen.scss */
 .hide {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
   opacity: 0;
 }
 
 /* loading animation */
-/* line 267, ../sass/screen.scss */
+/* line 245, ../sass/screen.scss */
 .loading {
   display: none;
   position: fixed;
-  width: 100%;
-  height: 100%;
   text-align: center;
   z-index: 11;
+  width: 100%;
+  height: 100%;
   background: #20D4FF;
   -moz-animation: disappear 1s linear 18s forwards;
   -webkit-animation: disappear 1s linear 18s forwards;
@@ -785,17 +785,17 @@ a {
     height: 0;
   }
 }
-/* line 284, ../sass/screen.scss */
+/* line 261, ../sass/screen.scss */
 .loading .before {
   font-size: 5em;
   display: block;
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 1em;
-  height: 1em;
   background: transparent;
   color: white;
+  width: 1em;
+  height: 1em;
   transform-origin: 0% 0%;
   -webkit-transform-origin: 0% 0%;
   -moz-transform-origin: 0% 0%;
@@ -812,7 +812,7 @@ a {
   -webkit-animation: loader 1.5s ease-out 5;
   animation: loader 1.5s ease-out 5;
 }
-/* line 304, ../sass/screen.scss */
+/* line 280, ../sass/screen.scss */
 .loading p {
   display: table-cell;
   vertical-align: middle;
@@ -1095,7 +1095,7 @@ a {
     box-shadow: 0 -0.83em 0 -0.4em #fff, 0 -0.83em 0 -0.42em #fff, 0 -0.83em 0 -0.44em #fff, 0 -0.83em 0 -0.46em #fff, 0 -0.83em 0 -0.477em #fff;
   }
 }
-/* line 350, ../sass/screen.scss */
+/* line 326, ../sass/screen.scss */
 .windows {
   width: 100%;
   height: 100%;
@@ -1155,41 +1155,109 @@ a {
     opacity: 1;
   }
 }
-/* line 363, ../sass/screen.scss */
+/* line 337, ../sass/screen.scss */
 .windows .menubar {
   display: block;
-  width: 100%;
-  height: 5%;
   position: fixed;
   bottom: 0;
+  width: 100%;
+  height: 5%;
   background: rgba(0, 5, 10, 0.7);
 }
-/* line 372, ../sass/screen.scss */
-.windows .menubar ul {
+/* line 345, ../sass/screen.scss */
+.windows .menubar ul.menu {
   width: 100%;
   height: 100%;
 }
-/* line 376, ../sass/screen.scss */
-.windows .menubar ul li {
+/* line 348, ../sass/screen.scss */
+.windows .menubar ul.menu li.menu-list {
   float: left;
   height: 100%;
   padding: 0 2%;
+  position: relative;
+}
+/* line 354, ../sass/screen.scss */
+.windows .menubar ul.menu li.menu-list img {
+  height: 100%;
+  position: relative;
+  z-index: 9;
   cursor: pointer;
 }
-/* line 382, ../sass/screen.scss */
-.windows .menubar ul li img {
-  height: 100%;
-}
-/* line 386, ../sass/screen.scss */
-.windows .menubar ul li:last-child {
-  float: right;
-}
-/* line 389, ../sass/screen.scss */
-.windows .menubar ul li:hover img {
+/* line 360, ../sass/screen.scss */
+.windows .menubar ul.menu li.menu-list img:hover {
   -moz-box-shadow: 0px 0px 13px 2px linen;
   -webkit-box-shadow: 0px 0px 13px 2px linen;
   box-shadow: 0px 0px 13px 2px linen;
   -moz-border-radius: 2em;
   -webkit-border-radius: 2em;
   border-radius: 2em;
+}
+/* line 365, ../sass/screen.scss */
+.windows .menubar ul.menu li.menu-list ul.submenu-start {
+  width: 200%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  cursor: pointer;
+  z-index: 1;
+  background: rgba(250, 250, 250, 0.2);
+  -moz-transform: translate(0%, -100%);
+  -ms-transform: translate(0%, -100%);
+  -webkit-transform: translate(0%, -100%);
+  transform: translate(0%, -100%);
+  -moz-border-radius: 5px 5px 0 0;
+  -webkit-border-radius: 5px;
+  border-radius: 5px 5px 0 0;
+  -moz-box-shadow: 0px 0px 2px #ccc inset;
+  -webkit-box-shadow: 0px 0px 2px #ccc inset;
+  box-shadow: 0px 0px 2px #ccc inset;
+}
+/* line 378, ../sass/screen.scss */
+.windows .menubar ul.menu li.menu-list ul.submenu-start li.submenu-start-list {
+  text-align: center;
+  height: 100px;
+  line-height: 100px;
+  color: rgba(255, 255, 255, 0.7);
+  -moz-transition: background 0.5s ease-out, color 0.5s ease-out;
+  -o-transition: background 0.5s ease-out, color 0.5s ease-out;
+  -webkit-transition: background 0.5s ease-out, color 0.5s ease-out;
+  transition: background 0.5s ease-out, color 0.5s ease-out;
+}
+/* line 386, ../sass/screen.scss */
+.windows .menubar ul.menu li.menu-list ul.submenu-start li.submenu-start-list:hover {
+  color: white;
+  background: rgba(133, 255, 187, 0.4);
+}
+/* line 394, ../sass/screen.scss */
+.windows .menubar ul.menu li.menu-list:last-child {
+  float: right;
+}
+/* line 402, ../sass/screen.scss */
+.windows .desktop {
+  width: 98%;
+  height: 95%;
+}
+/* line 405, ../sass/screen.scss */
+.windows .desktop dl {
+  display: inline-block;
+  -webkit-writing-mode: horizontal-tb;
+  margin: 3.9% 20px;
+}
+/* line 410, ../sass/screen.scss */
+.windows .desktop dl dt {
+  text-align: center;
+}
+/* line 413, ../sass/screen.scss */
+.windows .desktop dl dd {
+  text-align: center;
+}
+/* line 417, ../sass/screen.scss */
+.windows .desktop dl:hover {
+  background: rgba(250, 250, 250, 0.4);
+}
+@media screen and (min-width: 960px) {
+  /* line 425, ../sass/screen.scss */
+  .windows .desktop {
+    -webkit-writing-mode: vertical-lr;
+  }
 }

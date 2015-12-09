@@ -7,7 +7,21 @@
 define(['app'], function (app) {
 
 	'use strict';
-	app.controller('MenuCtrl', ['$scope', function ($scope) {
-		$scope.menu = ['start', 'file', 'pdf'];
+
+	app.controller('MenuCtrl', ['$scope', 'Menu', function ($scope, Menu) {
+
+		$scope.menu = Menu;
+
+		$scope.toggle = function (param) {
+			angular.forEach($scope.menu, function (item, index) {
+				if (item.name === param) {
+					Menu[index].display = $scope.menu[index].display = !$scope.menu[index].display;
+				}
+			});
+		};
+	}]).controller('StartCtrl', ['$scope', function ($scope) {
+		$scope.submenus = ['draw', 'music', 'movie', 'all'];
+	}]).controller('FileCtrl', ['$scope', function ($scope) {}]).controller('PdfCtrl', ['$scope', function ($scope) {}]).controller('DesktopCtrl', ['$scope', 'Menu', function ($scope, Menu) {
+		$scope.apps = [{ name: 'My Computer', image: 'ApplicationIcon' }, { name: 'My Store', image: 'sketch' }, { name: 'H5 App', image: 'HypeApp' }, { name: 'Affinity Photo', image: 'AppIcon4' }];
 	}]);
 });

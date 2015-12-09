@@ -1,4 +1,7 @@
-<ul>
-	<li ng-repeat="name in menu"><img src="../public/images/{{name}}.png" alt=""></li>
-	<li><img src="../public/images/voice.png" alt=""></li>
+<ul class="menu">
+	<li class="menu-list" ng-repeat="m in menu">
+		<div ng-show="m.display" ui-view="{{m.name}}"></div>
+		<img src="../public/images/{{m.name}}.png" alt="" ng-click="toggle(m.name)" />
+	</li>
+	<li class="menu-list"><img src="../public/images/voice.png" alt=""></li>
 </ul>			

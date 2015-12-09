@@ -11,11 +11,15 @@ $width: 100%;
 $height: 100%;
 $blur: 20px;
 
+@mixin percent($width: 100%, $height: 100%) {
+	width: $width;
+	height: $height;
+}
+
 html, body, .view-init, .blog-index {
 	font-family: 'Segoe Print';
 	color: white;
-	width: $width;
-	height: $height;
+	@include percent;
 }
 body {
 	// @include background(radial-gradient(45px 45px, cyan 10px, transparent 30px));
@@ -27,28 +31,9 @@ a {
 
 #cas {
 	position: absolute;
-	width: $width;
-	height: $height;
+	@include percent;
 	// background: black;
 	// @include background-image(radial-gradient(10% 10%, #ffffff 300px, #111 900px));
-}
-
-@mixin prefix($selector) {
-	#{$selector} {
-		@content;
-	}
-	-webkit-#{$selector} {
-		@content;
-	}
-	-moz-#{$selector} {
-		@content;
-	}
-	-o-#{$selector} {
-		@content;
-	}
-	-ms-#{selector} {
-		@content;
-	}
 }
 
 @mixin keyframes-compat($name) {
@@ -77,12 +62,11 @@ a {
 }
 
 .blur {
-	width: $width;
-	height: $height;
 	position: absolute;
+
+	@include percent;
 	@include background(url('../images/background.jpg') no-repeat left bottom/100% 100%);
 	@include filter(blur($blur));
-
 	@include animation(removeFilter 3s 4);
 	@at-root {
 		@keyframes removeFilter {
@@ -118,17 +102,13 @@ a {
 	top: 50%;
 	max-width: 326.656px;
 	max-height: 290.328px;
-	width: $width * 0.4;
-	height: $height * 0.2;
 	
+	@include percent(40%, 20%);
 	@include transform-origin-compat(0% -50%);
-
 	@include background(url('../images/name.png') no-repeat left bottom/100% 100%);
 	@include transform(translate(-50%, -50%));
-
 	@include opacity(1);
 	@include transition(transform 1s);
-
 	@include animation(showBrand 5s);
 	@at-root {
 		@include keyframes-compat(showBrand) {
@@ -144,24 +124,24 @@ a {
 /* logo mixin */
 @mixin side($background, $before, $after) {
 	display: inline-block;
-	width: $width * 0.5;
-	height: $height * 0.5;
 	background: $background;
 	text-align: center;
 
+	@include percent(50%, 50%);
 	@include transform(translate(0%, 50%));
 	&:before, &:after {
 		font-size: 14px;
 		content: "";
 		display: block;
 		position: absolute;
-		width: $width * 0.25;
-		height: $height * 0.8;
 		left: 50%;
+
+		@include percent(25%, 80%);
 	}
 
 	&:before {
 		z-index: 1;
+
 		@include transform(skew(5deg) translate(-75%, 0%));
 		@include background($before);
 	}
@@ -174,24 +154,22 @@ a {
 
 	.bottom {
 		position: absolute;
-		width: 0;
-		height: 0;
 		border-top: 3vw solid $before;
 		border-left: 8vw solid transparent;
 		border-right: 8vw solid transparent;
 		left: 50%;
 		bottom: 8%;
 
+		@include percent(0, 0);
 		@include transform(translate(-50%, 0));
 	}
 }
 
 #mongolia {
 	position: absolute;
-	width: $width;
-	height: $height;
 	z-index: 10;
 
+	@include percent;
 	@include transition(opacity 5s ease-out 4s);
 	@include filter(blur(10px));
 }
@@ -267,11 +245,10 @@ a {
 .loading {
 	display: none;
 	position: fixed;
-	width: $width;
-	height: $height;
 	text-align: center;
 	z-index: 11;
 
+	@include percent;
 	@include background(#20D4FF);
 	@include animation(disappear 1s linear 18s forwards);
 
@@ -287,11 +264,10 @@ a {
 		position: absolute;
 		left: 50%;
 		top: 50%;
-		width: 1em;
-		height: 1em;
 		background: transparent;
 		color: white;
 		
+		@include percent(1em, 1em);
 		@include transform-origin-compat(0% 0%);
 		@include transform(rotate(0deg) translate(-50%, -50%));
 		@include border-radius(1em);
@@ -348,9 +324,7 @@ a {
 }
 
 .windows {
-	width: $width;
-	height: $height;
-
+	@include percent;
 	@include background(linear-gradient(to bottom left, #011E3E, #85D4FF));
 	//@include animation(appear 2s linear 18s);
 
@@ -362,37 +336,95 @@ a {
 
 	.menubar {
 		display: block;
-		width: 100%;
-		height: 5%;
 		position: fixed;
 		bottom: 0;
 
+		@include percent(100%, 5%);
 		@include background(rgba(0, 5, 10, 0.7));
 
-		ul {
-			width: $width;
-			height: $height;
+		ul.menu {
+			@include percent;
 
-			li {
+			li.menu-list {
 				float: left;
 				height: $height;
 				padding: 0 2%;
-				cursor: pointer;
+				position: relative;
 
 				img {
 					height: $height;
+					position: relative;
+					z-index: 9;
+					cursor: pointer;
+
+					&:hover {
+						@include box-shadow(0px 0px 13px 2px linen);
+						@include border-radius(2em);
+					}
+				}
+				ul.submenu-start {
+					width: 200%;
+					position: absolute;
+					left: 0;
+					top: 0;
+					cursor:pointer;
+					z-index: 1;
+
+					@include background(rgba(250, 250, 250, 0.2));
+					@include transform(translate(0%, -100%));
+					@include border-radius(5px 5px 0 0);
+					@include box-shadow(0px 0px 2px #ccc inset);
+
+					li.submenu-start-list {
+						text-align: center;
+						height: 100px;
+						line-height: 100px;
+						color: rgba(255, 255, 255, 0.7);
+
+						@include transition(background 0.5s ease-out, color 0.5s ease-out);
+
+						&:hover {
+							color: white;
+
+							@include background(rgba(133, 255, 187, 0.4));
+						}
+					}
 				}
 
 				&:last-child {
 					float: right;
 				}
-				&:hover img {
-					@include box-shadow(0px 0px 13px 2px linen);
-					@include border-radius(2em);
-				}
 			}
 		}
 
+	}
+
+	.desktop {
+		@include percent(98%, 95%);
+
+		dl {
+			display: inline-block;
+			-webkit-writing-mode: horizontal-tb;
+			margin: 3.9% 20px;
+
+			dt {
+				text-align: center;
+			}
+			dd {
+				text-align: center;
+			}
+
+			&:hover {
+				@include background(rgba(250, 250, 250, 0.4));
+			} 
+		}
+
+	}
+
+	@media screen and (min-width: 960px) {
+		.desktop {
+			-webkit-writing-mode: vertical-lr;
+		}
 	}
 }
 
