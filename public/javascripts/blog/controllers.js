@@ -21,7 +21,10 @@ define(['app'], function (app) {
 		};
 	}]).controller('StartCtrl', ['$scope', function ($scope) {
 		$scope.submenus = ['draw', 'music', 'movie', 'all'];
-	}]).controller('FileCtrl', ['$scope', function ($scope) {}]).controller('PdfCtrl', ['$scope', function ($scope) {}]).controller('DesktopCtrl', ['$scope', 'Menu', function ($scope, Menu) {
+	}]).controller('FileCtrl', ['$scope', '$location', function ($scope, $location) {
+		// $location.path('/home').replace(); // 禁止后退
+
+	}]).controller('PdfCtrl', ['$scope', function ($scope) {}]).controller('DesktopCtrl', ['$scope', 'Menu', function ($scope, Menu) {
 		$scope.apps = [{ name: 'My Computer', image: 'ApplicationIcon' }, { name: 'My Store', image: 'sketch' }, { name: 'H5 App', image: 'HypeApp' }, { name: 'Affinity Photo', image: 'AppIcon4' }];
 	}]);
 });

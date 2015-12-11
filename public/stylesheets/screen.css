@@ -1261,3 +1261,9 @@ a {
     -webkit-writing-mode: vertical-lr;
   }
 }
+@media (max-width: 959px) {
+  /* line 430, ../sass/screen.scss */
+  .windows .desktop {
+    text-align: center;
+  }
+}

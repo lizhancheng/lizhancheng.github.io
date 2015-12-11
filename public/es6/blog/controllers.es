@@ -22,7 +22,8 @@
 			.controller('StartCtrl', ['$scope', $scope => {
 				$scope.submenus = ['draw', 'music', 'movie', 'all'];
 			}])
-			.controller('FileCtrl', ['$scope', $scope => {
+			.controller('FileCtrl', ['$scope', '$location', ($scope, $location) => {
+				// $location.path('/home').replace(); // 禁止后退
 
 			}])
 			.controller('PdfCtrl', ['$scope', $scope => {
