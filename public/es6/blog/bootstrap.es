@@ -2,7 +2,7 @@
  * CREATED BY ZHANCHENG.LI IN 2015/12/04
  */
 
-	define(['require', 'app', 'angular', 'angular-route', 'angular-ui-router', 'services', controllers', 'directives'], (require, app, angular) => {
+	define(['require', 'app', 'angular', 'angular-route', 'angular-ui-router', 'services', 'controllers', 'directives'], (require, app, angular) => {
 
 		'use strict';
 		require(['domReady!'], document => {

@@ -4,7 +4,7 @@
 
 'use strict';
 
-define(['require', 'app', 'angular', 'angular-route', 'angular-ui-router', 'controllers', 'directives', 'services'], function (require, app, angular) {
+define(['require', 'app', 'angular', 'angular-route', 'angular-ui-router', 'services', 'controllers', 'directives'], function (require, app, angular) {
 
 	'use strict';
 	require(['domReady!'], function (document) {
