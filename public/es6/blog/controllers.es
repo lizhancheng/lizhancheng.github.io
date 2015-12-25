@@ -18,6 +18,7 @@
 						}
 					});
 				};
+
 			}])
 			.controller('StartCtrl', ['$scope', $scope => {
 				$scope.submenus = ['draw', 'music', 'movie', 'all'];
@@ -29,7 +30,7 @@
 			.controller('PdfCtrl', ['$scope', $scope => {
 
 			}])
-			.controller('DesktopCtrl', ['$scope', 'Menu', ($scope, Menu) => {
+			.controller('DesktopCtrl', ['$scope', $scope => {
 				$scope.apps = [
 					{name: 'My Computer', image: 'ApplicationIcon'}, 
 					{name: 'My Store', image: 'sketch'}, 
@@ -37,6 +38,17 @@
 					{name: 'Affinity Photo', image: 'AppIcon4'}
 				];
 
+			}])
+			.controller('MusicCtrl', ['$scope', '$timeout', ($scope, $timeout) => {
+				$scope.flag = undefined;
+				
+				$scope.state = au => {
+					!au.paused ? au.pause() : au.play();
+				}
+				
+				$scope.progress = au => {
+					return `${au.currentTime / au.duration * 96}%`;
+				}
 			}]);
 
 

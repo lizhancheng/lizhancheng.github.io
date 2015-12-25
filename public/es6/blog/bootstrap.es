@@ -36,6 +36,10 @@
 								'pdf@index': {
 									templateUrl: 'blog_template/menu_pdf.html', 
 									controller: 'PdfCtrl'
+								}, 
+								'music@index': {
+									templateUrl: 'blog_template/start_music.html', 
+									controller: 'MusicCtrl'
 								}
 							}
 						})

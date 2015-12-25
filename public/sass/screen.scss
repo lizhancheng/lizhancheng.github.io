@@ -323,6 +323,22 @@ a {
 	}
 }
 
+@mixin twinkle {
+	from {
+		@include box-shadow(0 0 15px 0px white);
+	}
+	to {
+		@include box-shadow(0 0 15px 5px white);
+	}
+}
+
+@mixin writing-mode($value: horizontal-tb) {
+	writing-mode: $value;
+	-webkit-writing-mode: $value;
+}
+
+
+
 .windows {
 	@include percent;
 	@include background(linear-gradient(to bottom left, #011E3E, #85D4FF));
@@ -404,8 +420,8 @@ a {
 
 		dl {
 			display: inline-block;
-			-webkit-writing-mode: horizontal-tb;
 			margin: 3.9% 20px;
+			@include writing-mode;
 
 			dt {
 				text-align: center;
@@ -419,11 +435,97 @@ a {
 			} 
 		}
 
+		.music-box {
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			margin: -150px 0 0 -200px;
+			cursor: move; 
+			
+			@include writing-mode;
+			@include percent(400px, 300px);
+			@include background(linear-gradient(to bottom left, rgba(84, 78, 224, 0.4), rgba(195,195,195,0.4)));
+			@include border-radius(1px);
+			@include box-shadow(rgba(blue, 0.4) 0 0 25px, rgba(green, 0.2) 0 0 3px 1px inset);
+
+			.banner {
+				position: relative;
+				z-index: 1;
+
+				@include percent(100%, 64%);
+				@include background(#e9e8e8);
+
+				img {
+					@include percent(100%, 100%);
+				}
+				.components {
+					position: absolute;
+					right: 0;
+					top: 0;
+					padding: 5px;
+				}
+			}
+
+			.progress {
+				position: relative;
+				z-index: 2;
+				padding-left: 15px;
+				cursor: pointer;
+
+				@include percent(0%, 5%);
+				@include background(linear-gradient(to bottom, #70B0E6, transparent));
+				@include border-radius(1em);
+
+				&:after {
+					content: '';
+					float: right;
+
+					@include percent(15px, 100%);
+					@include background(white);
+					@include border-radius(1em);
+					@include animation(twinkle 1s ease-in infinite alternate);
+
+					@at-root {
+						@include keyframes-compat(twinkle) {
+							@include twinkle;
+						} 
+					}
+				}
+			}
+
+			.buttons {
+				text-align: center; 
+				line-height: 7;
+				cursor: default;
+
+				@include percent(100%, 31%);
+
+				a {
+					display: inline-block;
+					background: url('../images/music_buttons.png') no-repeat;
+					cursor: pointer;
+
+					&.prev {
+					    @include percent(29px, 26px);
+					    background-position: -4px 0px;
+					}
+					&.play {
+					    @include percent(30px, 30px);
+					    background-position: -37px 0px;
+					}
+					&.next {
+					    @include percent(30px, 26px);
+					    background-position: -99px 0px;
+					}
+				}
+			}
+		}
+
 	}
 
 	@media screen and (min-width: 960px) {
 		.desktop {
-			-webkit-writing-mode: vertical-lr;
+			@include writing-mode(vertical-lr);
 		}
 	}
 	@media (max-width: 959px) {

@@ -1095,7 +1095,7 @@ a {
     box-shadow: 0 -0.83em 0 -0.4em #fff, 0 -0.83em 0 -0.42em #fff, 0 -0.83em 0 -0.44em #fff, 0 -0.83em 0 -0.46em #fff, 0 -0.83em 0 -0.477em #fff;
   }
 }
-/* line 326, ../sass/screen.scss */
+/* line 342, ../sass/screen.scss */
 .windows {
   width: 100%;
   height: 100%;
@@ -1155,7 +1155,7 @@ a {
     opacity: 1;
   }
 }
-/* line 337, ../sass/screen.scss */
+/* line 353, ../sass/screen.scss */
 .windows .menubar {
   display: block;
   position: fixed;
@@ -1164,26 +1164,26 @@ a {
   height: 5%;
   background: rgba(0, 5, 10, 0.7);
 }
-/* line 345, ../sass/screen.scss */
+/* line 361, ../sass/screen.scss */
 .windows .menubar ul.menu {
   width: 100%;
   height: 100%;
 }
-/* line 348, ../sass/screen.scss */
+/* line 364, ../sass/screen.scss */
 .windows .menubar ul.menu li.menu-list {
   float: left;
   height: 100%;
   padding: 0 2%;
   position: relative;
 }
-/* line 354, ../sass/screen.scss */
+/* line 370, ../sass/screen.scss */
 .windows .menubar ul.menu li.menu-list img {
   height: 100%;
   position: relative;
   z-index: 9;
   cursor: pointer;
 }
-/* line 360, ../sass/screen.scss */
+/* line 376, ../sass/screen.scss */
 .windows .menubar ul.menu li.menu-list img:hover {
   -moz-box-shadow: 0px 0px 13px 2px linen;
   -webkit-box-shadow: 0px 0px 13px 2px linen;
@@ -1192,7 +1192,7 @@ a {
   -webkit-border-radius: 2em;
   border-radius: 2em;
 }
-/* line 365, ../sass/screen.scss */
+/* line 381, ../sass/screen.scss */
 .windows .menubar ul.menu li.menu-list ul.submenu-start {
   width: 200%;
   position: absolute;
@@ -1212,7 +1212,7 @@ a {
   -webkit-box-shadow: 0px 0px 2px #ccc inset;
   box-shadow: 0px 0px 2px #ccc inset;
 }
-/* line 378, ../sass/screen.scss */
+/* line 394, ../sass/screen.scss */
 .windows .menubar ul.menu li.menu-list ul.submenu-start li.submenu-start-list {
   text-align: center;
   height: 100px;
@@ -1223,46 +1223,214 @@ a {
   -webkit-transition: background 0.5s ease-out, color 0.5s ease-out;
   transition: background 0.5s ease-out, color 0.5s ease-out;
 }
-/* line 386, ../sass/screen.scss */
+/* line 402, ../sass/screen.scss */
 .windows .menubar ul.menu li.menu-list ul.submenu-start li.submenu-start-list:hover {
   color: white;
   background: rgba(133, 255, 187, 0.4);
 }
-/* line 394, ../sass/screen.scss */
+/* line 410, ../sass/screen.scss */
 .windows .menubar ul.menu li.menu-list:last-child {
   float: right;
 }
-/* line 402, ../sass/screen.scss */
+/* line 418, ../sass/screen.scss */
 .windows .desktop {
   width: 98%;
   height: 95%;
 }
-/* line 405, ../sass/screen.scss */
+/* line 421, ../sass/screen.scss */
 .windows .desktop dl {
   display: inline-block;
-  -webkit-writing-mode: horizontal-tb;
   margin: 3.9% 20px;
+  writing-mode: horizontal-tb;
+  -webkit-writing-mode: horizontal-tb;
 }
-/* line 410, ../sass/screen.scss */
+/* line 426, ../sass/screen.scss */
 .windows .desktop dl dt {
   text-align: center;
 }
-/* line 413, ../sass/screen.scss */
+/* line 429, ../sass/screen.scss */
 .windows .desktop dl dd {
   text-align: center;
 }
-/* line 417, ../sass/screen.scss */
+/* line 433, ../sass/screen.scss */
 .windows .desktop dl:hover {
   background: rgba(250, 250, 250, 0.4);
 }
+/* line 438, ../sass/screen.scss */
+.windows .desktop .music-box {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: -150px 0 0 -200px;
+  cursor: move;
+  writing-mode: horizontal-tb;
+  -webkit-writing-mode: horizontal-tb;
+  width: 400px;
+  height: 300px;
+  background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjEuMCIgeTE9IjAuMCIgeDI9IjAuMCIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzU0NGVlMCIgc3RvcC1vcGFjaXR5PSIwLjQiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNjM2MzYzMiIHN0b3Atb3BhY2l0eT0iMC40Ii8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
+  background: -webkit-gradient(linear, 100% 0%, 0% 100%, color-stop(0%, rgba(84, 78, 224, 0.4)), color-stop(100%, rgba(195, 195, 195, 0.4)));
+  background: -moz-linear-gradient(top, rgba(84, 78, 224, 0.4), rgba(195, 195, 195, 0.4));
+  background: -webkit-linear-gradient(top, rgba(84, 78, 224, 0.4), rgba(195, 195, 195, 0.4));
+  background: linear-gradient(to bottom left, rgba(84, 78, 224, 0.4), rgba(195, 195, 195, 0.4));
+  -moz-border-radius: 1px;
+  -webkit-border-radius: 1px;
+  border-radius: 1px;
+  -moz-box-shadow: rgba(0, 0, 255, 0.4) 0 0 25px, rgba(0, 128, 0, 0.2) 0 0 3px 1px inset;
+  -webkit-box-shadow: rgba(0, 0, 255, 0.4) 0 0 25px, rgba(0, 128, 0, 0.2) 0 0 3px 1px inset;
+  box-shadow: rgba(0, 0, 255, 0.4) 0 0 25px, rgba(0, 128, 0, 0.2) 0 0 3px 1px inset;
+}
+/* line 451, ../sass/screen.scss */
+.windows .desktop .music-box .banner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 64%;
+  background: #e9e8e8;
+}
+/* line 458, ../sass/screen.scss */
+.windows .desktop .music-box .banner img {
+  width: 100%;
+  height: 100%;
+}
+/* line 461, ../sass/screen.scss */
+.windows .desktop .music-box .banner .components {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 5px;
+}
+/* line 469, ../sass/screen.scss */
+.windows .desktop .music-box .progress {
+  position: relative;
+  z-index: 2;
+  padding-left: 15px;
+  cursor: pointer;
+  width: 0%;
+  height: 5%;
+  background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzcwYjBlNiIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwLjAiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz48cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyYWQpIiAvPjwvc3ZnPiA=');
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #70b0e6), color-stop(100%, rgba(0, 0, 0, 0)));
+  background: -moz-linear-gradient(top, #70b0e6, rgba(0, 0, 0, 0));
+  background: -webkit-linear-gradient(top, #70b0e6, rgba(0, 0, 0, 0));
+  background: linear-gradient(to bottom, #70b0e6, rgba(0, 0, 0, 0));
+  -moz-border-radius: 1em;
+  -webkit-border-radius: 1em;
+  border-radius: 1em;
+}
+/* line 479, ../sass/screen.scss */
+.windows .desktop .music-box .progress:after {
+  content: '';
+  float: right;
+  width: 15px;
+  height: 100%;
+  background: white;
+  -moz-border-radius: 1em;
+  -webkit-border-radius: 1em;
+  border-radius: 1em;
+  -moz-animation: twinkle 1s ease-in infinite alternate;
+  -webkit-animation: twinkle 1s ease-in infinite alternate;
+  animation: twinkle 1s ease-in infinite alternate;
+}
+@keyframes twinkle {
+  from {
+    -moz-box-shadow: 0 0 15px 0px white;
+    -webkit-box-shadow: 0 0 15px 0px white;
+    box-shadow: 0 0 15px 0px white;
+  }
+  to {
+    -moz-box-shadow: 0 0 15px 5px white;
+    -webkit-box-shadow: 0 0 15px 5px white;
+    box-shadow: 0 0 15px 5px white;
+  }
+}
+@-webkit-keyframes twinkle {
+  from {
+    -moz-box-shadow: 0 0 15px 0px white;
+    -webkit-box-shadow: 0 0 15px 0px white;
+    box-shadow: 0 0 15px 0px white;
+  }
+  to {
+    -moz-box-shadow: 0 0 15px 5px white;
+    -webkit-box-shadow: 0 0 15px 5px white;
+    box-shadow: 0 0 15px 5px white;
+  }
+}
+@-moz-keyframes twinkle {
+  from {
+    -moz-box-shadow: 0 0 15px 0px white;
+    -webkit-box-shadow: 0 0 15px 0px white;
+    box-shadow: 0 0 15px 0px white;
+  }
+  to {
+    -moz-box-shadow: 0 0 15px 5px white;
+    -webkit-box-shadow: 0 0 15px 5px white;
+    box-shadow: 0 0 15px 5px white;
+  }
+}
+@-o-keyframes twinkle {
+  from {
+    -moz-box-shadow: 0 0 15px 0px white;
+    -webkit-box-shadow: 0 0 15px 0px white;
+    box-shadow: 0 0 15px 0px white;
+  }
+  to {
+    -moz-box-shadow: 0 0 15px 5px white;
+    -webkit-box-shadow: 0 0 15px 5px white;
+    box-shadow: 0 0 15px 5px white;
+  }
+}
+@-ms-keyframes twinkle {
+  from {
+    -moz-box-shadow: 0 0 15px 0px white;
+    -webkit-box-shadow: 0 0 15px 0px white;
+    box-shadow: 0 0 15px 0px white;
+  }
+  to {
+    -moz-box-shadow: 0 0 15px 5px white;
+    -webkit-box-shadow: 0 0 15px 5px white;
+    box-shadow: 0 0 15px 5px white;
+  }
+}
+/* line 496, ../sass/screen.scss */
+.windows .desktop .music-box .buttons {
+  text-align: center;
+  line-height: 7;
+  cursor: default;
+  width: 100%;
+  height: 31%;
+}
+/* line 503, ../sass/screen.scss */
+.windows .desktop .music-box .buttons a {
+  display: inline-block;
+  background: url("../images/music_buttons.png") no-repeat;
+  cursor: pointer;
+}
+/* line 508, ../sass/screen.scss */
+.windows .desktop .music-box .buttons a.prev {
+  width: 29px;
+  height: 26px;
+  background-position: -4px 0px;
+}
+/* line 512, ../sass/screen.scss */
+.windows .desktop .music-box .buttons a.play {
+  width: 30px;
+  height: 30px;
+  background-position: -37px 0px;
+}
+/* line 516, ../sass/screen.scss */
+.windows .desktop .music-box .buttons a.next {
+  width: 30px;
+  height: 26px;
+  background-position: -99px 0px;
+}
 @media screen and (min-width: 960px) {
-  /* line 425, ../sass/screen.scss */
+  /* line 527, ../sass/screen.scss */
   .windows .desktop {
+    writing-mode: vertical-lr;
     -webkit-writing-mode: vertical-lr;
   }
 }
 @media (max-width: 959px) {
-  /* line 430, ../sass/screen.scss */
+  /* line 532, ../sass/screen.scss */
   .windows .desktop {
     text-align: center;
   }

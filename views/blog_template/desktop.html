@@ -1,6 +1,9 @@
 <dl ng-repeat="app in apps">
 	<dt>
-		<img src="../public/images/{{app.image}}.png" alt="" />
+		<a href="javascript:void(0);">
+			<img src="../public/images/{{app.image}}.png" alt="" />
+		</a>
 	</dt>
 	<dd ng-bind="app.name"></dd>
 </dl>
+<div ui-view="music"></div>

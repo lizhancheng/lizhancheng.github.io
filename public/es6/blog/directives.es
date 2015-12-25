@@ -10,12 +10,40 @@
 			.directive('desktop', () => {
 				return {
 					restrict: 'ECMA', 
-					controller: 'DesktopCtrl', 
+					controller: 'MenuCtrl', 
 					link: ($scope, element, attr) => {
-						element.on('click', event => {
-
+						element.bind('click', event => {
+							if($scope.menu[0].display === true) {
+								document.querySelector('li:first-child img').click();
+							}
 						});
 					}
 				}
-			});
+			})
+			.directive('musicBox', () => {
+				return {
+					restrict: 'ECMA', 
+					controller: 'MusicCtrl', 
+					link: ($scope, element, attr) => {
+						$scope.loop = function(au) {
+							let width = $scope.progress(au);
+							angular.element(progress).css('width', width);
+							$scope.flag = setTimeout(function() {
+								$scope.loop(au);
+							}, 1000);
+							if(parseInt(width) === 96) {
+								clearTimeout($scope.flag);
+							}
+						}
+
+						let play = document.querySelector('.play');
+						let au = document.querySelector('.audio');
+						let progress = document.querySelector('.progress');
+						angular.element(play).bind('click', event => {
+							$scope.state(au);
+							$scope.loop(au);
+						});
+					}
+				}
+			})
 	});

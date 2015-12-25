@@ -24,7 +24,17 @@ define(['app'], function (app) {
 	}]).controller('FileCtrl', ['$scope', '$location', function ($scope, $location) {
 		// $location.path('/home').replace(); // 禁止后退
 
-	}]).controller('PdfCtrl', ['$scope', function ($scope) {}]).controller('DesktopCtrl', ['$scope', 'Menu', function ($scope, Menu) {
+	}]).controller('PdfCtrl', ['$scope', function ($scope) {}]).controller('DesktopCtrl', ['$scope', function ($scope) {
 		$scope.apps = [{ name: 'My Computer', image: 'ApplicationIcon' }, { name: 'My Store', image: 'sketch' }, { name: 'H5 App', image: 'HypeApp' }, { name: 'Affinity Photo', image: 'AppIcon4' }];
+	}]).controller('MusicCtrl', ['$scope', '$timeout', function ($scope, $timeout) {
+		$scope.flag = undefined;
+
+		$scope.state = function (au) {
+			!au.paused ? au.pause() : au.play();
+		};
+
+		$scope.progress = function (au) {
+			return au.currentTime / au.duration * 96 + '%';
+		};
 	}]);
 });
