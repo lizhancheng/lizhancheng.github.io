@@ -35,6 +35,9 @@
 								clearTimeout($scope.flag);
 							}
 						}
+						$scope.bindMove = () => {
+							
+						}
 
 						let play = document.querySelector('.play');
 						let au = document.querySelector('.audio');

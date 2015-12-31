@@ -49,6 +49,7 @@
 				$scope.progress = au => {
 					return `${au.currentTime / au.duration * 96}%`;
 				}
+
 			}]);
 
 

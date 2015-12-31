@@ -34,6 +34,7 @@ define(['app'], function (app) {
 						clearTimeout($scope.flag);
 					}
 				};
+				$scope.bindMove = function () {};
 
 				var play = document.querySelector('.play');
 				var au = document.querySelector('.audio');
