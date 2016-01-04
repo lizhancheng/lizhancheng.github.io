@@ -2,7 +2,7 @@
  * CREATED BY ZHANCHENG.LI IN 2015/12/06
  */
 
-	define(['app'], app => {
+	define(['app', 'zUtil'], (app, ZU) => {
 
 		'use strict';
 
@@ -41,12 +41,22 @@
 			}])
 			.controller('MusicCtrl', ['$scope', '$timeout', ($scope, $timeout) => {
 				$scope.flag = undefined;
-				
+				$scope.duration = 'loading...';
+
+				$scope.getTime = au => {
+					if(au) {
+						au.onloadedmetadata = function() {
+							$scope.duration = ZU.makeTime(au.duration);
+						}
+					}
+				}
+
 				$scope.state = au => {
 					!au.paused ? au.pause() : au.play();
 				}
 				
 				$scope.progress = au => {
+					$scope.duration = `${ZU.makeTime(au.currentTime).split('/')[1]}/${$scope.duration.split('/')[1]}`;
 					return `${au.currentTime / au.duration * 96}%`;
 				}
 

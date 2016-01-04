@@ -4,7 +4,7 @@
 
 'use strict';
 
-define(['app'], function (app) {
+define(['app', 'zUtil'], function (app, ZU) {
 
 	'use strict';
 
@@ -28,12 +28,22 @@ define(['app'], function (app) {
 		$scope.apps = [{ name: 'My Computer', image: 'ApplicationIcon' }, { name: 'My Store', image: 'sketch' }, { name: 'H5 App', image: 'HypeApp' }, { name: 'Affinity Photo', image: 'AppIcon4' }];
 	}]).controller('MusicCtrl', ['$scope', '$timeout', function ($scope, $timeout) {
 		$scope.flag = undefined;
+		$scope.duration = 'loading...';
+
+		$scope.getTime = function (au) {
+			if (au) {
+				au.onloadedmetadata = function () {
+					$scope.duration = ZU.makeTime(au.duration);
+				};
+			}
+		};
 
 		$scope.state = function (au) {
 			!au.paused ? au.pause() : au.play();
 		};
 
 		$scope.progress = function (au) {
+			$scope.duration = ZU.makeTime(au.currentTime).split('/')[1] + '/' + $scope.duration.split('/')[1];
 			return au.currentTime / au.duration * 96 + '%';
 		};
 	}]);

@@ -9,6 +9,7 @@ requirejs.config({
 		"angular-route": 'libs/angular-route/angular-route', 
 		"angular-ui-router": 'libs/angular-ui-router/angular-ui-router.min', 
 		"angularAMD": 'libs/angularAMD/angularAMD', 
+		"zUtil": 'libs/zencommon/zen', 
 		"app": 'blog/app', 
 		"bootstrap": 'blog/bootstrap', 
 		"controllers": 'blog/controllers', 

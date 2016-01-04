@@ -1,7 +1,7 @@
 <dl ng-repeat="app in apps">
 	<dt>
 		<a href="javascript:void(0);">
-			<img src="../public/images/{{app.image}}.png" alt="" />
+			<img ng-src="../public/images/{{app.image}}.png" alt="" />
 		</a>
 	</dt>
 	<dd ng-bind="app.name"></dd>
