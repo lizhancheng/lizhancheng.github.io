@@ -35,8 +35,23 @@
 								clearTimeout($scope.flag);
 							}
 						}
-						$scope.bindMove = () => {
-							
+						$scope.moveBox = event => {
+							function onMove(evt) {
+								let parent = document.querySelector('.music-box');
+								let targetStyle = getComputedStyle(parent) || parent.currentStyle;
+								let [currentLeft, currentTop] = [parseInt(targetStyle.left), parseInt(targetStyle.top)];
+								let [finalLeft, finalTop] = [currentLeft + evt.movementX, currentTop + evt.movementY];
+console.log(finalLeft);
+								angular.element(parent).css({left: finalLeft + 'px', top: finalTop + 'px'});
+							}
+							var target = angular.element(event.target);
+							target.css('cursor', 'move');
+							target.on('mousemove', onMove);
+						}
+						$scope.stopBox = event => {
+							var target = angular.element(event.target);
+							target.css('cursor', 'default');
+							target.off('mousemove');
 						}
 
 						let play = document.querySelector('.play');

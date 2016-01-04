@@ -48,7 +48,7 @@
 
 	 			img[len].onload = (len) => {
 
-	 				return () => {
+	 				// return () => {  // 这里babel解析报错
 		 				let [imgWidth, imgHeight] = [img[len].width, img[len].height];
 		 				if(!/background/.test(value)) {
 		 				console.log(imgWidth, imgHeight);
@@ -56,8 +56,8 @@
 		 				}else {
 				 			ctx.drawImage(img[len], 0, 0, width, height);
 			 			}
-		 			}
-	 			}(len)
+		 			// }(len)
+	 			};
  			}
  		}
 

@@ -34,7 +34,27 @@ define(['app'], function (app) {
 						clearTimeout($scope.flag);
 					}
 				};
-				$scope.bindMove = function () {};
+				$scope.moveBox = function (event) {
+					function onMove(evt) {
+						var parent = document.querySelector('.music-box');
+						var targetStyle = getComputedStyle(parent) || parent.currentStyle;
+						var currentLeft = parseInt(targetStyle.left);
+						var currentTop = parseInt(targetStyle.top);
+						var finalLeft = currentLeft + evt.movementX;
+						var finalTop = currentTop + evt.movementY;
+
+						console.log(finalLeft);
+						angular.element(parent).css({ left: finalLeft + 'px', top: finalTop + 'px' });
+					}
+					var target = angular.element(event.target);
+					target.css('cursor', 'move');
+					target.on('mousemove', onMove);
+				};
+				$scope.stopBox = function (event) {
+					var target = angular.element(event.target);
+					target.css('cursor', 'default');
+					target.off('mousemove');
+				};
 
 				var play = document.querySelector('.play');
 				var au = document.querySelector('.audio');

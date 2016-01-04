@@ -1,9 +1,9 @@
 <div class="music-box">
-	<div class="banner">
+	<div class="banner" ng-mousedown="moveBox($event)" ng-mouseup="stopBox($event)">
 		<img src="../public/images/background.jpg" />
 		<div class="components">
-			<a href="javascript:void(0);" class="minimize">-</a>
-			<a href="javascript:void(0);" class="close">&times;</a>
+			<a href="javascript:void(0);" class="minimize" title="最小化">&minus;</a>
+			<a href="javascript:void(0);" class="close" title="关闭">&times;</a>
 		</div>
 	</div>
 	<div class="progress"></div>
