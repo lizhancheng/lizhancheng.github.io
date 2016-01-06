@@ -12,5 +12,13 @@
 					{name: 'file', display: false}, 
 					{name: 'pdf', display: false}
 				];
+			}])
+			.factory('MusicList', ['$http', $http => {
+				return {
+					getList: $scope => {
+						let api = '/interface/music_list.json';
+						return $http.get(api);
+					}
+				}
 			}]);
 	});

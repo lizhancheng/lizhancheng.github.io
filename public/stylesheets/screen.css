@@ -1425,34 +1425,66 @@ a {
   display: inline-block;
   background: url("../images/music_buttons.png") no-repeat;
   cursor: pointer;
+  -moz-transition: background-position 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+  -o-transition: background-position 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+  -webkit-transition: background-position 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+  transition: background-position 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
-/* line 526, ../sass/screen.scss */
+/* line 528, ../sass/screen.scss */
 .windows .desktop .music-box .buttons a.prev {
   width: 29px;
   height: 26px;
   background-position: -4px 0px;
 }
-/* line 530, ../sass/screen.scss */
+/* line 532, ../sass/screen.scss */
 .windows .desktop .music-box .buttons a.play {
   width: 30px;
   height: 30px;
   background-position: -37px 0px;
 }
-/* line 534, ../sass/screen.scss */
+/* line 536, ../sass/screen.scss */
+.windows .desktop .music-box .buttons a.play.pause {
+  background-position: -70px 0px;
+}
+/* line 540, ../sass/screen.scss */
 .windows .desktop .music-box .buttons a.next {
   width: 30px;
   height: 26px;
   background-position: -99px 0px;
 }
+/* line 546, ../sass/screen.scss */
+.windows .desktop .music-box .buttons .auto {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  border: none;
+  outline: none;
+  color: white;
+  width: 50px;
+  height: 20px;
+  -moz-transition: color 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+  -o-transition: color 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+  -webkit-transition: color 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+  transition: color 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
+  background: transparent;
+}
+/* line 558, ../sass/screen.scss */
+.windows .desktop .music-box .buttons .auto:hover {
+  color: #85F8FF;
+}
+/* line 562, ../sass/screen.scss */
+.windows .desktop .music-box .buttons .auto.active {
+  color: #85FF8A;
+}
 @media screen and (min-width: 960px) {
-  /* line 545, ../sass/screen.scss */
+  /* line 572, ../sass/screen.scss */
   .windows .desktop {
     writing-mode: vertical-lr;
     -webkit-writing-mode: vertical-lr;
   }
 }
 @media (max-width: 959px) {
-  /* line 550, ../sass/screen.scss */
+  /* line 577, ../sass/screen.scss */
   .windows .desktop {
     text-align: center;
   }

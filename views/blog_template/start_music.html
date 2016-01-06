@@ -4,17 +4,18 @@
 		<div class="timestamps" ng-bind="duration"></div>
 		<div class="components">
 			<a href="javascript:void(0);" class="minimize" title="最小化">&minus;</a>
-			<a href="javascript:void(0);" class="close" title="关闭">&times;</a>
+			<a href="javascript:void(0);" ui-sref="index" class="close" title="关闭">&times;</a>
 		</div>
 	</div>
-	<div class="progress"></div>
+	<div class="progress" ng-click="updateProgress($event)"></div>
 	<div class="buttons">
-		<a href="javascript:void(0);" class="prev"></a>
+		<a href="javascript:void(0);" class="prev" ng-click="alterSong($event)"></a>
 		<a href="javascript:void(0);" class="play"></a>
-		<a href="javascript:void(0);" class="next"></a>
+		<a href="javascript:void(0);" class="next" ng-click="alterSong($event)"></a>
+		<button type="button" class="auto" ng-click="alterAuto($event)">自动</button>
 	</div>
 	<audio class="audio">
-		<source src="../public/music/slience.mp3" type="audio/mp3" />
-		<embed src="../public/music/slience.mp3" />
+		<source ng-src="{{now_song.path}}" type="audio/mp3" />
+		<embed ng-src="{{now_song.path}}" />
 	</audio>
 </div>

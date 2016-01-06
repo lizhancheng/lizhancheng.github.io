@@ -8,9 +8,10 @@ define(['require', 'app', 'angular', 'angular-route', 'angular-ui-router', 'serv
 
 	'use strict';
 	require(['domReady!'], function (document) {
-		app.config(function ($stateProvider, $urlRouterProvider) {
+		app.config(function ($stateProvider, $urlRouterProvider, $sceDelegateProvider) {
 
 			// $urlRouterProvider.otherwise('/default');
+			$sceDelegateProvider.resourceUrlWhitelist(['**']);
 			$stateProvider.state('index', {
 				url: '',
 				views: {
@@ -40,6 +41,21 @@ define(['require', 'app', 'angular', 'angular-route', 'angular-ui-router', 'serv
 					'music@index': {
 						templateUrl: 'blog_template/start_music.html',
 						controller: 'MusicCtrl'
+					}
+				}
+			}).state('index.music', {
+				url: '/music-box',
+				views: {
+					'': {
+						templateUrl: 'blog_template/start_music.html',
+						controller: 'MusicCtrl'
+					}
+				}
+			}).state('index.draw', {
+				url: '/drawing',
+				views: {
+					'': {
+						templateUrl: 'blog_template/start_draw.html'
 					}
 				}
 			});

@@ -523,6 +523,8 @@ a {
 					background: url('../images/music_buttons.png') no-repeat;
 					cursor: pointer;
 
+					@include transition(background-position 0.5s cubic-bezier(0.215, 0.61, 0.355, 1));
+
 					&.prev {
 					    @include percent(29px, 26px);
 					    background-position: -4px 0px;
@@ -530,10 +532,35 @@ a {
 					&.play {
 					    @include percent(30px, 30px);
 					    background-position: -37px 0px;
+
+					    &.pause {
+					    	background-position: -70px 0px;
+					    }
 					}
 					&.next {
 					    @include percent(30px, 26px);
 					    background-position: -99px 0px;
+					}
+				}
+
+				.auto {
+					position: absolute;
+					right: 0;
+					bottom: 0;
+					border: none;
+					outline: none;
+					color: white;
+
+					@include percent(50px, 20px);
+					@include transition(color 0.5s cubic-bezier(0.215, 0.61, 0.355, 1));
+					@include background(transparent);
+
+					&:hover {
+						color: #85F8FF;
+					}
+
+					&.active {
+						color: #85FF8A;
 					}
 				}
 			}

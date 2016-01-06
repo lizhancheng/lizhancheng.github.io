@@ -23,7 +23,22 @@ define(['app'], function (app) {
 		return {
 			restrict: 'ECMA',
 			controller: 'MusicCtrl',
-			link: function link($scope, element, attr) {
+			link: function link($scope, element, attr, $watch) {
+				function isPlay() {
+					var jau = angular.element(au);
+					var jplay = angular.element(play);
+
+					if (au.autoplay) {
+						au.play();
+					} else {
+						au.pause();
+					}
+					if (au.paused) {
+						jplay.removeClass('pause');
+					} else {
+						jplay.addClass('pause');
+					}
+				}
 				$scope.movement = false;
 				/*
     // through timing to set the progress-bar
@@ -38,6 +53,7 @@ define(['app'], function (app) {
     	}
     }
     */
+				// move the music-box alternately
 				$scope.moveBox = function (event) {
 					function onMove(evt) {
 						var parent = document.querySelector('.music-box');
@@ -53,9 +69,12 @@ define(['app'], function (app) {
 						}
 					}
 					var target = angular.element(event.target);
-					target.css('cursor', 'move');
-					target.on('mousemove', onMove);
+					if (!(target.hasClass('minimize') || target.hasClass('close'))) {
+						target.css('cursor', 'move');
+						target.on('mousemove', onMove);
+					}
 				};
+				// while stop moving box, it will unbind the move event
 				$scope.stopBox = function (event) {
 					function stopMove() {
 						var parent = document.querySelector('.music-box');
@@ -71,12 +90,54 @@ define(['app'], function (app) {
 						$scope.movement = false;
 					}
 					var target = angular.element(event.target);
-					target.css('cursor', 'default');
-					target.off('mousemove');
+					if (!(target.hasClass('minimize') || target.hasClass('close'))) {
+						target.css('cursor', 'default');
+						target.off('mousemove');
+					}
 					if ($scope.movement) {
 						// stopMove();
 					}
 				};
+				// while modify the progress manually, it will update the progress-bar
+				$scope.updateProgress = function (event) {
+					var x = (event.offsetX || event.layerX) / 400 * 100 + '%';
+					angular.element(progress).css('width', x);
+					au.currentTime = parseFloat(x) / 100 * au.duration;
+					isPlay();
+				};
+				// choose song
+				$scope.alterSong = function (event) {
+					var alter_class = event.target.getAttribute('class');
+					if (alter_class === 'prev') {
+						$scope.prevSong();
+					} else {
+						$scope.nextSong();
+					}
+				};
+				// switch auto status
+				$scope.alterAuto = function (event) {
+					angular.element(event.target).toggleClass('active');
+					au.autoplay = !au.autoplay;
+				};
+				// get music list
+				$scope.loadMusic.getList($scope).success(function (result) {
+					if (result.status === 200) {
+						$scope.music_list = result.data;
+						$scope.now_song = $scope.music_list[0];
+						$scope.total_song = $scope.music_list.length - 1;
+					}
+				});
+				// watch the song changing
+				$scope.$watch('now_song', function (nv, ov, $scope) {
+					if (nv) {
+						var jau = angular.element(au);
+						var jplay = angular.element(play);
+
+						jau.children().attr('src', nv.path);
+						au.load();
+						isPlay();
+					}
+				});
 
 				var play = document.querySelector('.play');
 				var au = document.querySelector('.audio');
@@ -85,7 +146,11 @@ define(['app'], function (app) {
 				$scope.getTime(au);
 
 				angular.element(play).bind('click', function (event) {
+					if (!au.readyState) {
+						au.load();
+					}
 					$scope.state(au);
+					angular.element(play).toggleClass('pause');
 					// $scope.loop(au);
 				});
 				// prevent img tag from moving
@@ -93,6 +158,7 @@ define(['app'], function (app) {
 					event.preventDefault();
 					return false;
 				});
+				// while time updates, it will update the progress-bar and timing
 				au.ontimeupdate = function () {
 					var width = $scope.progress(au);
 					angular.element(progress).css('width', width);

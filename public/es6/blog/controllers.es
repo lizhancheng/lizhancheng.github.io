@@ -39,14 +39,32 @@
 				];
 
 			}])
-			.controller('MusicCtrl', ['$scope', '$timeout', ($scope, $timeout) => {
+			.controller('MusicCtrl', ['$scope', '$timeout', 'MusicList', ($scope, $timeout, MusicList) => {
 				$scope.flag = undefined;
 				$scope.duration = 'loading...';
+				$scope.music_list = null;
+				$scope.now_song = null;
+				$scope.song_count = 0;
+				$scope.total_song = 0;
+
+				$scope.loadMusic = MusicList;
+
+				$scope.nextSong = () => {
+					if($scope.song_count < $scope.total_song) {
+						$scope.now_song = $scope.music_list[++ $scope.song_count];
+					}
+				}
+
+				$scope.prevSong = () => {
+					if($scope.song_count > 0) {
+						$scope.now_song = $scope.music_list[-- $scope.song_count];
+					}
+				}
 
 				$scope.getTime = au => {
 					if(au) {
 						au.onloadedmetadata = function() {
-							$scope.duration = ZU.makeTime(au.duration);
+							$scope.duration = ZU.makeTime(au.duration, true);
 						}
 					}
 				}
@@ -56,7 +74,7 @@
 				}
 				
 				$scope.progress = au => {
-					$scope.duration = `${ZU.makeTime(au.currentTime).split('/')[1]}/${$scope.duration.split('/')[1]}`;
+					$scope.duration = `${ZU.makeTime(au.currentTime)}/${$scope.duration.split('/')[1]}`;
 					return `${au.currentTime / au.duration * 96}%`;
 				}
 

@@ -24,7 +24,20 @@
 				return {
 					restrict: 'ECMA', 
 					controller: 'MusicCtrl', 
-					link: ($scope, element, attr) => {
+					link: ($scope, element, attr, $watch) => {
+						function isPlay() {
+							let [jau, jplay] = [angular.element(au), angular.element(play)];
+							if(au.autoplay) {
+								au.play();
+							}else {
+								au.pause();
+							}
+							if(au.paused) {
+								jplay.removeClass('pause');
+							}else {
+								jplay.addClass('pause');
+							}
+						}
 						$scope.movement = false;
 						/*
 						// through timing to set the progress-bar
@@ -39,6 +52,7 @@
 							}
 						}
 						*/
+						// move the music-box alternately
 						$scope.moveBox = event => {
 							function onMove(evt) {
 								let parent = document.querySelector('.music-box');
@@ -51,9 +65,12 @@
 								}
 							}
 							var target = angular.element(event.target);
-							target.css('cursor', 'move');
-							target.on('mousemove', onMove);
+							if(!(target.hasClass('minimize') || target.hasClass('close'))){
+								target.css('cursor', 'move');
+								target.on('mousemove', onMove);
+							}
 						}
+						// while stop moving box, it will unbind the move event
 						$scope.stopBox = event => {
 							function stopMove() {
 								let parent = document.querySelector('.music-box');
@@ -65,21 +82,66 @@
 								$scope.movement = false;
 							}
 							var target = angular.element(event.target);
-							target.css('cursor', 'default');
-							target.off('mousemove');
+							if(!(target.hasClass('minimize') || target.hasClass('close'))){
+								target.css('cursor', 'default');
+								target.off('mousemove');
+							}
 							if($scope.movement) {
 								// stopMove();
 							}
 						}
+						// while modify the progress manually, it will update the progress-bar
+						$scope.updateProgress = event => {
+							let x = (event.offsetX || event.layerX) / 400 * 100 + '%';
+							angular.element(progress).css('width', x);
+							au.currentTime = parseFloat(x) / 100 * au.duration;
+							isPlay();
+						}
+						// choose song
+						$scope.alterSong = event => {
+							let alter_class = event.target.getAttribute('class');
+							if(alter_class === 'prev') {
+								$scope.prevSong();
+							}else {
+								$scope.nextSong();
+							}
+						}
+						// switch auto status
+						$scope.alterAuto = event => {
+							angular.element(event.target).toggleClass('active');
+							au.autoplay = !au.autoplay;
+						}
+						// get music list
+						$scope.loadMusic.getList($scope)
+						.success(result => {
+							if(result.status === 200) {
+								$scope.music_list = result.data;
+								$scope.now_song = $scope.music_list[0];
+								$scope.total_song = $scope.music_list.length - 1;
+							}
+						});
+						// watch the song changing
+						$scope.$watch('now_song', (nv, ov, $scope) => {
+							if(nv) {
+								let [jau, jplay] = [angular.element(au), angular.element(play)];
+								jau.children().attr('src', nv.path);
+								au.load();
+								isPlay();
+							}
+						});
 
-						let play = document.querySelector('.play');
-						let au = document.querySelector('.audio');
-						let banner_img = document.querySelector('.banner img');
-						let progress = document.querySelector('.progress');
+						var play = document.querySelector('.play');
+						var au = document.querySelector('.audio');
+						var banner_img = document.querySelector('.banner img');
+						var progress = document.querySelector('.progress');
 						$scope.getTime(au);
 
 						angular.element(play).bind('click', event => {
+							if(!au.readyState) {
+								au.load();
+							}
 							$scope.state(au);
+							angular.element(play).toggleClass('pause');
 							// $scope.loop(au);
 						});
 						// prevent img tag from moving
@@ -87,6 +149,7 @@
 							event.preventDefault();
 							return false;
 						});
+						// while time updates, it will update the progress-bar and timing
 						au.ontimeupdate = function() {
 							let width = $scope.progress(au);
 							angular.element(progress).css('width', width);

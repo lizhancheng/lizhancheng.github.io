@@ -26,14 +26,32 @@ define(['app', 'zUtil'], function (app, ZU) {
 
 	}]).controller('PdfCtrl', ['$scope', function ($scope) {}]).controller('DesktopCtrl', ['$scope', function ($scope) {
 		$scope.apps = [{ name: 'My Computer', image: 'ApplicationIcon' }, { name: 'My Store', image: 'sketch' }, { name: 'H5 App', image: 'HypeApp' }, { name: 'Affinity Photo', image: 'AppIcon4' }];
-	}]).controller('MusicCtrl', ['$scope', '$timeout', function ($scope, $timeout) {
+	}]).controller('MusicCtrl', ['$scope', '$timeout', 'MusicList', function ($scope, $timeout, MusicList) {
 		$scope.flag = undefined;
 		$scope.duration = 'loading...';
+		$scope.music_list = null;
+		$scope.now_song = null;
+		$scope.song_count = 0;
+		$scope.total_song = 0;
+
+		$scope.loadMusic = MusicList;
+
+		$scope.nextSong = function () {
+			if ($scope.song_count < $scope.total_song) {
+				$scope.now_song = $scope.music_list[++$scope.song_count];
+			}
+		};
+
+		$scope.prevSong = function () {
+			if ($scope.song_count > 0) {
+				$scope.now_song = $scope.music_list[--$scope.song_count];
+			}
+		};
 
 		$scope.getTime = function (au) {
 			if (au) {
 				au.onloadedmetadata = function () {
-					$scope.duration = ZU.makeTime(au.duration);
+					$scope.duration = ZU.makeTime(au.duration, true);
 				};
 			}
 		};
@@ -43,7 +61,7 @@ define(['app', 'zUtil'], function (app, ZU) {
 		};
 
 		$scope.progress = function (au) {
-			$scope.duration = ZU.makeTime(au.currentTime).split('/')[1] + '/' + $scope.duration.split('/')[1];
+			$scope.duration = ZU.makeTime(au.currentTime) + '/' + $scope.duration.split('/')[1];
 			return au.currentTime / au.duration * 96 + '%';
 		};
 	}]);
