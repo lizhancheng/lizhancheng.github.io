@@ -20,7 +20,7 @@ define(['app', 'zUtil'], function (app, ZU) {
 			});
 		};
 	}]).controller('StartCtrl', ['$scope', function ($scope) {
-		$scope.submenus = ['draw', 'music', 'movie', 'all'];
+		$scope.submenus = ['draw', 'music', 'movie', 'article', 'all'];
 	}]).controller('FileCtrl', ['$scope', '$location', function ($scope, $location) {
 		// $location.path('/home').replace(); // 禁止后退
 
@@ -64,5 +64,9 @@ define(['app', 'zUtil'], function (app, ZU) {
 			$scope.duration = ZU.makeTime(au.currentTime) + '/' + $scope.duration.split('/')[1];
 			return au.currentTime / au.duration * 96 + '%';
 		};
+	}]).controller('DrawCtrl', ['$scope', '$state', function ($scope, $state) {
+		console.log('draw-controller loaded...');
+	}]).controller('ArticleCtrl', ['$scope', function ($scope) {
+		console.log('article-controller loaded...');
 	}]);
 });

@@ -56,17 +56,18 @@
 
         img[len].onload = function (len) {
 
-          // return () => {  // 这里babel解析报错
-          var imgWidth = img[len].width;
-          var imgHeight = img[len].height;
+          return (function () {
+            // 这里babel解析报错
+            var imgWidth = img[len].width;
+            var imgHeight = img[len].height;
 
-          if (!/background/.test(value)) {
-            console.log(imgWidth, imgHeight);
-            ctx.drawImage(img[len], (width - imgWidth) * 0.5, height * 0.08, imgWidth, imgHeight);
-          } else {
-            ctx.drawImage(img[len], 0, 0, width, height);
-          }
-          // }(len)
+            if (!/background/.test(value)) {
+              console.log(imgWidth, imgHeight);
+              ctx.drawImage(img[len], (width - imgWidth) * 0.5, height * 0.08, imgWidth, imgHeight);
+            } else {
+              ctx.drawImage(img[len], 0, 0, width, height);
+            }
+          })(len);
         };
       };
 

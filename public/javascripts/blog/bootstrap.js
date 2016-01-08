@@ -10,10 +10,11 @@ define(['require', 'app', 'angular', 'angular-route', 'angular-ui-router', 'serv
 	require(['domReady!'], function (document) {
 		app.config(function ($stateProvider, $urlRouterProvider, $sceDelegateProvider) {
 
-			// $urlRouterProvider.otherwise('/default');
+			$urlRouterProvider.otherwise('/');
+			// allow cross-domain to access resource
 			$sceDelegateProvider.resourceUrlWhitelist(['**']);
 			$stateProvider.state('index', {
-				url: '',
+				url: '/',
 				views: {
 					'': {
 						templateUrl: 'blog_template/index.html'
@@ -41,10 +42,14 @@ define(['require', 'app', 'angular', 'angular-route', 'angular-ui-router', 'serv
 					'music@index': {
 						templateUrl: 'blog_template/start_music.html',
 						controller: 'MusicCtrl'
+					},
+					'article@index': {
+						templateUrl: 'blog_template/start_article.html',
+						controller: 'ArticleCtrl'
 					}
 				}
 			}).state('index.music', {
-				url: '/music-box',
+				url: 'music-box',
 				views: {
 					'': {
 						templateUrl: 'blog_template/start_music.html',
@@ -52,10 +57,11 @@ define(['require', 'app', 'angular', 'angular-route', 'angular-ui-router', 'serv
 					}
 				}
 			}).state('index.draw', {
-				url: '/drawing',
+				url: 'drawing',
 				views: {
 					'': {
-						templateUrl: 'blog_template/start_draw.html'
+						templateUrl: 'blog_template/start_draw.html',
+						controller: 'DrawCtrl'
 					}
 				}
 			});

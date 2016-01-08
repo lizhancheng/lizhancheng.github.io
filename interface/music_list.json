@@ -1,0 +1,15 @@
+{
+	"status": 200, 
+	"data": [
+		{
+			"song": "slience", 
+			"author": "Jay", 
+			"path": "../public/music/slience.mp3"
+		}, 
+		{
+			"song": "", 
+			"author": "Maria Arredondo", 
+			"path": "http://win.web.ra03.sycdn.kuwo.cn/b39e619aaa292489e52807a0fea9e155/568c7690/resource/a2/22/55/2080806261.aac"
+		}
+	]
+}

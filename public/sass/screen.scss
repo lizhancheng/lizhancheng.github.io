@@ -439,11 +439,14 @@ a {
 			position: absolute;
 			left: 50%;
 			top: 50%;
-			margin: -150px 0 0 -200px;
+			max-width: 400px;
+			max-height: 300px;
+			// margin: -150px 0 0 -200px;
 			cursor: default; 
 			
 			@include writing-mode;
-			@include percent(400px, 300px);
+			@include percent(80%, 35%);
+			@include transform(translate(-50%, -50%));
 			@include background(linear-gradient(to bottom left, rgba(84, 78, 224, 0.4), rgba(195,195,195,0.4)));
 			@include border-radius(1px);
 			@include box-shadow(rgba(blue, 0.4) 0 0 25px, rgba(green, 0.2) 0 0 3px 1px inset);
@@ -562,6 +565,43 @@ a {
 					&.active {
 						color: #85FF8A;
 					}
+				}
+			}
+		}
+
+		.article {
+			max-width: 683px;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			color: black;
+
+			@include percent(65%, 80%);
+			@include writing-mode;
+			@include background(rgba(255, 255, 255, 0.3));
+			@include transform(translate(-50%, -50%));
+
+			.title, .util {
+				line-height: 30px;
+
+				@include percent(100%, 30px);
+			}
+
+			.content {
+				overflow-y: scroll;
+
+				@include percent(100%, 90%);
+
+				&::-webkit-scrollbar {
+					@include percent(5px);
+					@include background(linear-gradient(to bottom right, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.1)));
+				}
+				 
+				&::-webkit-scrollbar-thumb
+				{
+				    @include border-radius(10px);
+				    @include box-shadow(inset 0 0 6px rgba(0, 0, 0, 0.3));
+				    @include background(linear-gradient(to top left, rgba(10, 10, 10, 0.1), rgba(10, 10, 10, 0.8)));
 				}
 			}
 		}

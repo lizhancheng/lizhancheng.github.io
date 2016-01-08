@@ -21,7 +21,7 @@
 
 			}])
 			.controller('StartCtrl', ['$scope', $scope => {
-				$scope.submenus = ['draw', 'music', 'movie', 'all'];
+				$scope.submenus = ['draw', 'music', 'movie', 'article', 'all'];
 			}])
 			.controller('FileCtrl', ['$scope', '$location', ($scope, $location) => {
 				// $location.path('/home').replace(); // 禁止后退
@@ -78,6 +78,12 @@
 					return `${au.currentTime / au.duration * 96}%`;
 				}
 
+			}])
+			.controller('DrawCtrl', ['$scope', '$state', ($scope, $state) => {
+				console.log('draw-controller loaded...');
+			}])
+			.controller('ArticleCtrl', ['$scope', ($scope) => {
+				console.log('article-controller loaded...');
 			}]);
 
 

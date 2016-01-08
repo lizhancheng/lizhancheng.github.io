@@ -1261,12 +1261,17 @@ a {
   position: absolute;
   left: 50%;
   top: 50%;
-  margin: -150px 0 0 -200px;
+  max-width: 400px;
+  max-height: 300px;
   cursor: default;
   writing-mode: horizontal-tb;
   -webkit-writing-mode: horizontal-tb;
-  width: 400px;
-  height: 300px;
+  width: 80%;
+  height: 35%;
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
   background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjEuMCIgeTE9IjAuMCIgeDI9IjAuMCIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzU0NGVlMCIgc3RvcC1vcGFjaXR5PSIwLjQiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNjM2MzYzMiIHN0b3Atb3BhY2l0eT0iMC40Ii8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
   background: -webkit-gradient(linear, 100% 0%, 0% 100%, color-stop(0%, rgba(84, 78, 224, 0.4)), color-stop(100%, rgba(195, 195, 195, 0.4)));
   background: -moz-linear-gradient(top, rgba(84, 78, 224, 0.4), rgba(195, 195, 195, 0.4));
@@ -1279,7 +1284,7 @@ a {
   -webkit-box-shadow: rgba(0, 0, 255, 0.4) 0 0 25px, rgba(0, 128, 0, 0.2) 0 0 3px 1px inset;
   box-shadow: rgba(0, 0, 255, 0.4) 0 0 25px, rgba(0, 128, 0, 0.2) 0 0 3px 1px inset;
 }
-/* line 451, ../sass/screen.scss */
+/* line 454, ../sass/screen.scss */
 .windows .desktop .music-box .banner {
   position: relative;
   z-index: 1;
@@ -1287,12 +1292,12 @@ a {
   height: 64%;
   background: #e9e8e8;
 }
-/* line 458, ../sass/screen.scss */
+/* line 461, ../sass/screen.scss */
 .windows .desktop .music-box .banner img {
   width: 100%;
   height: 100%;
 }
-/* line 462, ../sass/screen.scss */
+/* line 465, ../sass/screen.scss */
 .windows .desktop .music-box .banner .timestamps {
   position: absolute;
   left: 0;
@@ -1309,19 +1314,19 @@ a {
   width: 100%;
   height: 50%;
 }
-/* line 474, ../sass/screen.scss */
+/* line 477, ../sass/screen.scss */
 .windows .desktop .music-box .banner .timestamps:hover {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=40);
   opacity: 0.4;
 }
-/* line 479, ../sass/screen.scss */
+/* line 482, ../sass/screen.scss */
 .windows .desktop .music-box .banner .components {
   position: absolute;
   right: 0;
   top: 0;
   padding: 5px;
 }
-/* line 487, ../sass/screen.scss */
+/* line 490, ../sass/screen.scss */
 .windows .desktop .music-box .progress {
   position: relative;
   z-index: 2;
@@ -1338,7 +1343,7 @@ a {
   -webkit-border-radius: 1em;
   border-radius: 1em;
 }
-/* line 497, ../sass/screen.scss */
+/* line 500, ../sass/screen.scss */
 .windows .desktop .music-box .progress:after {
   content: '';
   float: right;
@@ -1412,7 +1417,7 @@ a {
     box-shadow: 0 0 15px 5px white;
   }
 }
-/* line 514, ../sass/screen.scss */
+/* line 517, ../sass/screen.scss */
 .windows .desktop .music-box .buttons {
   text-align: center;
   line-height: 7;
@@ -1420,7 +1425,7 @@ a {
   width: 100%;
   height: 31%;
 }
-/* line 521, ../sass/screen.scss */
+/* line 524, ../sass/screen.scss */
 .windows .desktop .music-box .buttons a {
   display: inline-block;
   background: url("../images/music_buttons.png") no-repeat;
@@ -1430,29 +1435,29 @@ a {
   -webkit-transition: background-position 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
   transition: background-position 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
-/* line 528, ../sass/screen.scss */
+/* line 531, ../sass/screen.scss */
 .windows .desktop .music-box .buttons a.prev {
   width: 29px;
   height: 26px;
   background-position: -4px 0px;
 }
-/* line 532, ../sass/screen.scss */
+/* line 535, ../sass/screen.scss */
 .windows .desktop .music-box .buttons a.play {
   width: 30px;
   height: 30px;
   background-position: -37px 0px;
 }
-/* line 536, ../sass/screen.scss */
+/* line 539, ../sass/screen.scss */
 .windows .desktop .music-box .buttons a.play.pause {
   background-position: -70px 0px;
 }
-/* line 540, ../sass/screen.scss */
+/* line 543, ../sass/screen.scss */
 .windows .desktop .music-box .buttons a.next {
   width: 30px;
   height: 26px;
   background-position: -99px 0px;
 }
-/* line 546, ../sass/screen.scss */
+/* line 549, ../sass/screen.scss */
 .windows .desktop .music-box .buttons .auto {
   position: absolute;
   right: 0;
@@ -1468,23 +1473,76 @@ a {
   transition: color 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
   background: transparent;
 }
-/* line 558, ../sass/screen.scss */
+/* line 561, ../sass/screen.scss */
 .windows .desktop .music-box .buttons .auto:hover {
   color: #85F8FF;
 }
-/* line 562, ../sass/screen.scss */
+/* line 565, ../sass/screen.scss */
 .windows .desktop .music-box .buttons .auto.active {
   color: #85FF8A;
 }
+/* line 572, ../sass/screen.scss */
+.windows .desktop .article {
+  max-width: 683px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  color: black;
+  width: 65%;
+  height: 80%;
+  writing-mode: horizontal-tb;
+  -webkit-writing-mode: horizontal-tb;
+  background: rgba(255, 255, 255, 0.3);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+/* line 584, ../sass/screen.scss */
+.windows .desktop .article .title, .windows .desktop .article .util {
+  line-height: 30px;
+  width: 100%;
+  height: 30px;
+}
+/* line 590, ../sass/screen.scss */
+.windows .desktop .article .content {
+  overflow-y: scroll;
+  width: 100%;
+  height: 90%;
+}
+/* line 595, ../sass/screen.scss */
+.windows .desktop .article .content::-webkit-scrollbar {
+  width: 5px;
+  height: 100%;
+  background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuMCIgeTE9IjAuMCIgeDI9IjEuMCIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIwLjgiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZmZmZmYiIHN0b3Atb3BhY2l0eT0iMC4xIi8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
+  background: -webkit-gradient(linear, 0% 0%, 100% 100%, color-stop(0%, rgba(255, 255, 255, 0.8)), color-stop(100%, rgba(255, 255, 255, 0.1)));
+  background: -moz-linear-gradient(top, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.1));
+  background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.1));
+  background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.1));
+}
+/* line 600, ../sass/screen.scss */
+.windows .desktop .article .content::-webkit-scrollbar-thumb {
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  -moz-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjEuMCIgeTE9IjEuMCIgeDI9IjAuMCIgeTI9IjAuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzBhMGEwYSIgc3RvcC1vcGFjaXR5PSIwLjEiLz48c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiMwYTBhMGEiIHN0b3Atb3BhY2l0eT0iMC44Ii8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmFkKSIgLz48L3N2Zz4g');
+  background: -webkit-gradient(linear, 100% 100%, 0% 0%, color-stop(0%, rgba(10, 10, 10, 0.1)), color-stop(100%, rgba(10, 10, 10, 0.8)));
+  background: -moz-linear-gradient(bottom, rgba(10, 10, 10, 0.1), rgba(10, 10, 10, 0.8));
+  background: -webkit-linear-gradient(bottom, rgba(10, 10, 10, 0.1), rgba(10, 10, 10, 0.8));
+  background: linear-gradient(to top left, rgba(10, 10, 10, 0.1), rgba(10, 10, 10, 0.8));
+}
 @media screen and (min-width: 960px) {
-  /* line 572, ../sass/screen.scss */
+  /* line 612, ../sass/screen.scss */
   .windows .desktop {
     writing-mode: vertical-lr;
     -webkit-writing-mode: vertical-lr;
   }
 }
 @media (max-width: 959px) {
-  /* line 577, ../sass/screen.scss */
+  /* line 617, ../sass/screen.scss */
   .windows .desktop {
     text-align: center;
   }
