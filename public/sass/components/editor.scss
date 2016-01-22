@@ -1,0 +1,10 @@
+@import "compass/css3";
+
+textarea#textcontent {
+	
+}
+span.selected {
+	color: white;
+
+	@include background(blue);
+}

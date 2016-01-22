@@ -9,7 +9,9 @@ requirejs.config({
 		"angular-route": 'libs/angular-route/angular-route', 
 		"angular-ui-router": 'libs/angular-ui-router/angular-ui-router.min', 
 		"angularAMD": 'libs/angularAMD/angularAMD', 
+		"angular-animate": 'libs/angular-animate/angular-animate.min', 
 		"zUtil": 'libs/zencommon/zen', 
+		"editor": 'components/editor', 
 		"app": 'blog/app', 
 		"bootstrap": 'blog/bootstrap', 
 		"controllers": 'blog/controllers', 
@@ -29,6 +31,10 @@ requirejs.config({
 		"angular-ui-router": {
 			"deps": ['angular'], 
 			"exports": 'angular-ui-router'
+		}, 
+		"angular-animate": {
+			"deps": ['angular'], 
+			"exports": 'angular-animate'
 		}
 
 	}, 

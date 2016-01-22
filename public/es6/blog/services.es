@@ -20,5 +20,13 @@
 						return $http.get(api);
 					}
 				}
+			}])
+			.factory('ArticleList', ['$http', $http => {
+				return {
+					getList: $scope => {
+						let api = '/interface/article_list.json';
+						return $http.get(api, {cache: true});
+					}
+				}
 			}]);
 	});

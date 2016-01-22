@@ -56,6 +56,12 @@
 									templateUrl: 'blog_template/start_music.html', 
 									controller: 'MusicCtrl'
 								}
+							}, 
+							onEnter: () => {
+								console.log('music enter...');
+							}, 
+							onExit: () => {
+								console.log('music exit...');
 							}
 						})
 						.state('index.draw', {
@@ -64,6 +70,15 @@
 								'': {
 									templateUrl: 'blog_template/start_draw.html', 
 									controller: 'DrawCtrl'
+								}
+							}
+						})
+						.state('index.article', {
+							url: 'article', 
+							views: {
+								'': {
+									templateUrl: 'blog_template/start_article.html', 
+									controller: 'ArticleCtrl'
 								}
 							}
 						});

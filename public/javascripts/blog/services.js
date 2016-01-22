@@ -16,5 +16,12 @@ define(['app'], function (app) {
 				return $http.get(api);
 			}
 		};
+	}]).factory('ArticleList', ['$http', function ($http) {
+		return {
+			getList: function getList($scope) {
+				var api = '/interface/article_list.json';
+				return $http.get(api, { cache: true });
+			}
+		};
 	}]);
 });

@@ -64,9 +64,42 @@ define(['app', 'zUtil'], function (app, ZU) {
 			$scope.duration = ZU.makeTime(au.currentTime) + '/' + $scope.duration.split('/')[1];
 			return au.currentTime / au.duration * 96 + '%';
 		};
+		console.log('music-controller loaded...');
 	}]).controller('DrawCtrl', ['$scope', '$state', function ($scope, $state) {
 		console.log('draw-controller loaded...');
-	}]).controller('ArticleCtrl', ['$scope', function ($scope) {
+		$state.transitionTo('index.music');
+	}]).controller('ArticleCtrl', ['$scope', '$sce', 'ArticleList', function ($scope, $sce, AL) {
 		console.log('article-controller loaded...');
+
+		AL.getList($scope).success(function (result) {
+			if (result.status === 200) {
+				$scope.status = result.status;
+				$scope.data = result.data;
+				$scope.current_content = $scope.data[0].content;
+
+				angular.forEach($scope.data, function (item, index) {
+					item.display = false;
+				});
+				$scope.data[0].display = true;
+			}
+		});
+
+		$scope.addNote = function () {
+			$scope.data.push({
+				title: '',
+				content: '',
+				display: false
+			});
+		};
+
+		$scope.updateContent = function (index) {
+			$scope.current_content = $scope.data[index].content;
+			angular.forEach($scope.data, function (item, index) {
+				item.display = false;
+			});
+			$scope.data[index].display = true;
+		};
+
+		$scope.trustAsHtml = $sce.trustAsHtml;
 	}]);
 });

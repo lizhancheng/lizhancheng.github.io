@@ -1,0 +1,42 @@
+@import "compass/css3";
+
+[tips] {
+	position: relative;
+	cursor: pointer;
+
+	&:before, &:after {
+		display: none;
+		position: absolute;
+
+		@include opacity(0);
+		@include transition(opacity 0.3s ease-in);
+	}
+
+	&:before {
+		content: '';
+		border-left: 5px solid transparent;
+		border-right: 5px solid transparent;
+		border-top: 5px solid black;
+	    left: 50%;
+
+	    @include transform(translate(-5px, -5px));
+	}
+
+	&:after {
+		left: 50%;
+	    padding: 0 5px;
+	    content: attr(tips);
+	    white-space: nowrap;
+	    margin-top: -5px;
+
+	    @include transform(translate(-50%, -100%));
+		@include background(black);
+	}
+
+	&:hover:after, &:hover:before {
+		display: inline;
+
+		@include opacity(0.7);
+	}
+
+}

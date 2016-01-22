@@ -4,7 +4,7 @@
 
 'use strict';
 
-define(['app'], function (app) {
+define(['app', 'editor'], function (app, CreateEditor) {
 
 	'use strict';
 	app.directive('desktop', function () {
@@ -22,7 +22,7 @@ define(['app'], function (app) {
 	}).directive('musicBox', function () {
 		return {
 			restrict: 'ECMA',
-			controller: 'MusicCtrl',
+			// controller: 'MusicCtrl',
 			link: function link($scope, element, attr, $watch) {
 				function isPlay() {
 					var jau = angular.element(au);
@@ -165,6 +165,18 @@ define(['app'], function (app) {
 					angular.element(document.querySelector('.timestamps')).text($scope.duration);
 				};
 			}
+		};
+	}).directive('content', function () {
+		return {
+			restrict: 'C',
+			link: function link($scope, element, attr) {
+				var textEditor = new CreateEditor('.content', '.image-file', true);
+			}
+		};
+	}).directive('main', function () {
+		return {
+			restrict: 'C',
+			link: function link($scope, element, attr) {}
 		};
 	});
 });

@@ -55,6 +55,12 @@ define(['require', 'app', 'angular', 'angular-route', 'angular-ui-router', 'serv
 						templateUrl: 'blog_template/start_music.html',
 						controller: 'MusicCtrl'
 					}
+				},
+				onEnter: function onEnter() {
+					console.log('music enter...');
+				},
+				onExit: function onExit() {
+					console.log('music exit...');
 				}
 			}).state('index.draw', {
 				url: 'drawing',
@@ -62,6 +68,14 @@ define(['require', 'app', 'angular', 'angular-route', 'angular-ui-router', 'serv
 					'': {
 						templateUrl: 'blog_template/start_draw.html',
 						controller: 'DrawCtrl'
+					}
+				}
+			}).state('index.article', {
+				url: 'article',
+				views: {
+					'': {
+						templateUrl: 'blog_template/start_article.html',
+						controller: 'ArticleCtrl'
 					}
 				}
 			});

@@ -1,0 +1,5 @@
+/* line 6, ../../sass/components/editor.scss */
+span.selected {
+  color: white;
+  background: blue;
+}

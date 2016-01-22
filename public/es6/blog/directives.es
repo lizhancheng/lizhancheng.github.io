@@ -3,7 +3,7 @@
  */
 
 
-	define(['app'], app => {
+	define(['app', 'editor'], (app, CreateEditor) => {
 
 		'use strict';
 		app
@@ -23,7 +23,7 @@
 			.directive('musicBox', () => {
 				return {
 					restrict: 'ECMA', 
-					controller: 'MusicCtrl', 
+					// controller: 'MusicCtrl', 
 					link: ($scope, element, attr, $watch) => {
 						function isPlay() {
 							let [jau, jplay] = [angular.element(au), angular.element(play)];
@@ -155,6 +155,22 @@
 							angular.element(progress).css('width', width);
 							angular.element(document.querySelector('.timestamps')).text($scope.duration);
 						}
+
+					}
+				}
+			})
+			.directive('content', () => {
+				return {
+					restrict: 'C', 
+					link: ($scope, element, attr) => {
+						let textEditor = new CreateEditor('.content', '.image-file', true);
+					}
+				}
+			})
+			.directive('main', () => {
+				return {
+					restrict: 'C', 
+					link: ($scope, element, attr) => {
 
 					}
 				}

@@ -1,6 +1,29 @@
 <div class="article">
-	<div class="title">题目</div>
-	<div class="util">功能</div>
-	<div class="content">内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br>内容<br></div>
-	<div class="foot">底部</div>
+	<div class="title">
+		我的笔记本
+		<i class="close" ui-sref="index" tips="关闭"></i>
+		<i class="minimize" tips="最小化"></i>
+	</div>
+	<div class="util">
+		<input type="file" class="image-file" accept="image/*" multiple="multiple" />
+		<button class="new" tips="新建" ng-click="addNote()"></button>
+		<button class="save" tips="保存"></button>
+		<button class="image" tips="插入图片"></button>
+		<button class="bold" tips="粗体"></button>
+		<button class="italic" tips="斜体"></button>
+	</div>
+	<div class="main">
+		<input type="checkbox" class="switch" id="switch" />
+		<!-- <textarea id="textcontent"></textarea> -->
+		<div class="side-bar">
+			<div class="sub-title" ng-repeat="item in data" ng-bind="item.title" ng-click="updateContent($index)" contenteditable="true" spellcheck="false"></div>
+		</div>
+		<div class="scale"><label for="switch" class="toggle"></label></div>
+		<pre class="content" ng-repeat="item in data" tabindex="0" contenteditable="true" spellcheck="false" ng-bind-html="trustAsHtml(item.content)" ng-show="item.display"></pre>
+	</div>
+	<div class="foot">
+		<ul>
+			<li>今日笑话：两个饺子结婚了，送走客人后新郎回到卧室，竟发现床上躺着一个肉丸子！新郎大惊，忙问新娘在哪？肉丸子害羞的说：讨厌，人家脱了衣服你就不认识啦！</li>
+		</ul>
+	</div>
 </div>

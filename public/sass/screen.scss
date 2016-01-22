@@ -2,24 +2,35 @@
  * In this file you should write your main styles. (or centralize your imports)
  * Import this file using the following HTML or equivalent:
  * <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css" /> */
-
+@charset 'utf-8';
 @import "compass/reset";
 
 @import "compass/css3";
+
+@import 'components/tips.css';
+@import 'components/editor.css';
 
 $width: 100%;
 $height: 100%;
 $blur: 20px;
 
-@mixin percent($width: 100%, $height: 100%) {
+@mixin setScale($width: 100%, $height: 100%) {
 	width: $width;
 	height: $height;
+}
+@mixin setTextOverflow($textOF: ellipsis) {
+	text-overflow: $textOF;
+	-webkit-text-overflow: $textOF;
+	-moz-text-overflow: $textOF;
+	-o-text-overflow: $textOF;
+	-ms-text-overflow: $textOF;
 }
 
 html, body, .view-init, .blog-index {
 	font-family: 'Segoe Print';
+	font-family: 'Microsoft YaHei';
 	color: white;
-	@include percent;
+	@include setScale;
 }
 body {
 	// @include background(radial-gradient(45px 45px, cyan 10px, transparent 30px));
@@ -28,10 +39,16 @@ a {
 	text-decoration: none;
 	color: white;
 }
+b {
+	font-weight: bold;
+}
+i {
+	font-style: italic;
+}
 
 #cas {
 	position: absolute;
-	@include percent;
+	@include setScale;
 	// background: black;
 	// @include background-image(radial-gradient(10% 10%, #ffffff 300px, #111 900px));
 }
@@ -64,7 +81,7 @@ a {
 .blur {
 	position: absolute;
 
-	@include percent;
+	@include setScale;
 	@include background(url('../images/background.jpg') no-repeat left bottom/100% 100%);
 	@include filter(blur($blur));
 	@include animation(removeFilter 3s 4);
@@ -103,10 +120,10 @@ a {
 	max-width: 326.656px;
 	max-height: 290.328px;
 	
-	@include percent(40%, 20%);
+	@include setScale(40%, 20%);
 	@include transform-origin-compat(0% -50%);
 	@include background(url('../images/name.png') no-repeat left bottom/100% 100%);
-	@include transform(translate(-50%, -50%));
+	@include transform(perspective(250px) translate(-50%, -50%));
 	@include opacity(1);
 	@include transition(transform 1s);
 	@include animation(showBrand 5s);
@@ -117,7 +134,7 @@ a {
 	}
 
 	&:active {
-		@include transform(rotateX(-60deg) translate(-50%, -50%));
+		@include transform(perspective(250px) rotateX(-60deg) translate(-50%, -50%));
 	}
 }
 
@@ -127,7 +144,7 @@ a {
 	background: $background;
 	text-align: center;
 
-	@include percent(50%, 50%);
+	@include setScale(50%, 50%);
 	@include transform(translate(0%, 50%));
 	&:before, &:after {
 		font-size: 14px;
@@ -136,7 +153,7 @@ a {
 		position: absolute;
 		left: 50%;
 
-		@include percent(25%, 80%);
+		@include setScale(25%, 80%);
 	}
 
 	&:before {
@@ -160,7 +177,7 @@ a {
 		left: 50%;
 		bottom: 8%;
 
-		@include percent(0, 0);
+		@include setScale(0, 0);
 		@include transform(translate(-50%, 0));
 	}
 }
@@ -169,7 +186,7 @@ a {
 	position: absolute;
 	z-index: 10;
 
-	@include percent;
+	@include setScale;
 	@include transition(opacity 5s ease-out 4s);
 	@include filter(blur(10px));
 }
@@ -248,7 +265,7 @@ a {
 	text-align: center;
 	z-index: 11;
 
-	@include percent;
+	@include setScale;
 	@include background(#20D4FF);
 	@include animation(disappear 1s linear 18s forwards);
 
@@ -267,7 +284,7 @@ a {
 		background: transparent;
 		color: white;
 		
-		@include percent(1em, 1em);
+		@include setScale(1em, 1em);
 		@include transform-origin-compat(0% 0%);
 		@include transform(rotate(0deg) translate(-50%, -50%));
 		@include border-radius(1em);
@@ -337,10 +354,8 @@ a {
 	-webkit-writing-mode: $value;
 }
 
-
-
 .windows {
-	@include percent;
+	@include setScale;
 	@include background(linear-gradient(to bottom left, #011E3E, #85D4FF));
 	//@include animation(appear 2s linear 18s);
 
@@ -355,11 +370,11 @@ a {
 		position: fixed;
 		bottom: 0;
 
-		@include percent(100%, 5%);
+		@include setScale(100%, 5%);
 		@include background(rgba(0, 5, 10, 0.7));
 
 		ul.menu {
-			@include percent;
+			@include setScale;
 
 			li.menu-list {
 				float: left;
@@ -416,7 +431,7 @@ a {
 	}
 
 	.desktop {
-		@include percent(98%, 95%);
+		@include setScale(98%, 95%);
 
 		dl {
 			display: inline-block;
@@ -443,9 +458,9 @@ a {
 			max-height: 300px;
 			// margin: -150px 0 0 -200px;
 			cursor: default; 
-			
+
 			@include writing-mode;
-			@include percent(80%, 35%);
+			@include setScale(80%, 35%);
 			@include transform(translate(-50%, -50%));
 			@include background(linear-gradient(to bottom left, rgba(84, 78, 224, 0.4), rgba(195,195,195,0.4)));
 			@include border-radius(1px);
@@ -455,11 +470,11 @@ a {
 				position: relative;
 				z-index: 1;
 
-				@include percent(100%, 64%);
+				@include setScale(100%, 64%);
 				@include background(#e9e8e8);
 
 				img {
-					@include percent(100%, 100%);
+					@include setScale(100%, 100%);
 				}
 
 				.timestamps {
@@ -472,7 +487,7 @@ a {
 					@include transition(opacity 0.5s ease-in-out);
 					@include background(black);
 					@include opacity(0);
-					@include percent(100%, 50%);
+					@include setScale(100%, 50%);
 
 					&:hover {
 						@include opacity(0.4);
@@ -493,7 +508,7 @@ a {
 				padding-left: 15px;
 				cursor: pointer;
 
-				@include percent(0%, 5%);
+				@include setScale(0%, 5%);
 				@include background(linear-gradient(to bottom, #70B0E6, transparent));
 				@include border-radius(1em);
 
@@ -501,7 +516,7 @@ a {
 					content: '';
 					float: right;
 
-					@include percent(15px, 100%);
+					@include setScale(15px, 100%);
 					@include background(white);
 					@include border-radius(1em);
 					@include animation(twinkle 1s ease-in infinite alternate);
@@ -519,7 +534,7 @@ a {
 				line-height: 7;
 				cursor: default;
 
-				@include percent(100%, 31%);
+				@include setScale(100%, 31%);
 
 				a {
 					display: inline-block;
@@ -529,11 +544,11 @@ a {
 					@include transition(background-position 0.5s cubic-bezier(0.215, 0.61, 0.355, 1));
 
 					&.prev {
-					    @include percent(29px, 26px);
+					    @include setScale(29px, 26px);
 					    background-position: -4px 0px;
 					}
 					&.play {
-					    @include percent(30px, 30px);
+					    @include setScale(30px, 30px);
 					    background-position: -37px 0px;
 
 					    &.pause {
@@ -541,7 +556,7 @@ a {
 					    }
 					}
 					&.next {
-					    @include percent(30px, 26px);
+					    @include setScale(30px, 26px);
 					    background-position: -99px 0px;
 					}
 				}
@@ -554,7 +569,7 @@ a {
 					outline: none;
 					color: white;
 
-					@include percent(50px, 20px);
+					@include setScale(50px, 20px);
 					@include transition(color 0.5s cubic-bezier(0.215, 0.61, 0.355, 1));
 					@include background(transparent);
 
@@ -574,34 +589,214 @@ a {
 			position: absolute;
 			left: 50%;
 			top: 50%;
-			color: black;
+			color: #E6E6E6;
 
-			@include percent(65%, 80%);
+			@include setScale(65%, 80%);
+			@include backface-visibility(hidden);
 			@include writing-mode;
 			@include background(rgba(255, 255, 255, 0.3));
 			@include transform(translate(-50%, -50%));
 
 			.title, .util {
 				line-height: 30px;
+				text-align: center;
+				border-bottom: 1px dashed #ccc;
 
-				@include percent(100%, 30px);
+				@include setScale(100%, 30px);
+
+				i, button {
+					display: inline-block;
+					cursor: pointer;
+					border: none;
+					outline: none;
+
+					@include setScale(14px, 14px);
+					@include background(url('../images/icons.png') no-repeat left bottom);
+				}
 			}
 
-			.content {
-				overflow-y: scroll;
+			.title {
+				i {
+					float: right;
+					font-style: normal;
 
-				@include percent(100%, 90%);
+					&.close {
+						background-position: -312px 0;
+					}
 
-				&::-webkit-scrollbar {
-					@include percent(5px);
+					&.minimize {
+						background-position: -433px -96px;
+					}
+				}
+			}
+
+			.util {
+				text-align: left;
+				padding-left: 2%;
+
+				@include setScale(98%, 30px);
+
+				input.image-file {
+					display: none;
+				}
+
+				button {
+					margin: 0 1%;
+
+					&:before {
+						@include transform(translate(-5px, -260%)); 
+					}
+
+					&:after {
+						color: #FFFFFF;
+						padding: 5px;
+						margin: 0;
+
+						@include transform(translate(-50%, -150%));
+					}
+
+					&.new {
+						background-position: -408px -96px;
+					}
+
+					&.save {
+						background-position: -24px -24px;
+					}
+
+					&.image {
+						background-position: -456px -48px;
+					}
+
+					&.bold {
+						background-position: -167px -48px;
+					}
+
+					&.italic {
+						background-position: -192px -48px;
+					}
+				}
+			}
+
+			.main {
+				overflow: hidden;
+				padding: 2% 0 2% 2%;
+
+				@include setScale(98%, 86%);
+
+				& *::-webkit-scrollbar {
+					@include setScale(5px);
 					@include background(linear-gradient(to bottom right, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.1)));
 				}
 				 
-				&::-webkit-scrollbar-thumb
+				& *::-webkit-scrollbar-thumb
 				{
 				    @include border-radius(10px);
 				    @include box-shadow(inset 0 0 6px rgba(0, 0, 0, 0.3));
 				    @include background(linear-gradient(to top left, rgba(10, 10, 10, 0.1), rgba(10, 10, 10, 0.8)));
+				}
+
+				.side-bar {
+					float: left;
+
+					@include setScale(20%, 100%);
+					@include transition(width 0.3s ease-out, opacity 0.3s ease-out);
+
+					&:hover + .scale {
+						@include opacity(0.5);
+					}
+
+					.sub-title {
+						cursor: pointer;
+						border-bottom: 1px solid #ccc;
+					    padding: 5% 0;
+					    margin-bottom: 6%;
+					    position: relative;
+
+					    @include transition(background 0.3s cubic-bezier(0, -0.37, 0.88, 0.5));
+
+					    &:hover {
+					    	color: white;
+					    	border: none;
+
+					    	@include background(#333333);
+					    }
+
+					}
+				}
+
+				.scale {
+					float: left;
+					position: relative;
+					padding: 49% 0px;
+					font-size: 0.5em;
+					text-align: center;
+
+					@include setScale(2%, 18px);
+					@include opacity(0);
+
+					&:hover {
+						@include opacity(0.5);
+					}
+
+					.toggle {
+						content: '';
+						cursor: pointer;
+						position: absolute;
+						z-index: 3;
+						left: 0;
+						border-top: 10px solid transparent;
+						border-bottom: 10px solid transparent;
+						border-right: 10px solid #333;
+					}
+
+				}
+
+				.switch {
+					display: none;
+
+					&:checked ~ .side-bar{
+						@include setScale(0);
+						@include opacity(0);
+					}
+					&:checked ~ .scale .toggle {
+						border-top: 10px solid transparent;
+						border-bottom: 10px solid transparent;
+						border-left: 10px solid #333;
+						border-right: none;
+					}
+					&:checked ~ .content {
+						@include setScale(98%, 100%);
+					}
+				}
+
+				.content {
+					float: right;
+					overflow: auto;
+					cursor: text;
+
+					@include setScale(78%, 100%);
+					@include transition(width 0.3s ease-out);
+
+					img {
+						width: 100px;
+					}
+				}
+			}
+
+			.foot {
+				font-size: 0.5em;
+				border-top: 1px dashed #ccc;
+
+				ul {
+					@include setScale(100%, 100%);
+					li {
+						white-space: nowrap;
+						overflow: hidden;
+
+						@include setScale(40%);
+						@include setTextOverflow(ellipsis);
+						@include text-shadow(0 0 5px white);
+					}
 				}
 			}
 		}
@@ -619,8 +814,6 @@ a {
 		}
 	}
 }
-
-
 
 
 
