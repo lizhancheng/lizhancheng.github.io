@@ -1514,7 +1514,7 @@ i {
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
-/* line 600, ../sass/screen.scss */
+/* line 601, ../sass/screen.scss */
 .windows .desktop .article .title, .windows .desktop .article .util {
   line-height: 30px;
   text-align: center;
@@ -1522,7 +1522,7 @@ i {
   width: 100%;
   height: 30px;
 }
-/* line 607, ../sass/screen.scss */
+/* line 608, ../sass/screen.scss */
 .windows .desktop .article .title i, .windows .desktop .article .title button, .windows .desktop .article .util i, .windows .desktop .article .util button {
   display: inline-block;
   cursor: pointer;
@@ -1532,42 +1532,42 @@ i {
   height: 14px;
   background: url("../images/icons.png") no-repeat left bottom;
 }
-/* line 619, ../sass/screen.scss */
+/* line 620, ../sass/screen.scss */
 .windows .desktop .article .title i {
   float: right;
   font-style: normal;
 }
-/* line 623, ../sass/screen.scss */
+/* line 624, ../sass/screen.scss */
 .windows .desktop .article .title i.close {
   background-position: -312px 0;
 }
-/* line 627, ../sass/screen.scss */
+/* line 628, ../sass/screen.scss */
 .windows .desktop .article .title i.minimize {
   background-position: -433px -96px;
 }
-/* line 633, ../sass/screen.scss */
+/* line 634, ../sass/screen.scss */
 .windows .desktop .article .util {
   text-align: left;
   padding-left: 2%;
   width: 98%;
   height: 30px;
 }
-/* line 639, ../sass/screen.scss */
+/* line 640, ../sass/screen.scss */
 .windows .desktop .article .util input.image-file {
   display: none;
 }
-/* line 643, ../sass/screen.scss */
+/* line 644, ../sass/screen.scss */
 .windows .desktop .article .util button {
   margin: 0 1%;
 }
-/* line 646, ../sass/screen.scss */
+/* line 647, ../sass/screen.scss */
 .windows .desktop .article .util button:before {
   -moz-transform: translate(-5px, -260%);
   -ms-transform: translate(-5px, -260%);
   -webkit-transform: translate(-5px, -260%);
   transform: translate(-5px, -260%);
 }
-/* line 650, ../sass/screen.scss */
+/* line 651, ../sass/screen.scss */
 .windows .desktop .article .util button:after {
   color: #FFFFFF;
   padding: 5px;
@@ -1577,34 +1577,34 @@ i {
   -webkit-transform: translate(-50%, -150%);
   transform: translate(-50%, -150%);
 }
-/* line 658, ../sass/screen.scss */
+/* line 659, ../sass/screen.scss */
 .windows .desktop .article .util button.new {
   background-position: -408px -96px;
 }
-/* line 662, ../sass/screen.scss */
+/* line 663, ../sass/screen.scss */
 .windows .desktop .article .util button.save {
   background-position: -24px -24px;
 }
-/* line 666, ../sass/screen.scss */
+/* line 667, ../sass/screen.scss */
 .windows .desktop .article .util button.image {
   background-position: -456px -48px;
 }
-/* line 670, ../sass/screen.scss */
+/* line 671, ../sass/screen.scss */
 .windows .desktop .article .util button.bold {
   background-position: -167px -48px;
 }
-/* line 674, ../sass/screen.scss */
+/* line 675, ../sass/screen.scss */
 .windows .desktop .article .util button.italic {
   background-position: -192px -48px;
 }
-/* line 680, ../sass/screen.scss */
+/* line 681, ../sass/screen.scss */
 .windows .desktop .article .main {
   overflow: hidden;
   padding: 2% 0 2% 2%;
   width: 98%;
   height: 86%;
 }
-/* line 686, ../sass/screen.scss */
+/* line 687, ../sass/screen.scss */
 .windows .desktop .article .main *::-webkit-scrollbar {
   width: 5px;
   height: 100%;
@@ -1614,7 +1614,7 @@ i {
   background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.1));
   background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.1));
 }
-/* line 691, ../sass/screen.scss */
+/* line 692, ../sass/screen.scss */
 .windows .desktop .article .main *::-webkit-scrollbar-thumb {
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
@@ -1628,7 +1628,7 @@ i {
   background: -webkit-linear-gradient(bottom, rgba(10, 10, 10, 0.1), rgba(10, 10, 10, 0.8));
   background: linear-gradient(to top left, rgba(10, 10, 10, 0.1), rgba(10, 10, 10, 0.8));
 }
-/* line 698, ../sass/screen.scss */
+/* line 699, ../sass/screen.scss */
 .windows .desktop .article .main .side-bar {
   float: left;
   width: 20%;
@@ -1638,12 +1638,12 @@ i {
   -webkit-transition: width 0.3s ease-out, opacity 0.3s ease-out;
   transition: width 0.3s ease-out, opacity 0.3s ease-out;
 }
-/* line 704, ../sass/screen.scss */
+/* line 705, ../sass/screen.scss */
 .windows .desktop .article .main .side-bar:hover + .scale {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
   opacity: 0.5;
 }
-/* line 708, ../sass/screen.scss */
+/* line 709, ../sass/screen.scss */
 .windows .desktop .article .main .side-bar .sub-title {
   cursor: pointer;
   border-bottom: 1px solid #ccc;
@@ -1655,13 +1655,13 @@ i {
   -webkit-transition: background 0.3s cubic-bezier(0, -0.37, 0.88, 0.5);
   transition: background 0.3s cubic-bezier(0, -0.37, 0.88, 0.5);
 }
-/* line 717, ../sass/screen.scss */
+/* line 718, ../sass/screen.scss */
 .windows .desktop .article .main .side-bar .sub-title:hover {
   color: white;
   border: none;
   background: #333333;
 }
-/* line 727, ../sass/screen.scss */
+/* line 728, ../sass/screen.scss */
 .windows .desktop .article .main .scale {
   float: left;
   position: relative;
@@ -1673,12 +1673,12 @@ i {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
   opacity: 0;
 }
-/* line 737, ../sass/screen.scss */
+/* line 738, ../sass/screen.scss */
 .windows .desktop .article .main .scale:hover {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
   opacity: 0.5;
 }
-/* line 741, ../sass/screen.scss */
+/* line 742, ../sass/screen.scss */
 .windows .desktop .article .main .scale .toggle {
   content: '';
   cursor: pointer;
@@ -1689,30 +1689,30 @@ i {
   border-bottom: 10px solid transparent;
   border-right: 10px solid #333;
 }
-/* line 754, ../sass/screen.scss */
+/* line 755, ../sass/screen.scss */
 .windows .desktop .article .main .switch {
   display: none;
 }
-/* line 757, ../sass/screen.scss */
+/* line 758, ../sass/screen.scss */
 .windows .desktop .article .main .switch:checked ~ .side-bar {
   width: 0;
   height: 100%;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
   opacity: 0;
 }
-/* line 761, ../sass/screen.scss */
+/* line 762, ../sass/screen.scss */
 .windows .desktop .article .main .switch:checked ~ .scale .toggle {
   border-top: 10px solid transparent;
   border-bottom: 10px solid transparent;
   border-left: 10px solid #333;
   border-right: none;
 }
-/* line 767, ../sass/screen.scss */
+/* line 768, ../sass/screen.scss */
 .windows .desktop .article .main .switch:checked ~ .content {
   width: 98%;
   height: 100%;
 }
-/* line 772, ../sass/screen.scss */
+/* line 773, ../sass/screen.scss */
 .windows .desktop .article .main .content {
   float: right;
   overflow: auto;
@@ -1724,21 +1724,21 @@ i {
   -webkit-transition: width 0.3s ease-out;
   transition: width 0.3s ease-out;
 }
-/* line 780, ../sass/screen.scss */
+/* line 781, ../sass/screen.scss */
 .windows .desktop .article .main .content img {
   width: 100px;
 }
-/* line 786, ../sass/screen.scss */
+/* line 787, ../sass/screen.scss */
 .windows .desktop .article .foot {
   font-size: 0.5em;
   border-top: 1px dashed #ccc;
 }
-/* line 790, ../sass/screen.scss */
+/* line 791, ../sass/screen.scss */
 .windows .desktop .article .foot ul {
   width: 100%;
   height: 100%;
 }
-/* line 792, ../sass/screen.scss */
+/* line 793, ../sass/screen.scss */
 .windows .desktop .article .foot ul li {
   white-space: nowrap;
   overflow: hidden;
@@ -1751,15 +1751,22 @@ i {
   -ms-text-overflow: ellipsis;
   text-shadow: 0 0 5px white;
 }
+/* line 801, ../sass/screen.scss */
+.windows .desktop .article .foot ul li:hover {
+  overflow: visible;
+  white-space: normal;
+  width: 100%;
+  height: 100%;
+}
 @media screen and (min-width: 960px) {
-  /* line 807, ../sass/screen.scss */
+  /* line 815, ../sass/screen.scss */
   .windows .desktop {
     writing-mode: vertical-lr;
     -webkit-writing-mode: vertical-lr;
   }
 }
 @media (max-width: 959px) {
-  /* line 812, ../sass/screen.scss */
+  /* line 820, ../sass/screen.scss */
   .windows .desktop {
     text-align: center;
   }

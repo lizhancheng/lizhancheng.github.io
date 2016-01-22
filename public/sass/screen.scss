@@ -586,6 +586,7 @@ i {
 
 		.article {
 			max-width: 683px;
+			// min-height: 82%;
 			position: absolute;
 			left: 50%;
 			top: 50%;
@@ -796,6 +797,13 @@ i {
 						@include setScale(40%);
 						@include setTextOverflow(ellipsis);
 						@include text-shadow(0 0 5px white);
+
+						&:hover {
+							overflow: visible;
+							white-space: normal;
+
+							@include setScale;
+						}
 					}
 				}
 			}
