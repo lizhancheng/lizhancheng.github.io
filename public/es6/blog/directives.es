@@ -3,7 +3,7 @@
  */
 
 
-	define(['app', 'editor'], (app, CreateEditor) => {
+	define(['app', 'components/editor','components/photo'], (app, CreateEditor, Photo) => {
 
 		'use strict';
 		app
@@ -165,13 +165,21 @@
 					link: ($scope, element, attr) => {
 						let textEditor = new CreateEditor('.content', '.image-file', true);
 					}
-				}
+				};
 			})
 			.directive('main', () => {
 				return {
 					restrict: 'C', 
 					link: ($scope, element, attr) => {
 
+					}
+				};
+			})
+			.directive('photo', () => {
+				return {
+					restrict: 'ECMA', 
+					link: ($scope, element, attr) => {
+						new Photo('photo');
 					}
 				}
 			})

@@ -117,7 +117,14 @@
 				};
 
 				$scope.trustAsHtml = $sce.trustAsHtml;
+			}])
+			.controller('WindowCtrl', ['$scope', ($scope) => {
+				console.log('WindowCtrl loaded...');
+			}])
+			.controller('PhotoCtrl', ['$scope', ($scope) => {
+				console.log('PhotoCtrl loaded...');
 			}]);
+
 
 
 	});

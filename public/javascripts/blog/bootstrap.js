@@ -30,25 +30,25 @@ define(['require', 'app', 'angular', 'angular-route', 'angular-ui-router', 'serv
 					'start@index': {
 						templateUrl: 'blog_template/menu_start.html',
 						controller: 'StartCtrl'
-					},
-					'file@index': {
-						templateUrl: 'blog_template/menu_file.html',
-						controller: 'FileCtrl'
-					},
-					'pdf@index': {
-						templateUrl: 'blog_template/menu_pdf.html',
-						controller: 'PdfCtrl'
-					},
-					'music@index': {
-						templateUrl: 'blog_template/start_music.html',
-						controller: 'MusicCtrl'
-					},
-					'article@index': {
-						templateUrl: 'blog_template/start_article.html',
-						controller: 'ArticleCtrl'
 					}
 				}
-			}).state('index.music', {
+			}). /*'file@index': {
+       	templateUrl: 'blog_template/menu_file.html', 
+       	controller: 'FileCtrl'
+       }, 
+       'pdf@index': {
+       	templateUrl: 'blog_template/menu_pdf.html', 
+       	controller: 'PdfCtrl'
+       }, 
+       'music@index': {
+       	templateUrl: 'blog_template/start_music.html', 
+       	controller: 'MusicCtrl'
+       }, 
+       'article@index': {
+       	templateUrl: 'blog_template/start_article.html', 
+       	controller: 'ArticleCtrl'
+       }*/
+			state('index.music', {
 				url: 'music-box',
 				views: {
 					'': {
@@ -78,6 +78,15 @@ define(['require', 'app', 'angular', 'angular-route', 'angular-ui-router', 'serv
 						controller: 'ArticleCtrl'
 					}
 				}
+			}).state('index.window', {
+				abstract: true,
+				url: 'window',
+				templateUrl: 'blog_template/window.html',
+				controller: 'WindowCtrl'
+			}).state('index.window.photo', {
+				url: '/photo',
+				templateUrl: 'blog_template/photo.html',
+				controller: 'PhotoCtrl'
 			});
 		});
 

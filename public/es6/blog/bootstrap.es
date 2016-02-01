@@ -31,7 +31,7 @@
 									templateUrl: 'blog_template/menu_start.html', 
 									controller: 'StartCtrl'
 								}, 
-								'file@index': {
+								/*'file@index': {
 									templateUrl: 'blog_template/menu_file.html', 
 									controller: 'FileCtrl'
 								}, 
@@ -46,7 +46,7 @@
 								'article@index': {
 									templateUrl: 'blog_template/start_article.html', 
 									controller: 'ArticleCtrl'
-								}
+								}*/
 							}
 						})
 						.state('index.music', {
@@ -81,6 +81,17 @@
 									controller: 'ArticleCtrl'
 								}
 							}
+						})
+						.state('index.window', {
+							abstract: true, 
+							url: 'window', 
+							templateUrl: 'blog_template/window.html', 
+							controller: 'WindowCtrl'
+						})
+						.state('index.window.photo', {
+							url: '/photo', 
+							templateUrl: 'blog_template/photo.html', 
+							controller: 'PhotoCtrl'
 						});
 
 				})

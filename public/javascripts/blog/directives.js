@@ -4,7 +4,7 @@
 
 'use strict';
 
-define(['app', 'editor'], function (app, CreateEditor) {
+define(['app', 'components/editor', 'components/photo'], function (app, CreateEditor, Photo) {
 
 	'use strict';
 	app.directive('desktop', function () {
@@ -177,6 +177,13 @@ define(['app', 'editor'], function (app, CreateEditor) {
 		return {
 			restrict: 'C',
 			link: function link($scope, element, attr) {}
+		};
+	}).directive('photo', function () {
+		return {
+			restrict: 'ECMA',
+			link: function link($scope, element, attr) {
+				new Photo('photo');
+			}
 		};
 	});
 });

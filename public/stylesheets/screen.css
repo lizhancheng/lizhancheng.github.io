@@ -1600,7 +1600,7 @@ i {
 /* line 681, ../sass/screen.scss */
 .windows .desktop .article .main {
   overflow: hidden;
-  padding: 2% 0 2% 2%;
+  padding: 13px 0 13px 13px;
   width: 98%;
   height: 86%;
 }
@@ -1717,7 +1717,7 @@ i {
   float: right;
   overflow: auto;
   cursor: text;
-  width: 78%;
+  width: 77%;
   height: 100%;
   -moz-transition: width 0.3s ease-out;
   -o-transition: width 0.3s ease-out;
@@ -1732,13 +1732,16 @@ i {
 .windows .desktop .article .foot {
   font-size: 0.5em;
   border-top: 1px dashed #ccc;
+  width: 100%;
+  height: 2.3%;
 }
-/* line 791, ../sass/screen.scss */
+/* line 793, ../sass/screen.scss */
 .windows .desktop .article .foot ul {
+  padding: 3px 0;
   width: 100%;
   height: 100%;
 }
-/* line 793, ../sass/screen.scss */
+/* line 797, ../sass/screen.scss */
 .windows .desktop .article .foot ul li {
   white-space: nowrap;
   overflow: hidden;
@@ -1750,23 +1753,22 @@ i {
   -o-text-overflow: ellipsis;
   -ms-text-overflow: ellipsis;
   text-shadow: 0 0 5px white;
-}
-/* line 801, ../sass/screen.scss */
-.windows .desktop .article .foot ul li:hover {
-  overflow: visible;
-  white-space: normal;
-  width: 100%;
-  height: 100%;
+  						/* &:hover {
+  							overflow: visible;
+  							white-space: normal;
+  
+  							@include setScale;
+  						} */
 }
 @media screen and (min-width: 960px) {
-  /* line 815, ../sass/screen.scss */
+  /* line 819, ../sass/screen.scss */
   .windows .desktop {
     writing-mode: vertical-lr;
     -webkit-writing-mode: vertical-lr;
   }
 }
 @media (max-width: 959px) {
-  /* line 820, ../sass/screen.scss */
+  /* line 824, ../sass/screen.scss */
   .windows .desktop {
     text-align: center;
   }

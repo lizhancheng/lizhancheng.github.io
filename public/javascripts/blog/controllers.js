@@ -101,5 +101,9 @@ define(['app', 'zUtil'], function (app, ZU) {
 		};
 
 		$scope.trustAsHtml = $sce.trustAsHtml;
+	}]).controller('WindowCtrl', ['$scope', function ($scope) {
+		console.log('WindowCtrl loaded...');
+	}]).controller('PhotoCtrl', ['$scope', function ($scope) {
+		console.log('PhotoCtrl loaded...');
 	}]);
 });

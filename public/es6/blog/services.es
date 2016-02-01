@@ -19,7 +19,7 @@
 						let api = '/interface/music_list.json';
 						return $http.get(api);
 					}
-				}
+				};
 			}])
 			.factory('ArticleList', ['$http', $http => {
 				return {
@@ -27,6 +27,6 @@
 						let api = '/interface/article_list.json';
 						return $http.get(api, {cache: true});
 					}
-				}
+				};
 			}]);
 	});

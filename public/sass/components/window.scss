@@ -1,0 +1,24 @@
+@import 'compass/css3';
+
+@mixin setScale($width: auto, $height: auto) {
+	width: $width;
+	height: $height;
+}
+
+.frame {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	writing-mode: horizontal-tb;
+	-webkit-writing-mode: horizontal-tb;
+
+	@include setScale;
+	@include background(#666666);
+	@include transform(translate(-50%, -50%));
+
+	.frame-header {
+		text-align: right;
+
+		@include setScale(100%);
+	}
+}

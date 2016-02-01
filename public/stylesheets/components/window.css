@@ -1,0 +1,21 @@
+/* line 8, ../../sass/components/window.scss */
+.frame {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  writing-mode: horizontal-tb;
+  -webkit-writing-mode: horizontal-tb;
+  width: auto;
+  height: auto;
+  background: #666666;
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+/* line 19, ../../sass/components/window.scss */
+.frame .frame-header {
+  text-align: right;
+  width: 100%;
+  height: auto;
+}

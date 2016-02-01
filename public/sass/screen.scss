@@ -680,7 +680,7 @@ i {
 
 			.main {
 				overflow: hidden;
-				padding: 2% 0 2% 2%;
+				padding: 13px 0 13px 13px;
 
 				@include setScale(98%, 86%);
 
@@ -775,7 +775,7 @@ i {
 					overflow: auto;
 					cursor: text;
 
-					@include setScale(78%, 100%);
+					@include setScale(77%, 100%);
 					@include transition(width 0.3s ease-out);
 
 					img {
@@ -788,7 +788,11 @@ i {
 				font-size: 0.5em;
 				border-top: 1px dashed #ccc;
 
+				@include setScale(100%, 2.3%);
+
 				ul {
+					padding: 3px 0;
+
 					@include setScale(100%, 100%);
 					li {
 						white-space: nowrap;
@@ -798,12 +802,12 @@ i {
 						@include setTextOverflow(ellipsis);
 						@include text-shadow(0 0 5px white);
 
-						&:hover {
+						/* &:hover {
 							overflow: visible;
 							white-space: normal;
 
 							@include setScale;
-						}
+						} */
 					}
 				}
 			}
