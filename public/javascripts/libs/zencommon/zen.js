@@ -145,6 +145,7 @@
     	 * previewImage a tool to preview the upload or writed-in image
     	 * @param {String} selector buttonId
     	 * @param {String} fileObj buttonId
+    	 * @param {Function} handler a function to handle the imgObj and file's path
     	 * @return {Object} Image Object 
     	 */
     	function previewImage(selector, fileObj, handler) {

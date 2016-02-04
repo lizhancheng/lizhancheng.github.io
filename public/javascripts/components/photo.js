@@ -56,6 +56,7 @@ define('components/photo', ['app', 'zUtil'], function (app, ZU) {
         var toTop = 7;
         var iHeight = 5;
 
+        var toolPosition = [];
         this.ctx.fillStyle = color || '#666666';
         this.ctx.fillRect(5, 5, 25, height * 0.8);
 
@@ -64,12 +65,28 @@ define('components/photo', ['app', 'zUtil'], function (app, ZU) {
         var img = new Image();
         img.src = path;
 
+        self.ctx.strokeStyle = '#666666';
         ZU.addEvent(img, 'load', function () {
           for (var i = 0; i < len; i++) {
             // To middle of the tools
             var movedown = height * 0.8 / len * i + height * 0.8 / (len * 2) - toTop + iHeight;
             self.ctx.drawImage(img, icons[i][0], icons[i][1], 14, 14, 12, movedown, 14, 14);
+            // stroke rectangle to make it in the point of canvas
+            self.ctx.rect(12, movedown, 14, 14);
+            self.ctx.stroke();
           }
+        });
+
+        ZU.addEvent(self.canvas, 'click', function (event) {
+          var frame = document.querySelector('.frame');
+          var coordinate = [event.pageX || event.clientX, event.pageY || event.clientY];
+          var extraction = [frame.offsetLeft, frame.offsetTop];
+          var half_width = self.canvas.width / 2;
+          var half_height = self.canvas.height / 2;
+
+          var status = self.ctx.isPointInPath(coordinate[0] - extraction[0] + half_width, coordinate[1] - extraction[1] + half_height);
+
+          console.log(status);
         });
       }
     }, {
