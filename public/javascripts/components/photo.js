@@ -9,7 +9,7 @@ var _createClass = (function () { function defineProperties(target, props) { for
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-define('components/photo', ['app', 'zUtil'], function (app, ZU) {
+define('components/photo', ['app', 'zUtil', 'libs/createjs/easeljs-0.8.1.min'], function (app, ZU, Createjs) {
 
   'use strict';
 
@@ -22,6 +22,8 @@ define('components/photo', ['app', 'zUtil'], function (app, ZU) {
       this.photos = photos;
 
       this.init();
+
+      console.log(createjs);
     }
 
     _createClass(Photo, [{

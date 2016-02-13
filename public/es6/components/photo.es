@@ -3,7 +3,7 @@
  * @class Photo
  */
 
- 	define('components/photo', ['app', 'zUtil'], (app, ZU) => {
+ 	define('components/photo', ['app', 'zUtil', 'libs/createjs/easeljs-0.8.1.min'], (app, ZU, Createjs) => {
 
  		'use strict';
  		class Photo {
@@ -14,6 +14,8 @@
  				this.photos = photos;
 
  				this.init();
+
+ 				console.log(createjs);
  			}
 
  			init() {
