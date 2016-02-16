@@ -170,14 +170,14 @@
     					img.src = window.URL.createObjectURL(files[i]);
     					addEvent(img, 'load', function() {
     						window.URL.revokeObjectURL(this.src);
+	    					handler(img, files[i]);
     					});
-    					handler(img, files[i]);
     				}
     			}
     		}
 
-    		var $selector = document.getElementById(selector), 
-    			$fileObj  = document.getElementById(fileObj);
+    		var $selector = typeof selector === 'string' ? document.getElementById(selector) : selector, 
+    			$fileObj  = typeof fileObj === 'string' ? document.getElementById(fileObj) : fileObj;
 
     		window.URL = window.URL || window.webkitURL;
     		addEvent($selector, 'click', mockClick);

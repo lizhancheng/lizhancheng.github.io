@@ -1773,3 +1773,8 @@ i {
     text-align: center;
   }
 }
+
+/* line 830, ../sass/screen.scss */
+.none {
+  display: none;
+}

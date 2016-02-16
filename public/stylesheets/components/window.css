@@ -19,3 +19,35 @@
   width: 100%;
   height: auto;
 }
+/* line 27, ../../sass/components/window.scss */
+.frame .frame-main .mark-name {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  text-align: center;
+  outline: none;
+  border: none;
+  font-family: Microsoft YaHei, sans-serif;
+  font-size: 15px;
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 50px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  -moz-transition: box-shadow 0.75s cubic-bezier(0.215, 0.61, 0.355, 1), opacity 0.5s;
+  -o-transition: box-shadow 0.75s cubic-bezier(0.215, 0.61, 0.355, 1), opacity 0.5s;
+  -webkit-transition: box-shadow 0.75s cubic-bezier(0.215, 0.61, 0.355, 1), opacity 0.5s;
+  transition: box-shadow 0.75s cubic-bezier(0.215, 0.61, 0.355, 1), opacity 0.5s;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=90);
+  opacity: 0.9;
+}
+/* line 43, ../../sass/components/window.scss */
+.frame .frame-main .mark-name:focus {
+  -moz-box-shadow: 0 0 10px #00DCFF;
+  -webkit-box-shadow: 0 0 10px #00DCFF;
+  box-shadow: 0 0 10px #00DCFF;
+}
