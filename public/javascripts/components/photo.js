@@ -34,8 +34,10 @@ define('components/photo', ['app', 'zUtil', 'libs/createjs/easeljs-0.8.1.min', '
       value: function init() {
         createjs.Ticker.timingMode = createjs.Ticker.RAF;
         this.makeClose();
+        this.adjustViewPort();
 
         this.setElements();
+        this.draw();
         this.display();
       }
     }, {
@@ -43,7 +45,8 @@ define('components/photo', ['app', 'zUtil', 'libs/createjs/easeljs-0.8.1.min', '
       value: function makeClose() {
         var self = this;
         var length = 10;
-        this.close = new createjs.Text('×', '20px Arial', '#fff');
+        this.close = new createjs.Text('×', '20px Microsoft YaHei', '#fff');
+        this.close.name = 'close';
         // this.close = new createjs.Shape();
         // this.close.graphics.f('black').r(0, 0, length, length);
         this.close.setBounds(0, 0, length, length);
@@ -87,7 +90,13 @@ define('components/photo', ['app', 'zUtil', 'libs/createjs/easeljs-0.8.1.min', '
       }
     }, {
       key: 'adjustViewPort',
-      value: function adjustViewPort() {}
+      value: function adjustViewPort() {
+        var self = this;
+        var dom = document.documentElement;
+
+        self.canvas.width = dom.clientWidth > 640 ? 640 : dom.clientWidth * 0.6;
+        self.canvas.height = dom.clientHeight > 480 ? 480 : dom.clientHeight * 0.5;
+      }
     }, {
       key: 'fillBackground',
       value: function fillBackground(color) {
@@ -148,16 +157,14 @@ define('components/photo', ['app', 'zUtil', 'libs/createjs/easeljs-0.8.1.min', '
         var toTop = 7;
         var iHeight = 5;
         var stage = this.stage;
+        var ctan = new createjs.Container();
         var loader = new createjs.LoadQueue(false);
         var manifest = [{ src: path, id: 'tools' }];
-        var icons = [[0, 72], [240, 48], [456, 48], [72, 72]];
-        var bg = new createjs.Shape();
-        var bar = new createjs.Shape();
+        var icons = [[0, 72], [240, 48], [456, 48], [72, 72], [96, 24]];
 
-        bg.graphics.f(bgColor || '#555555').r(0, 0, width, height);
+        var bar = new createjs.Shape();
         bar.graphics.f(color || '#666666').r(5, 5, 25, height * 0.8);
-        stage.addChild(bg);
-        stage.addChild(bar);
+        ctan.addChild(bar);
 
         var len = icons.length;
 
@@ -174,22 +181,27 @@ define('components/photo', ['app', 'zUtil', 'libs/createjs/easeljs-0.8.1.min', '
             shape[index].y = movedown - item[1];
             shape[index].x = 12 - item[0];
 
-            stage.addChild(shape[index]);
+            ctan.addChild(shape[index]);
           });
 
-          self.eventHandler(shape);
+          self.eventHandler(shape, ctan);
+          stage.addChild(ctan);
           stage.update();
         });
       }
     }, {
       key: 'eventHandler',
-      value: function eventHandler(shape) {
+      value: function eventHandler(shape, bar) {
         var self = this;
         var stage = this.stage;
 
         // pencil handle
         shape[0].addEventListener('click', function (evnet) {
-          self.canvas.style.cursor = 'url("../public/images/pen.ico"), auto';
+          var mouse = 'url("../public/images/pen.ico") 0 10, auto';
+          var gesture = self.canvas.style.cursor || 'default';
+          self.canvas.style.cursor = gesture === mouse ? 'default' : mouse;
+
+          self.drawStart();
         });
         // text handle
         shape[1].addEventListener('click', function (event) {
@@ -220,6 +232,17 @@ define('components/photo', ['app', 'zUtil', 'libs/createjs/easeljs-0.8.1.min', '
           self.mark.className = self.mark.className.replace('none', '');
           self.mark.focus();
         });
+        // download handle
+        shape[4].addEventListener('click', function (event) {
+          bar.visible = false;
+          self.close.visible = false;
+          self.stage.update();
+          self.download();
+
+          bar.visible = true;
+          self.close.visible = true;
+          self.stage.update();
+        });
         // mousewheel to setScale
         ZU.addEvent(self.canvas, 'mousewheel', function (event) {
           if (!self.shape) return;
@@ -240,6 +263,54 @@ define('components/photo', ['app', 'zUtil', 'libs/createjs/easeljs-0.8.1.min', '
           }
           self.stage.update();
         });
+      }
+
+      /**
+       * draw with pen arbitrarily
+       * @return null
+       * @notice this function needs to be optimized
+       */
+    }, {
+      key: 'draw',
+      value: function draw() {
+        var self = this;
+        var stage = self.stage;
+        var drawing = new createjs.Shape();
+        var width = self.canvas.width;
+        var height = self.canvas.height;
+        var startX = 0;
+        var startY = 0;
+
+        drawing.graphics.f('rgba(255, 255, 255, 0.1)');
+        drawing.graphics.rect(40, 0, width, height);
+        drawing.graphics.beginStroke('black');
+        drawing.addEventListener('mousedown', function (event) {
+          startX = event.rawX;
+          startY = event.rawY;
+
+          drawing.graphics.mt(startX, startY);
+          stage.update();
+        });
+        drawing.addEventListener('pressmove', function (event) {
+          var drawX = event.rawX;
+          var drawY = event.rawY;
+
+          drawing.graphics.lt(drawX, drawY);
+          drawing.graphics.mt(drawX, drawY);
+          stage.update();
+        });
+
+        stage.addChildAt(drawing, 0);
+        drawing.visible = false;
+        stage.update();
+
+        self.drawing = drawing;
+      }
+    }, {
+      key: 'drawStart',
+      value: function drawStart() {
+        this.drawing.visible = this.canvas.style.cursor === 'default' ? true : true;
+        this.stage.update();
       }
     }, {
       key: 'moveShape',
@@ -345,13 +416,13 @@ define('components/photo', ['app', 'zUtil', 'libs/createjs/easeljs-0.8.1.min', '
         var self = this;
         var shape = self.shape;
         if (!self.container) return;
-        var font = Math.random() + 16 + 'px Arial';
+        var font = Math.random() + 16 + 'px Microsoft YaHei';
 
         var fill = 'rgb(' + randomColor() + ', ' + randomColor() + ', ' + randomColor() + ')';
         var text = new createjs.Text(value, font, fill);
-        text.alpha = Math.random();
+        text.alpha = Math.random() + 0.3;
         text.setTransform(Math.random() * self.getScale(shape)[0], Math.random() * self.getScale(shape)[1], 1, 1, Math.random() * 1080);
-        self.container.addChild(text);
+        self.container.addChildAt(text, 2);
         self.stage.update();
       }
     }, {
@@ -376,7 +447,8 @@ define('components/photo', ['app', 'zUtil', 'libs/createjs/easeljs-0.8.1.min', '
         var height = _self$getScale2[1];
 
         containers.forEach(function (item, index) {
-          item.removeChildAt(1);
+          var close = item.getChildByName('close');
+          item.removeChild(close);
         });
 
         self.close.setTransform(width);
@@ -387,7 +459,7 @@ define('components/photo', ['app', 'zUtil', 'libs/createjs/easeljs-0.8.1.min', '
       key: 'download',
       value: function download() {
         var type = 'png';
-        var imgData = document.querySelector('#canvas').toDataURL(type);
+        var imgData = document.getElementById('photo').toDataURL(type);
         /**
          * GET mimeType
          * @param  {String} type the old mime-type
@@ -399,12 +471,12 @@ define('components/photo', ['app', 'zUtil', 'libs/createjs/easeljs-0.8.1.min', '
           return 'image/' + r;
         };
 
-        // 加工image data，替换mime type
+        // reinforce image data，replace mime type
         imgData = imgData.replace(_fixType(type), 'image/octet-stream');
         /**
-         * 在本地进行文件保存
-         * @param  {String} data     要保存到本地的图片数据
-         * @param  {String} filename 文件名
+         * save file locally
+         * @param  {String} data     the data of filestream
+         * @param  {String} filename the name of file
          */
         var saveFile = function saveFile(data, filename) {
           var save_link = document.createElementNS('http://www.w3.org/1999/xhtml', 'a');
@@ -416,7 +488,7 @@ define('components/photo', ['app', 'zUtil', 'libs/createjs/easeljs-0.8.1.min', '
           save_link.dispatchEvent(event);
         };
 
-        // 下载后的问题名
+        // name of file after download
         var filename = 'DIY_' + new Date().getTime() + '.' + type;
         // download
         saveFile(imgData, filename);
@@ -427,9 +499,6 @@ define('components/photo', ['app', 'zUtil', 'libs/createjs/easeljs-0.8.1.min', '
         var self = this;
 
         self.addTools(false, false, '../public/images/icons.png');
-        setTimeout(function () {
-          console.log(self.stage.toDataURL());
-        }, 10000);
         /*self.fillBackground('#555');
         self.addToolBar(false, '../public/images/icons.png');*/
       }

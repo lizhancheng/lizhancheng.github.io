@@ -1,6 +1,6 @@
 <dl ng-repeat="app in apps">
 	<dt>
-		<a href="javascript:void(0);">
+		<a ui-sref="index.window.{{app.href}}">
 			<img ng-src="../public/images/{{app.image}}.png" alt="" />
 		</a>
 	</dt>

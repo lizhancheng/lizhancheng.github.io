@@ -13,8 +13,12 @@
 	-webkit-writing-mode: horizontal-tb;
 
 	@include setScale;
-	@include background(#666666);
+	@include background(#555555);
 	@include transform(translate(-50%, -50%));
+
+	& > div:not(.frame-main) {
+		@include background(#666666);
+	}
 
 	.frame-header {
 		text-align: right;
@@ -45,4 +49,5 @@
 		    }
 		}
 	}
+
 }

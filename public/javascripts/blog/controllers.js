@@ -25,7 +25,7 @@ define(['app', 'zUtil'], function (app, ZU) {
 		// $location.path('/home').replace(); // 禁止后退
 
 	}]).controller('PdfCtrl', ['$scope', function ($scope) {}]).controller('DesktopCtrl', ['$scope', function ($scope) {
-		$scope.apps = [{ name: 'My Computer', image: 'ApplicationIcon' }, { name: 'My Store', image: 'sketch' }, { name: 'H5 App', image: 'HypeApp' }, { name: 'Affinity Photo', image: 'AppIcon4' }];
+		$scope.apps = [{ name: 'My Computer', image: 'ApplicationIcon', href: '' }, { name: 'My Store', image: 'sketch', href: '' }, { name: 'H5 App', image: 'HypeApp', href: '' }, { name: 'Affinity Photo', image: 'AppIcon4', href: 'photo' }];
 	}]).controller('MusicCtrl', ['$scope', '$timeout', 'MusicList', function ($scope, $timeout, MusicList) {
 		$scope.flag = undefined;
 		$scope.duration = 'loading...';

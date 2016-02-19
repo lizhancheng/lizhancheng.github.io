@@ -92,9 +92,14 @@
 							url: '/photo', 
 							templateUrl: 'blog_template/photo.html', 
 							controller: 'PhotoCtrl'
+						})
+						.state('index.window.pdf', {
+							url: '/pdf', 
+							templateUrl: 'blog_template/menu_pdf.html', 
+							controller: 'PdfCtrl'
 						});
 
-				})
+				});
 				
 			angular.bootstrap(document, ['app']);
 		});

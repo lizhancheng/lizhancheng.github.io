@@ -22,15 +22,18 @@
  			init() {
  				createjs.Ticker.timingMode = createjs.Ticker.RAF;
  				this.makeClose();
+ 				this.adjustViewPort();
 
  				this.setElements();
+ 				this.draw();
  				this.display();
  			}
 
  			makeClose() {
  				let self = this;
  				let length = 10;
- 				this.close = new createjs.Text('×', '20px Arial', '#fff');
+ 				this.close = new createjs.Text('×', '20px Microsoft YaHei', '#fff');
+ 				this.close.name = 'close';
  				// this.close = new createjs.Shape();
  				// this.close.graphics.f('black').r(0, 0, length, length);
  				this.close.setBounds(0, 0, length, length);
@@ -71,7 +74,13 @@
  				this.canvas.height = height;
  			}
 
- 			adjustViewPort() {}
+ 			adjustViewPort() {
+ 				let self = this;
+ 				let dom = document.documentElement;
+
+ 				self.canvas.width = dom.clientWidth > 640 ? 640 : dom.clientWidth * 0.6;
+ 				self.canvas.height = dom.clientHeight > 480 ? 480 : dom.clientHeight * 0.5;
+ 			}
 
  			fillBackground(color) {
  				let [width, height] = [this.canvas.width, this.canvas.height];
@@ -122,6 +131,7 @@
 	 					toTop, 
 	 					iHeight, 
 	 					stage, 
+	 					ctan, 
 	 					loader, 
 	 					manifest, 
 	 					icons
@@ -132,15 +142,14 @@
 		 					7, 
 		 					5, 
 		 					this.stage, 
+		 					new createjs.Container(), 
 		 					new createjs.LoadQueue(false), 
 		 					[{src: path, id: 'tools'}], 
-		 					[[0, 72], [240, 48], [456, 48], [72, 72]]
+		 					[[0, 72], [240, 48], [456, 48], [72, 72], [96, 24]]
 	 					];
- 				let [bg, bar] = [new createjs.Shape(), new createjs.Shape()];
- 				bg.graphics.f(bgColor || '#555555').r(0, 0, width, height);
+ 				let bar = new createjs.Shape();
  				bar.graphics.f(color || '#666666').r(5, 5, 25, height * 0.8);
- 				stage.addChild(bg);
- 				stage.addChild(bar);
+ 				ctan.addChild(bar);
 
  				let len = icons.length;
 
@@ -157,19 +166,24 @@
  						shape[index].y = movedown - item[1];
  						shape[index].x = 12 - item[0];
 
- 						stage.addChild(shape[index]);
+ 						ctan.addChild(shape[index]);
  					});
 
- 					self.eventHandler(shape);
+ 					self.eventHandler(shape, ctan);
+ 					stage.addChild(ctan);
 					stage.update();
  				});
  			}
 
- 			eventHandler(shape) {
+ 			eventHandler(shape, bar) {
  				let [self, stage] = [this, this.stage];
  				// pencil handle
  				shape[0].addEventListener('click', evnet => {
- 					self.canvas.style.cursor = 'url("../public/images/pen.ico"), auto';
+ 					let mouse = 'url("../public/images/pen.ico") 0 10, auto';
+ 					let gesture = self.canvas.style.cursor || 'default';
+ 					self.canvas.style.cursor = gesture === mouse ? 'default' : mouse;
+
+ 					self.drawStart();
  				});
  				// text handle
  				shape[1].addEventListener('click', event => {
@@ -200,6 +214,17 @@
  					self.mark.className = self.mark.className.replace('none', '');
  					self.mark.focus();
  				});
+ 				// download handle
+ 				shape[4].addEventListener('click', event => {
+ 					bar.visible = false;
+ 					self.close.visible = false;
+ 					self.stage.update();
+ 					self.download();
+
+ 					bar.visible = true;
+ 					self.close.visible = true;
+ 					self.stage.update();
+ 				});
  				// mousewheel to setScale
  				ZU.addEvent(self.canvas, 'mousewheel', event => {
  					if(!self.shape) return;
@@ -217,6 +242,44 @@
  					}
  					self.stage.update();
  				});
+ 			}
+ 			/**
+ 			 * draw with pen arbitrarily
+ 			 * @return null
+ 			 * @notice this function needs to be optimized
+ 			 */
+ 			draw() {
+ 				let self = this;
+ 				let stage = self.stage;
+ 				let drawing = new createjs.Shape();
+ 				let [width, height] = [self.canvas.width, self.canvas.height];
+ 				let [startX, startY] = [0, 0];
+
+ 				drawing.graphics.f('rgba(255, 255, 255, 0.1)');
+ 				drawing.graphics.rect(40, 0, width, height);
+ 				drawing.graphics.beginStroke('black');
+ 				drawing.addEventListener('mousedown', event => {
+ 					[startX, startY] = [event.rawX, event.rawY];
+ 					drawing.graphics.mt(startX, startY);
+ 					stage.update();
+ 				});
+ 				drawing.addEventListener('pressmove', event => {
+ 					let [drawX, drawY] = [event.rawX, event.rawY];
+ 					drawing.graphics.lt(drawX, drawY);
+ 					drawing.graphics.mt(drawX, drawY);
+ 					stage.update();
+ 				});
+
+ 				stage.addChildAt(drawing, 0);
+ 				drawing.visible = false;
+ 				stage.update();
+
+ 				self.drawing = drawing;
+ 			}
+
+ 			drawStart() {
+ 				this.drawing.visible = this.canvas.style.cursor === 'default' ? true : true;
+ 				this.stage.update();
  			}
 
  			moveShape(container, shape) {
@@ -305,13 +368,13 @@
  				let self = this;
  				let shape = self.shape;
  				if(!self.container) return;
- 				let font = Math.random() + 16 + 'px Arial';
+ 				let font = Math.random() + 16 + 'px Microsoft YaHei';
  				
  				let fill = `rgb(${randomColor()}, ${randomColor()}, ${randomColor()})`;
  				let text = new createjs.Text(value, font, fill);
- 				text.alpha = Math.random();
+ 				text.alpha = Math.random() + 0.3;
  				text.setTransform(Math.random() * self.getScale(shape)[0], Math.random() * self.getScale(shape)[1], 1, 1, Math.random()* 1080);
- 				self.container.addChild(text);
+ 				self.container.addChildAt(text, 2);
  				self.stage.update();
  			}
 
@@ -326,7 +389,8 @@
  				let [width, height] = self.getScale(self.shape);
 
  				containers.forEach((item, index) => {
- 					item.removeChildAt(1);
+ 					let close = item.getChildByName('close');
+ 					item.removeChild(close);
  				});
 
  				self.close.setTransform(width);
@@ -336,7 +400,7 @@
 
  			download() {
  				var type = 'png';
-				var imgData = document.querySelector('#canvas').toDataURL(type);
+				var imgData = document.getElementById('photo').toDataURL(type);
 				/**
 				 * GET mimeType
 				 * @param  {String} type the old mime-type
@@ -348,12 +412,12 @@
 				    return 'image/' + r;
 				};
 				   
-				// 加工image data，替换mime type
+				// reinforce image data，replace mime type
 				imgData = imgData.replace(_fixType(type),'image/octet-stream');
 				/**
-				 * 在本地进行文件保存
-				 * @param  {String} data     要保存到本地的图片数据
-				 * @param  {String} filename 文件名
+				 * save file locally
+				 * @param  {String} data     the data of filestream
+				 * @param  {String} filename the name of file
 				 */
 				var saveFile = function(data, filename){
 				    var save_link = document.createElementNS('http://www.w3.org/1999/xhtml', 'a');
@@ -365,7 +429,7 @@
 				    save_link.dispatchEvent(event);
 				};
 				   
-				// 下载后的问题名
+				// name of file after download
 				var filename = 'DIY_' + (new Date()).getTime() + '.' + type;
 				// download
 				saveFile(imgData,filename);
@@ -375,9 +439,6 @@
  				let self = this;
 
  				self.addTools(false, false, '../public/images/icons.png');
- 				setTimeout(function() {
- 					console.log(self.stage.toDataURL());
- 				}, 10000);
  				/*self.fillBackground('#555');
  				self.addToolBar(false, '../public/images/icons.png');*/
  			}

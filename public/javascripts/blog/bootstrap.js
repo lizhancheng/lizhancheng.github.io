@@ -87,6 +87,10 @@ define(['require', 'app', 'angular', 'angular-route', 'angular-ui-router', 'serv
 				url: '/photo',
 				templateUrl: 'blog_template/photo.html',
 				controller: 'PhotoCtrl'
+			}).state('index.window.pdf', {
+				url: '/pdf',
+				templateUrl: 'blog_template/menu_pdf.html',
+				controller: 'PdfCtrl'
 			});
 		});
 

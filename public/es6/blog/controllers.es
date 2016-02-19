@@ -32,10 +32,10 @@
 			}])
 			.controller('DesktopCtrl', ['$scope', $scope => {
 				$scope.apps = [
-					{name: 'My Computer', image: 'ApplicationIcon'}, 
-					{name: 'My Store', image: 'sketch'}, 
-					{name: 'H5 App', image: 'HypeApp'}, 
-					{name: 'Affinity Photo', image: 'AppIcon4'}
+					{name: 'My Computer', image: 'ApplicationIcon', href: ''}, 
+					{name: 'My Store', image: 'sketch', href: ''}, 
+					{name: 'H5 App', image: 'HypeApp', href: ''}, 
+					{name: 'Affinity Photo', image: 'AppIcon4', href: 'photo'}
 				];
 
 			}])

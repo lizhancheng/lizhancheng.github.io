@@ -7,19 +7,23 @@
   -webkit-writing-mode: horizontal-tb;
   width: auto;
   height: auto;
-  background: #666666;
+  background: #555555;
   -moz-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
 /* line 19, ../../sass/components/window.scss */
+.frame > div:not(.frame-main) {
+  background: #666666;
+}
+/* line 23, ../../sass/components/window.scss */
 .frame .frame-header {
   text-align: right;
   width: 100%;
   height: auto;
 }
-/* line 27, ../../sass/components/window.scss */
+/* line 31, ../../sass/components/window.scss */
 .frame .frame-main .mark-name {
   position: absolute;
   left: 50%;
@@ -45,7 +49,7 @@
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=90);
   opacity: 0.9;
 }
-/* line 43, ../../sass/components/window.scss */
+/* line 47, ../../sass/components/window.scss */
 .frame .frame-main .mark-name:focus {
   -moz-box-shadow: 0 0 10px #00DCFF;
   -webkit-box-shadow: 0 0 10px #00DCFF;
