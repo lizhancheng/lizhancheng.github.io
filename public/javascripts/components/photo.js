@@ -25,6 +25,7 @@ define('components/photo', ['app', 'zUtil', 'libs/createjs/easeljs-0.8.1.min', '
       this.stage = new createjs.Stage('photo');
       this.containers = [];
       this.shape = null;
+      this.eventFlag = false;
 
       this.init();
     }
@@ -274,43 +275,60 @@ define('components/photo', ['app', 'zUtil', 'libs/createjs/easeljs-0.8.1.min', '
       key: 'draw',
       value: function draw() {
         var self = this;
+        var cas = self.canvas;
+        var ctx = self.ctx;
         var stage = self.stage;
-        var drawing = new createjs.Shape();
-        var width = self.canvas.width;
-        var height = self.canvas.height;
+        var width = cas.width;
+        var height = cas.height;
         var startX = 0;
         var startY = 0;
+        var leftEdge = 0;
+        var topEdge = 0;
 
-        drawing.graphics.f('rgba(255, 255, 255, 0.1)');
-        drawing.graphics.rect(40, 0, width, height);
-        drawing.graphics.beginStroke('black');
-        drawing.addEventListener('mousedown', function (event) {
-          startX = event.rawX;
-          startY = event.rawY;
+        var drawFlag = false;
 
-          drawing.graphics.mt(startX, startY);
-          stage.update();
-        });
-        drawing.addEventListener('pressmove', function (event) {
-          var drawX = event.rawX;
-          var drawY = event.rawY;
+        function down(event) {
+          if (!self.eventFlag) return;
+          drawFlag = true;
+          leftEdge = cas.getBoundingClientRect().left;
+          topEdge = cas.getBoundingClientRect().top;
+          startX = (event.clientX || event.pageX || event.touches[0].clientX || event.touches[0].pageX) - leftEdge;
+          startY = (event.clientY || event.pageY || event.touches[0].clientY || event.touches[0].pageY) - topEdge;
 
-          drawing.graphics.lt(drawX, drawY);
-          drawing.graphics.mt(drawX, drawY);
-          stage.update();
-        });
+          ctx.beginPath();
+          ctx.lineCap = 'round';
+          ctx.lineJoin = 'round';
+          ctx.lineWidth = 5;
+          ctx.moveTo(startX, startY);
+          ctx.lineTo(startX, startY);
+          ctx.strokeStyle = 'black';
+          ctx.stroke();
+        }
+        function move(event) {
+          if (drawFlag) {
+            var moveX = (event.clientX || event.pageX || event.touches[0].clientX || event.touches[0].pageX) - leftEdge;
+            var moveY = (event.clientY || event.pageY || event.touches[0].clientY || event.touches[0].pageY) - topEdge;
 
-        stage.addChildAt(drawing, 0);
-        drawing.visible = false;
-        stage.update();
+            ctx.lineTo(moveX, moveY);
+            ctx.stroke();
+            ctx.moveTo(moveX, moveY);
+          }
+        }
+        function up() {
+          drawFlag = false;
+        }
 
-        self.drawing = drawing;
+        ZU.addEvent(cas, 'mousedown', down);
+        ZU.addEvent(cas, 'touchstart', down);
+        ZU.addEvent(cas, 'mousemove', move);
+        ZU.addEvent(cas, 'touchmove', move);
+        ZU.addEvent(cas, 'mouseup', up);
+        ZU.addEvent(cas, 'touchend', up);
       }
     }, {
       key: 'drawStart',
       value: function drawStart() {
-        this.drawing.visible = this.canvas.style.cursor === 'default' ? true : true;
-        this.stage.update();
+        this.eventFlag = !this.eventFlag;
       }
     }, {
       key: 'moveShape',

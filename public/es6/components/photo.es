@@ -15,6 +15,7 @@
  				this.stage = new createjs.Stage('photo');
  				this.containers = [];
  				this.shape = null;
+ 				this.eventFlag = false;
 
  				this.init();
  			}
@@ -250,36 +251,56 @@
  			 */
  			draw() {
  				let self = this;
+ 				let cas = self.canvas;
+ 				let ctx = self.ctx;
  				let stage = self.stage;
- 				let drawing = new createjs.Shape();
- 				let [width, height] = [self.canvas.width, self.canvas.height];
- 				let [startX, startY] = [0, 0];
+ 				let [width, height] = [cas.width, cas.height];
+ 				let [startX, startY, leftEdge, topEdge] = [0, 0, 0, 0];
+ 				let drawFlag = false;
 
- 				drawing.graphics.f('rgba(255, 255, 255, 0.1)');
- 				drawing.graphics.rect(40, 0, width, height);
- 				drawing.graphics.beginStroke('black');
- 				drawing.addEventListener('mousedown', event => {
- 					[startX, startY] = [event.rawX, event.rawY];
- 					drawing.graphics.mt(startX, startY);
- 					stage.update();
- 				});
- 				drawing.addEventListener('pressmove', event => {
- 					let [drawX, drawY] = [event.rawX, event.rawY];
- 					drawing.graphics.lt(drawX, drawY);
- 					drawing.graphics.mt(drawX, drawY);
- 					stage.update();
- 				});
+ 				function down(event) {
+ 					if(!self.eventFlag) return;
+ 					drawFlag = true;
+					[leftEdge, topEdge] = [cas.getBoundingClientRect().left, cas.getBoundingClientRect().top];
+ 					[startX, startY] = [
+ 						(event.clientX || event.pageX || event.touches[0].clientX || event.touches[0].pageX) - leftEdge, 
+ 						(event.clientY || event.pageY || event.touches[0].clientY || event.touches[0].pageY) - topEdge 
+ 					];
+ 					ctx.beginPath();
+ 					ctx.lineCap = 'round';
+ 					ctx.lineJoin = 'round';
+ 					ctx.lineWidth = 5;
+ 					ctx.moveTo(startX, startY);
+ 					ctx.lineTo(startX, startY);
+ 					ctx.strokeStyle = 'black';
+ 					ctx.stroke()
+ 				}
+				function move(event){
+					if (drawFlag) {
+						let [moveX, moveY] = [
+							(event.clientX || event.pageX || event.touches[0].clientX || event.touches[0].pageX) - leftEdge, 
+							(event.clientY || event.pageY || event.touches[0].clientY || event.touches[0].pageY) - topEdge 
+						];
 
- 				stage.addChildAt(drawing, 0);
- 				drawing.visible = false;
- 				stage.update();
+						ctx.lineTo(moveX, moveY);
+						ctx.stroke();
+						ctx.moveTo(moveX, moveY);
+					}
+				}
+				function up(){
+					drawFlag = false;
+				} 				
 
- 				self.drawing = drawing;
+ 				ZU.addEvent(cas, 'mousedown', down);
+ 				ZU.addEvent(cas, 'touchstart', down);
+ 				ZU.addEvent(cas, 'mousemove', move);
+ 				ZU.addEvent(cas, 'touchmove', move);
+ 				ZU.addEvent(cas, 'mouseup', up);
+ 				ZU.addEvent(cas, 'touchend', up);
  			}
 
  			drawStart() {
- 				this.drawing.visible = this.canvas.style.cursor === 'default' ? true : true;
- 				this.stage.update();
+ 				this.eventFlag = !this.eventFlag;
  			}
 
  			moveShape(container, shape) {

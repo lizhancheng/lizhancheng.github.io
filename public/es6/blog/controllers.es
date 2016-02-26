@@ -32,9 +32,9 @@
 			}])
 			.controller('DesktopCtrl', ['$scope', $scope => {
 				$scope.apps = [
-					{name: 'My Computer', image: 'ApplicationIcon', href: ''}, 
-					{name: 'My Store', image: 'sketch', href: ''}, 
-					{name: 'H5 App', image: 'HypeApp', href: ''}, 
+					{name: 'My Computer', image: 'ApplicationIcon', href: 'home'}, 
+					{name: 'My Store', image: 'sketch', href: 'store'}, 
+					{name: 'H5 App', image: 'HypeApp', href: 'app'}, 
 					{name: 'Affinity Photo', image: 'AppIcon4', href: 'photo'}
 				];
 
@@ -53,30 +53,30 @@
 					if($scope.song_count < $scope.total_song) {
 						$scope.now_song = $scope.music_list[++ $scope.song_count];
 					}
-				}
+				};
 
 				$scope.prevSong = () => {
 					if($scope.song_count > 0) {
 						$scope.now_song = $scope.music_list[-- $scope.song_count];
 					}
-				}
+				};
 
 				$scope.getTime = au => {
 					if(au) {
 						au.onloadedmetadata = function() {
 							$scope.duration = ZU.makeTime(au.duration, true);
-						}
+						};
 					}
-				}
+				};
 
 				$scope.state = au => {
 					!au.paused ? au.pause() : au.play();
-				}
+				};
 				
 				$scope.progress = au => {
 					$scope.duration = `${ZU.makeTime(au.currentTime)}/${$scope.duration.split('/')[1]}`;
 					return `${au.currentTime / au.duration * 96}%`;
-				}
+				};
 				console.log('music-controller loaded...');
 			}])
 			.controller('DrawCtrl', ['$scope', '$state', ($scope, $state) => {
