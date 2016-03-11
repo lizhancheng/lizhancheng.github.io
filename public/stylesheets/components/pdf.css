@@ -1,0 +1,20 @@
+/* line 7, ../../sass/components/pdf.scss */
+#pdf-area {
+  padding: 5% 0;
+  cursor: pointer;
+  width: 800px;
+  height: 600px;
+}
+/* line 13, ../../sass/components/pdf.scss */
+#pdf-area .preview-file {
+  display: block;
+  text-align: center;
+  color: #C1BFBF;
+  margin: 0 auto;
+  vertical-align: middle;
+  padding: 35% 0;
+}
+/* line 22, ../../sass/components/pdf.scss */
+#pdf-area #pdf-file {
+  display: none;
+}

@@ -24,7 +24,13 @@ define(['app', 'zUtil'], function (app, ZU) {
 	}]).controller('FileCtrl', ['$scope', '$location', function ($scope, $location) {
 		// $location.path('/home').replace(); // 禁止后退
 
-	}]).controller('PdfCtrl', ['$scope', function ($scope) {}]).controller('DesktopCtrl', ['$scope', function ($scope) {
+	}]).controller('PdfCtrl', ['$scope', function ($scope) {
+		console.log('PdfCtrl loaded...');
+		$scope.load = function () {
+			ZU.loadFile('pdf-area', 'pdf-file', $scope.getPdf, 'pdf');
+		};
+		$scope.$emit('alterTitle', 'PDF Viewer');
+	}]).controller('DesktopCtrl', ['$scope', function ($scope) {
 		$scope.apps = [{ name: 'My Computer', image: 'ApplicationIcon', href: 'home' }, { name: 'My Store', image: 'sketch', href: 'store' }, { name: 'H5 App', image: 'HypeApp', href: 'app' }, { name: 'Affinity Photo', image: 'AppIcon4', href: 'photo' }];
 	}]).controller('MusicCtrl', ['$scope', '$timeout', 'MusicList', function ($scope, $timeout, MusicList) {
 		$scope.flag = undefined;
@@ -67,7 +73,7 @@ define(['app', 'zUtil'], function (app, ZU) {
 		console.log('music-controller loaded...');
 	}]).controller('DrawCtrl', ['$scope', '$state', function ($scope, $state) {
 		console.log('draw-controller loaded...');
-		$state.transitionTo('index.music');
+		// $state.transitionTo('index.music');
 	}]).controller('ArticleCtrl', ['$scope', '$sce', 'ArticleList', function ($scope, $sce, AL) {
 		console.log('article-controller loaded...');
 
@@ -103,7 +109,27 @@ define(['app', 'zUtil'], function (app, ZU) {
 		$scope.trustAsHtml = $sce.trustAsHtml;
 	}]).controller('WindowCtrl', ['$scope', function ($scope) {
 		console.log('WindowCtrl loaded...');
+
+		var coordinateX = 0;
+		var coordinateY = 0;
+
+		$scope.title = 'loading...';
+		$scope.moveWindow = function (event) {
+			var which = event.which;
+			if (which) {
+				var x = event.movementX;
+				var y = event.movementY;
+
+				$scope.move(x, y);
+			}
+		};
+
+		$scope.$on('alterTitle', function (event, data) {
+			$scope.title = data;
+		});
 	}]).controller('PhotoCtrl', ['$scope', function ($scope) {
 		console.log('PhotoCtrl loaded...');
+
+		$scope.$emit('alterTitle', 'Photo Editor');
 	}]);
 });

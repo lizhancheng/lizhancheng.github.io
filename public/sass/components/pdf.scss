@@ -1,0 +1,25 @@
+@import "compass/css3";
+
+@mixin setScale($width: auto, $height: auto) {
+	width: $width;
+	height: $height;
+}
+#pdf-area {
+    padding: 5% 0;
+	cursor: pointer;
+
+	@include setScale(800px, 600px);
+	
+	.preview-file {
+		display: block;
+	    text-align: center;
+	    color: #C1BFBF;
+	    margin: 0 auto;
+	    vertical-align: middle;
+	    padding: 35% 0;
+	}
+
+	#pdf-file {
+		display: none;
+	}
+}

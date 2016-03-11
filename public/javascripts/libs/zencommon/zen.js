@@ -140,24 +140,44 @@
     	function aLert(string) {
     		alert(string);
     	}
-/*Image Function*/
+/*File Function*/
     	/**
-    	 * previewImage a tool to preview the upload or writed-in image
+    	 * loadFile a tool to load the local file, eg: image, pdf, etc
     	 * @param {String} selector buttonId
     	 * @param {String} fileObj buttonId
-    	 * @param {Function} handler a function to handle the imgObj and file's path
-    	 * @return {Object} Image Object 
+    	 * @param {Function} handler a function to handle the fileObj or fileString
+    	 * @return {Object} File Object 
     	 */
-    	function previewImage(selector, fileObj, handler) {
+    	function loadFile(selector, fileObj, handler, type) {
+    		/**
+    		 * mockClick use an element to simulate the click event on file element
+    		 * @param  {Event} event the event object
+    		 * @return {Void}   
+    		 */
     		function mockClick(event) {
     			if($fileObj) {
 	    			$fileObj.click();
 	    		}
-	    		event.preventDefault();
+	    		// event.preventDefault();
+    		}
+    		function handleImage(file) {
+				var img = document.createElement('img');
+				img.src = window.URL.createObjectURL(file);
+				addEvent(img, 'load', function() {
+					window.URL.revokeObjectURL(this.src);
+					handler(img, file);
+				});    			
+    		}
+    		function handlePdf(file) {
+    			var embed = window.URL.createObjectURL(file);
+    			var html = '<embed width="800px" height="600px" name="plugin" id="plugin" src="' + embed +'" type="application/pdf">';
+    			handler(html, file);
     		}
     		function handleFiles(event) {
-    			var files = $fileObj.files;
+    			event.preventDefault();
+    			var files = event.dataTransfer ? event.dataTransfer.files : $fileObj.files;
     			var len = files.length;
+    			var callBack = type === 'pdf' ? handlePdf : handleImage;
     			if(!isFunction(handler)) {
     				console.warn('handler no value!');
     				return false;
@@ -166,12 +186,7 @@
     				handler(null);
     			} else {
     				for(var i = 0;i < len;i ++) {
-    					var img = document.createElement('img');
-    					img.src = window.URL.createObjectURL(files[i]);
-    					addEvent(img, 'load', function() {
-    						window.URL.revokeObjectURL(this.src);
-	    					handler(img, files[i]);
-    					});
+    					callBack(files[i]);
     				}
     			}
     		}
@@ -181,15 +196,17 @@
 
     		window.URL = window.URL || window.webkitURL;
     		addEvent($selector, 'click', mockClick);
+    		addEvent($selector, 'drop', handleFiles);
+    		addEvent($selector, 'dragover', function (event) {event.preventDefault();});
+
     		addEvent($fileObj, 'change', handleFiles);
     	}
-
 
     	return {
     		makeTime    : mkduration, 
     		escapeHtml  : escapeHtml, 
     		aLert       : aLert, 
-    		previewImage: previewImage, 
+    		loadFile    : loadFile, 
     		addEvent    : addEvent
     	};
     });

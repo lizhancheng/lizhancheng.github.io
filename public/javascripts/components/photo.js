@@ -209,7 +209,7 @@ define('components/photo', ['app', 'zUtil', 'libs/createjs/easeljs-0.8.1.min', '
           self.canvas.style.cursor = 'text';
         });
         // image handle
-        ZU.previewImage(shape[2], 'photo-file', function (img, file) {
+        ZU.loadFile(shape[2], 'photo-file', function (img, file) {
           var shp = new createjs.Shape();
           var container = new createjs.Container();
 

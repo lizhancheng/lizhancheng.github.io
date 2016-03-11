@@ -183,4 +183,46 @@
 					}
 				}
 			})
+			.directive('frameHeader', () => {
+				return {
+					restrict: 'C', 
+					link: ($scope, element, attr) => {
+						let parent = element.parent();
+						$scope.move = (x, y) => {
+							let targetStyle = getComputedStyle(parent[0]) || parent[0].currentStyle;
+							let [left, top] = [parseInt(targetStyle.left) + x, parseInt(targetStyle.top) + y];
+							parent.css({
+								left: left + 'px', 
+								top: top + 'px'
+							});
+						}
+					}
+				}
+			})
+			.directive('frame', () => {
+				return {
+					restrict: 'C', 
+					link: ($scope, element, attr) => {
+						let $el = element;
+						$scope.setScale = () => {
+							$el.css({
+								width: '100%', 
+								height: '100%'
+							})
+						}
+					}
+				}
+			})
+			.directive('pdfArea', () => {
+				return {
+					restrict: 'A', 
+					link: ($scope, element, attr) => {
+						let $el = element;
+						$scope.getPdf = (html) => {
+							$el.html(html);
+						};
+						$scope.load();
+					}
+				}
+			});
 	});

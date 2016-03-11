@@ -191,7 +191,7 @@
  					self.canvas.style.cursor = 'text';
  				});
  				// image handle
- 				ZU.previewImage(shape[2], 'photo-file', function(img, file) {
+ 				ZU.loadFile(shape[2], 'photo-file', function(img, file) {
  					let shp = new createjs.Shape();
  					let container = new createjs.Container();
 

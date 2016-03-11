@@ -24,6 +24,10 @@
 		text-align: right;
 
 		@include setScale(100%);
+
+		.title {
+			float: left;
+		}
 	}
 
 	.frame-main {
@@ -47,7 +51,18 @@
 		    &:focus {
 		    	@include box-shadow(0 0 10px #00DCFF);
 		    }
+
 		}
+	    & *::-webkit-scrollbar {
+	    	@include setScale(5px);
+	    	@include background(white);
+	    }
+	     
+	    & *::-webkit-scrollbar-thumb
+	    {
+	        @include border-radius(10px);
+	        @include background(#999999);
+	    }
 	}
 
 }

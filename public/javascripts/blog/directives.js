@@ -185,5 +185,46 @@ define(['app', 'components/editor', 'components/photo'], function (app, CreateEd
 				new Photo('photo');
 			}
 		};
+	}).directive('frameHeader', function () {
+		return {
+			restrict: 'C',
+			link: function link($scope, element, attr) {
+				var parent = element.parent();
+				$scope.move = function (x, y) {
+					var targetStyle = getComputedStyle(parent[0]) || parent[0].currentStyle;
+					var left = parseInt(targetStyle.left) + x;
+					var top = parseInt(targetStyle.top) + y;
+
+					parent.css({
+						left: left + 'px',
+						top: top + 'px'
+					});
+				};
+			}
+		};
+	}).directive('frame', function () {
+		return {
+			restrict: 'C',
+			link: function link($scope, element, attr) {
+				var $el = element;
+				$scope.setScale = function () {
+					$el.css({
+						width: '100%',
+						height: '100%'
+					});
+				};
+			}
+		};
+	}).directive('pdfArea', function () {
+		return {
+			restrict: 'A',
+			link: function link($scope, element, attr) {
+				var $el = element;
+				$scope.getPdf = function (html) {
+					$el.html(html);
+				};
+				$scope.load();
+			}
+		};
 	});
 });

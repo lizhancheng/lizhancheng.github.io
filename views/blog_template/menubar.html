@@ -1,7 +1,8 @@
 <ul class="menu">
 	<li class="menu-list" ng-repeat="m in menu">
 		<div ng-show="m.display" ui-view="{{m.name}}"></div>
-		<img ng-src="../public/images/{{m.name}}.png" alt="" ng-click="toggle(m.name)" />
+		<img ng-src="../public/images/{{m.name}}.png" alt="" ng-click="toggle(m.name)" ng-if="m.name=='pdf'" ui-sref="index.window.{{m.name}}" />
+		<img ng-src="../public/images/{{m.name}}.png" alt="" ng-click="toggle(m.name)" ng-if="m.name!='pdf'" />
 	</li>
 	<li class="menu-list"><img src="../public/images/voice.png" alt=""></li>
 </ul>			

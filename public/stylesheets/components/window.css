@@ -23,7 +23,11 @@
   width: 100%;
   height: auto;
 }
-/* line 31, ../../sass/components/window.scss */
+/* line 28, ../../sass/components/window.scss */
+.frame .frame-header .title {
+  float: left;
+}
+/* line 35, ../../sass/components/window.scss */
 .frame .frame-main .mark-name {
   position: absolute;
   left: 50%;
@@ -49,9 +53,22 @@
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=90);
   opacity: 0.9;
 }
-/* line 47, ../../sass/components/window.scss */
+/* line 51, ../../sass/components/window.scss */
 .frame .frame-main .mark-name:focus {
   -moz-box-shadow: 0 0 10px #00DCFF;
   -webkit-box-shadow: 0 0 10px #00DCFF;
   box-shadow: 0 0 10px #00DCFF;
+}
+/* line 56, ../../sass/components/window.scss */
+.frame .frame-main *::-webkit-scrollbar {
+  width: 5px;
+  height: auto;
+  background: white;
+}
+/* line 61, ../../sass/components/window.scss */
+.frame .frame-main *::-webkit-scrollbar-thumb {
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: #999999;
 }

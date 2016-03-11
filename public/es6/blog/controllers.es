@@ -28,7 +28,11 @@
 
 			}])
 			.controller('PdfCtrl', ['$scope', $scope => {
-
+				console.log('PdfCtrl loaded...');
+				$scope.load = () => {
+					ZU.loadFile('pdf-area', 'pdf-file', $scope.getPdf, 'pdf');
+				};
+				$scope.$emit('alterTitle', 'PDF Viewer');
 			}])
 			.controller('DesktopCtrl', ['$scope', $scope => {
 				$scope.apps = [
@@ -81,7 +85,7 @@
 			}])
 			.controller('DrawCtrl', ['$scope', '$state', ($scope, $state) => {
 				console.log('draw-controller loaded...');
-				$state.transitionTo('index.music');
+				// $state.transitionTo('index.music');
 			}])
 			.controller('ArticleCtrl', ['$scope', '$sce', 'ArticleList', ($scope, $sce, AL) => {
 				console.log('article-controller loaded...');
@@ -120,11 +124,27 @@
 			}])
 			.controller('WindowCtrl', ['$scope', ($scope) => {
 				console.log('WindowCtrl loaded...');
+
+				let [coordinateX, coordinateY] = [0, 0];
+
+				$scope.title = 'loading...';
+				$scope.moveWindow = event => {
+					let which = event.which;
+					if(which) {
+						let [x, y] = [event.movementX, event.movementY];
+						$scope.move(x, y);
+					}
+				};
+
+				$scope.$on('alterTitle', (event, data) => {
+					$scope.title = data;
+				});
 			}])
 			.controller('PhotoCtrl', ['$scope', ($scope) => {
 				console.log('PhotoCtrl loaded...');
-			}]);
 
+				$scope.$emit('alterTitle', 'Photo Editor');
+			}])
 
 
 	});
