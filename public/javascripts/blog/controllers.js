@@ -29,7 +29,7 @@ define(['app', 'zUtil'], function (app, ZU) {
 		$scope.load = function () {
 			ZU.loadFile('pdf-area', 'pdf-file', $scope.getPdf, 'pdf');
 		};
-		$scope.$emit('alterTitle', 'PDF Viewer');
+		$scope.$emit('alter', { title: 'PDF Viewer', status: '已启动' });
 	}]).controller('DesktopCtrl', ['$scope', function ($scope) {
 		$scope.apps = [{ name: 'My Computer', image: 'ApplicationIcon', href: 'home' }, { name: 'My Store', image: 'sketch', href: 'store' }, { name: 'H5 App', image: 'HypeApp', href: 'app' }, { name: 'Affinity Photo', image: 'AppIcon4', href: 'photo' }];
 	}]).controller('MusicCtrl', ['$scope', '$timeout', 'MusicList', function ($scope, $timeout, MusicList) {
@@ -80,7 +80,7 @@ define(['app', 'zUtil'], function (app, ZU) {
 		AL.getList($scope).success(function (result) {
 			if (result.status === 200) {
 				$scope.status = result.status;
-				$scope.data = result.data;
+				$scope.data = result.data || [{ title: '', content: '', display: true }];
 				$scope.current_content = $scope.data[0].content;
 
 				angular.forEach($scope.data, function (item, index) {
@@ -113,7 +113,8 @@ define(['app', 'zUtil'], function (app, ZU) {
 		var coordinateX = 0;
 		var coordinateY = 0;
 
-		$scope.title = 'loading...';
+		$scope.title = $scope.status = 'loading...';
+
 		$scope.moveWindow = function (event) {
 			var which = event.which;
 			if (which) {
@@ -124,12 +125,15 @@ define(['app', 'zUtil'], function (app, ZU) {
 			}
 		};
 
-		$scope.$on('alterTitle', function (event, data) {
-			$scope.title = data;
+		$scope.$on('alter', function (event, data) {
+			$scope.title = data.title;
+			$scope.status = data.status;
 		});
 	}]).controller('PhotoCtrl', ['$scope', function ($scope) {
 		console.log('PhotoCtrl loaded...');
 
-		$scope.$emit('alterTitle', 'Photo Editor');
+		$scope.$emit('alter', { title: 'Photo Editor', status: '已启动' });
+	}]).controller('AppCtrl', ['$scope', function ($scope) {
+		console.log('AppCtrl loaded...');
 	}]);
 });

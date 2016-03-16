@@ -32,7 +32,7 @@
 				$scope.load = () => {
 					ZU.loadFile('pdf-area', 'pdf-file', $scope.getPdf, 'pdf');
 				};
-				$scope.$emit('alterTitle', 'PDF Viewer');
+				$scope.$emit('alter', {title: 'PDF Viewer', status: '已启动'});
 			}])
 			.controller('DesktopCtrl', ['$scope', $scope => {
 				$scope.apps = [
@@ -94,7 +94,7 @@
 				.success(result => {
 					if(result.status === 200) {
 						$scope.status = result.status;
-						$scope.data = result.data;
+						$scope.data = result.data || [{title: '', content: '', display: true}];
 						$scope.current_content = $scope.data[0].content;
 
 						angular.forEach($scope.data, (item, index) => {
@@ -127,7 +127,8 @@
 
 				let [coordinateX, coordinateY] = [0, 0];
 
-				$scope.title = 'loading...';
+				$scope.title = $scope.status = 'loading...';
+
 				$scope.moveWindow = event => {
 					let which = event.which;
 					if(which) {
@@ -136,14 +137,20 @@
 					}
 				};
 
-				$scope.$on('alterTitle', (event, data) => {
-					$scope.title = data;
+				$scope.$on('alter', (event, data) => {
+					$scope.title = data.title;
+					$scope.status = data.status;
 				});
 			}])
 			.controller('PhotoCtrl', ['$scope', ($scope) => {
 				console.log('PhotoCtrl loaded...');
 
-				$scope.$emit('alterTitle', 'Photo Editor');
+				$scope.$emit('alter', {title: 'Photo Editor', status: '已启动'});
+			}])
+			.controller('AppCtrl', ['$scope', ($scope) => {
+				console.log('AppCtrl loaded...');
+
+
 			}])
 
 

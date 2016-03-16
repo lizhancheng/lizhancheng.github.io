@@ -97,7 +97,12 @@
 							url: '/pdf', 
 							templateUrl: 'blog_template/menu_pdf.html', 
 							controller: 'PdfCtrl'
-						});
+						})
+						.state('index.window.app', {
+							url: '/app', 
+							templateUrl: 'blog_template/app.html', 
+							controller: 'AppCtrl'
+						})
 
 				});
 				

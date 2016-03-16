@@ -146,6 +146,7 @@
     	 * @param {String} selector buttonId
     	 * @param {String} fileObj buttonId
     	 * @param {Function} handler a function to handle the fileObj or fileString
+    	 * @param {String or Boolean} to define it pdf or false
     	 * @return {Object} File Object 
     	 */
     	function loadFile(selector, fileObj, handler, type) {
@@ -186,7 +187,11 @@
     				handler(null);
     			} else {
     				for(var i = 0;i < len;i ++) {
-    					callBack(files[i]);
+    					if(type !== false) {
+	    					callBack(files[i]);
+	    				} else {
+	    					handler(files[i]);
+	    				}
     				}
     			}
     		}

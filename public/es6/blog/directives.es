@@ -18,7 +18,7 @@
 							}
 						});
 					}
-				}
+				};
 			})
 			.directive('musicBox', () => {
 				return {
@@ -69,7 +69,7 @@
 								target.css('cursor', 'move');
 								target.on('mousemove', onMove);
 							}
-						}
+						};
 						// while stop moving box, it will unbind the move event
 						$scope.stopBox = event => {
 							function stopMove() {
@@ -89,14 +89,14 @@
 							if($scope.movement) {
 								// stopMove();
 							}
-						}
+						};
 						// while modify the progress manually, it will update the progress-bar
 						$scope.updateProgress = event => {
 							let x = (event.offsetX || event.layerX) / 400 * 100 + '%';
 							angular.element(progress).css('width', x);
 							au.currentTime = parseFloat(x) / 100 * au.duration;
 							isPlay();
-						}
+						};
 						// choose song
 						$scope.alterSong = event => {
 							let alter_class = event.target.getAttribute('class');
@@ -105,12 +105,12 @@
 							}else {
 								$scope.nextSong();
 							}
-						}
+						};
 						// switch auto status
 						$scope.alterAuto = event => {
 							angular.element(event.target).toggleClass('active');
 							au.autoplay = !au.autoplay;
-						}
+						};
 						// get music list
 						$scope.loadMusic.getList($scope)
 						.success(result => {
