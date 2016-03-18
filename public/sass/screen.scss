@@ -260,7 +260,7 @@ i {
 }
 
 .loading {
-	display: none;
+	display: table;
 	position: fixed;
 	text-align: center;
 	z-index: 11;
@@ -357,7 +357,8 @@ i {
 .windows {
 	@include setScale;
 	@include background(linear-gradient(to bottom left, #011E3E, #85D4FF));
-	//@include animation(appear 2s linear 18s);
+	@include animation(appear 2s linear 17s);
+	// @include opacity(0);
 
 	@at-root {
 		@include keyframes-compat(appear) {

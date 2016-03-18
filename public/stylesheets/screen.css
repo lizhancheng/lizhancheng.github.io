@@ -707,7 +707,7 @@ i {
 /* loading animation */
 /* line 262, ../sass/screen.scss */
 .loading {
-  display: none;
+  display: table;
   position: fixed;
   text-align: center;
   z-index: 11;
@@ -1117,6 +1117,9 @@ i {
   background: -moz-linear-gradient(top, #011e3e, #85d4ff);
   background: -webkit-linear-gradient(top, #011e3e, #85d4ff);
   background: linear-gradient(to bottom left, #011e3e, #85d4ff);
+  -moz-animation: appear 2s linear 17s;
+  -webkit-animation: appear 2s linear 17s;
+  animation: appear 2s linear 17s;
 }
 @keyframes appear {
   from {
@@ -1168,7 +1171,7 @@ i {
     opacity: 1;
   }
 }
-/* line 368, ../sass/screen.scss */
+/* line 369, ../sass/screen.scss */
 .windows .menubar {
   display: block;
   position: fixed;
@@ -1177,26 +1180,26 @@ i {
   height: 5%;
   background: rgba(0, 5, 10, 0.7);
 }
-/* line 376, ../sass/screen.scss */
+/* line 377, ../sass/screen.scss */
 .windows .menubar ul.menu {
   width: 100%;
   height: 100%;
 }
-/* line 379, ../sass/screen.scss */
+/* line 380, ../sass/screen.scss */
 .windows .menubar ul.menu li.menu-list {
   float: left;
   height: 100%;
   padding: 0 2%;
   position: relative;
 }
-/* line 385, ../sass/screen.scss */
+/* line 386, ../sass/screen.scss */
 .windows .menubar ul.menu li.menu-list img {
   height: 100%;
   position: relative;
   z-index: 9;
   cursor: pointer;
 }
-/* line 391, ../sass/screen.scss */
+/* line 392, ../sass/screen.scss */
 .windows .menubar ul.menu li.menu-list img:hover {
   -moz-box-shadow: 0px 0px 13px 2px linen;
   -webkit-box-shadow: 0px 0px 13px 2px linen;
@@ -1205,7 +1208,7 @@ i {
   -webkit-border-radius: 2em;
   border-radius: 2em;
 }
-/* line 396, ../sass/screen.scss */
+/* line 397, ../sass/screen.scss */
 .windows .menubar ul.menu li.menu-list ul.submenu-start {
   width: 200%;
   position: absolute;
@@ -1225,7 +1228,7 @@ i {
   -webkit-box-shadow: 0px 0px 2px #ccc inset;
   box-shadow: 0px 0px 2px #ccc inset;
 }
-/* line 409, ../sass/screen.scss */
+/* line 410, ../sass/screen.scss */
 .windows .menubar ul.menu li.menu-list ul.submenu-start li.submenu-start-list {
   text-align: center;
   height: 100px;
@@ -1236,40 +1239,40 @@ i {
   -webkit-transition: background 0.5s ease-out, color 0.5s ease-out;
   transition: background 0.5s ease-out, color 0.5s ease-out;
 }
-/* line 417, ../sass/screen.scss */
+/* line 418, ../sass/screen.scss */
 .windows .menubar ul.menu li.menu-list ul.submenu-start li.submenu-start-list:hover {
   color: white;
   background: rgba(133, 255, 187, 0.4);
 }
-/* line 425, ../sass/screen.scss */
+/* line 426, ../sass/screen.scss */
 .windows .menubar ul.menu li.menu-list:last-child {
   float: right;
 }
-/* line 433, ../sass/screen.scss */
+/* line 434, ../sass/screen.scss */
 .windows .desktop {
   width: 98%;
   height: 95%;
 }
-/* line 436, ../sass/screen.scss */
+/* line 437, ../sass/screen.scss */
 .windows .desktop dl {
   display: inline-block;
   margin: 3.9% 20px;
   writing-mode: horizontal-tb;
   -webkit-writing-mode: horizontal-tb;
 }
-/* line 441, ../sass/screen.scss */
+/* line 442, ../sass/screen.scss */
 .windows .desktop dl dt {
   text-align: center;
 }
-/* line 444, ../sass/screen.scss */
+/* line 445, ../sass/screen.scss */
 .windows .desktop dl dd {
   text-align: center;
 }
-/* line 448, ../sass/screen.scss */
+/* line 449, ../sass/screen.scss */
 .windows .desktop dl:hover {
   background: rgba(250, 250, 250, 0.4);
 }
-/* line 453, ../sass/screen.scss */
+/* line 454, ../sass/screen.scss */
 .windows .desktop .music-box {
   position: absolute;
   left: 50%;
@@ -1297,7 +1300,7 @@ i {
   -webkit-box-shadow: rgba(0, 0, 255, 0.4) 0 0 25px, rgba(0, 128, 0, 0.2) 0 0 3px 1px inset;
   box-shadow: rgba(0, 0, 255, 0.4) 0 0 25px, rgba(0, 128, 0, 0.2) 0 0 3px 1px inset;
 }
-/* line 469, ../sass/screen.scss */
+/* line 470, ../sass/screen.scss */
 .windows .desktop .music-box .banner {
   position: relative;
   z-index: 1;
@@ -1305,12 +1308,12 @@ i {
   height: 64%;
   background: #e9e8e8;
 }
-/* line 476, ../sass/screen.scss */
+/* line 477, ../sass/screen.scss */
 .windows .desktop .music-box .banner img {
   width: 100%;
   height: 100%;
 }
-/* line 480, ../sass/screen.scss */
+/* line 481, ../sass/screen.scss */
 .windows .desktop .music-box .banner .timestamps {
   position: absolute;
   left: 0;
@@ -1327,19 +1330,19 @@ i {
   width: 100%;
   height: 50%;
 }
-/* line 492, ../sass/screen.scss */
+/* line 493, ../sass/screen.scss */
 .windows .desktop .music-box .banner .timestamps:hover {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=40);
   opacity: 0.4;
 }
-/* line 497, ../sass/screen.scss */
+/* line 498, ../sass/screen.scss */
 .windows .desktop .music-box .banner .components {
   position: absolute;
   right: 0;
   top: 0;
   padding: 5px;
 }
-/* line 505, ../sass/screen.scss */
+/* line 506, ../sass/screen.scss */
 .windows .desktop .music-box .progress {
   position: relative;
   z-index: 2;
@@ -1356,7 +1359,7 @@ i {
   -webkit-border-radius: 1em;
   border-radius: 1em;
 }
-/* line 515, ../sass/screen.scss */
+/* line 516, ../sass/screen.scss */
 .windows .desktop .music-box .progress:after {
   content: '';
   float: right;
@@ -1430,7 +1433,7 @@ i {
     box-shadow: 0 0 15px 5px white;
   }
 }
-/* line 532, ../sass/screen.scss */
+/* line 533, ../sass/screen.scss */
 .windows .desktop .music-box .buttons {
   text-align: center;
   line-height: 7;
@@ -1438,7 +1441,7 @@ i {
   width: 100%;
   height: 31%;
 }
-/* line 539, ../sass/screen.scss */
+/* line 540, ../sass/screen.scss */
 .windows .desktop .music-box .buttons a {
   display: inline-block;
   background: url("../images/music_buttons.png") no-repeat;
@@ -1448,29 +1451,29 @@ i {
   -webkit-transition: background-position 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
   transition: background-position 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
-/* line 546, ../sass/screen.scss */
+/* line 547, ../sass/screen.scss */
 .windows .desktop .music-box .buttons a.prev {
   width: 29px;
   height: 26px;
   background-position: -4px 0px;
 }
-/* line 550, ../sass/screen.scss */
+/* line 551, ../sass/screen.scss */
 .windows .desktop .music-box .buttons a.play {
   width: 30px;
   height: 30px;
   background-position: -37px 0px;
 }
-/* line 554, ../sass/screen.scss */
+/* line 555, ../sass/screen.scss */
 .windows .desktop .music-box .buttons a.play.pause {
   background-position: -70px 0px;
 }
-/* line 558, ../sass/screen.scss */
+/* line 559, ../sass/screen.scss */
 .windows .desktop .music-box .buttons a.next {
   width: 30px;
   height: 26px;
   background-position: -99px 0px;
 }
-/* line 564, ../sass/screen.scss */
+/* line 565, ../sass/screen.scss */
 .windows .desktop .music-box .buttons .auto {
   position: absolute;
   right: 0;
@@ -1486,15 +1489,15 @@ i {
   transition: color 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
   background: transparent;
 }
-/* line 576, ../sass/screen.scss */
+/* line 577, ../sass/screen.scss */
 .windows .desktop .music-box .buttons .auto:hover {
   color: #85F8FF;
 }
-/* line 580, ../sass/screen.scss */
+/* line 581, ../sass/screen.scss */
 .windows .desktop .music-box .buttons .auto.active {
   color: #85FF8A;
 }
-/* line 587, ../sass/screen.scss */
+/* line 588, ../sass/screen.scss */
 .windows .desktop .article {
   max-width: 683px;
   position: absolute;
@@ -1514,7 +1517,7 @@ i {
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
-/* line 601, ../sass/screen.scss */
+/* line 602, ../sass/screen.scss */
 .windows .desktop .article .title, .windows .desktop .article .util {
   line-height: 30px;
   text-align: center;
@@ -1522,7 +1525,7 @@ i {
   width: 100%;
   height: 30px;
 }
-/* line 608, ../sass/screen.scss */
+/* line 609, ../sass/screen.scss */
 .windows .desktop .article .title i, .windows .desktop .article .title button, .windows .desktop .article .util i, .windows .desktop .article .util button {
   display: inline-block;
   cursor: pointer;
@@ -1532,42 +1535,42 @@ i {
   height: 14px;
   background: url("../images/icons.png") no-repeat left bottom;
 }
-/* line 620, ../sass/screen.scss */
+/* line 621, ../sass/screen.scss */
 .windows .desktop .article .title i {
   float: right;
   font-style: normal;
 }
-/* line 624, ../sass/screen.scss */
+/* line 625, ../sass/screen.scss */
 .windows .desktop .article .title i.close {
   background-position: -312px 0;
 }
-/* line 628, ../sass/screen.scss */
+/* line 629, ../sass/screen.scss */
 .windows .desktop .article .title i.minimize {
   background-position: -433px -96px;
 }
-/* line 634, ../sass/screen.scss */
+/* line 635, ../sass/screen.scss */
 .windows .desktop .article .util {
   text-align: left;
   padding-left: 2%;
   width: 98%;
   height: 30px;
 }
-/* line 640, ../sass/screen.scss */
+/* line 641, ../sass/screen.scss */
 .windows .desktop .article .util input.image-file {
   display: none;
 }
-/* line 644, ../sass/screen.scss */
+/* line 645, ../sass/screen.scss */
 .windows .desktop .article .util button {
   margin: 0 1%;
 }
-/* line 647, ../sass/screen.scss */
+/* line 648, ../sass/screen.scss */
 .windows .desktop .article .util button:before {
   -moz-transform: translate(-5px, -260%);
   -ms-transform: translate(-5px, -260%);
   -webkit-transform: translate(-5px, -260%);
   transform: translate(-5px, -260%);
 }
-/* line 651, ../sass/screen.scss */
+/* line 652, ../sass/screen.scss */
 .windows .desktop .article .util button:after {
   color: #FFFFFF;
   padding: 5px;
@@ -1577,34 +1580,34 @@ i {
   -webkit-transform: translate(-50%, -150%);
   transform: translate(-50%, -150%);
 }
-/* line 659, ../sass/screen.scss */
+/* line 660, ../sass/screen.scss */
 .windows .desktop .article .util button.new {
   background-position: -408px -96px;
 }
-/* line 663, ../sass/screen.scss */
+/* line 664, ../sass/screen.scss */
 .windows .desktop .article .util button.save {
   background-position: -24px -24px;
 }
-/* line 667, ../sass/screen.scss */
+/* line 668, ../sass/screen.scss */
 .windows .desktop .article .util button.image {
   background-position: -456px -48px;
 }
-/* line 671, ../sass/screen.scss */
+/* line 672, ../sass/screen.scss */
 .windows .desktop .article .util button.bold {
   background-position: -167px -48px;
 }
-/* line 675, ../sass/screen.scss */
+/* line 676, ../sass/screen.scss */
 .windows .desktop .article .util button.italic {
   background-position: -192px -48px;
 }
-/* line 681, ../sass/screen.scss */
+/* line 682, ../sass/screen.scss */
 .windows .desktop .article .main {
   overflow: hidden;
   padding: 13px 0 13px 13px;
   width: 98%;
   height: 86%;
 }
-/* line 687, ../sass/screen.scss */
+/* line 688, ../sass/screen.scss */
 .windows .desktop .article .main *::-webkit-scrollbar {
   width: 5px;
   height: 100%;
@@ -1614,7 +1617,7 @@ i {
   background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.1));
   background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.1));
 }
-/* line 692, ../sass/screen.scss */
+/* line 693, ../sass/screen.scss */
 .windows .desktop .article .main *::-webkit-scrollbar-thumb {
   -moz-border-radius: 10px;
   -webkit-border-radius: 10px;
@@ -1628,7 +1631,7 @@ i {
   background: -webkit-linear-gradient(bottom, rgba(10, 10, 10, 0.1), rgba(10, 10, 10, 0.8));
   background: linear-gradient(to top left, rgba(10, 10, 10, 0.1), rgba(10, 10, 10, 0.8));
 }
-/* line 699, ../sass/screen.scss */
+/* line 700, ../sass/screen.scss */
 .windows .desktop .article .main .side-bar {
   float: left;
   width: 20%;
@@ -1638,12 +1641,12 @@ i {
   -webkit-transition: width 0.3s ease-out, opacity 0.3s ease-out;
   transition: width 0.3s ease-out, opacity 0.3s ease-out;
 }
-/* line 705, ../sass/screen.scss */
+/* line 706, ../sass/screen.scss */
 .windows .desktop .article .main .side-bar:hover + .scale {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
   opacity: 0.5;
 }
-/* line 709, ../sass/screen.scss */
+/* line 710, ../sass/screen.scss */
 .windows .desktop .article .main .side-bar .sub-title {
   cursor: pointer;
   border-bottom: 1px solid #ccc;
@@ -1655,13 +1658,13 @@ i {
   -webkit-transition: background 0.3s cubic-bezier(0, -0.37, 0.88, 0.5);
   transition: background 0.3s cubic-bezier(0, -0.37, 0.88, 0.5);
 }
-/* line 718, ../sass/screen.scss */
+/* line 719, ../sass/screen.scss */
 .windows .desktop .article .main .side-bar .sub-title:hover {
   color: white;
   border: none;
   background: #333333;
 }
-/* line 728, ../sass/screen.scss */
+/* line 729, ../sass/screen.scss */
 .windows .desktop .article .main .scale {
   float: left;
   position: relative;
@@ -1673,12 +1676,12 @@ i {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
   opacity: 0;
 }
-/* line 738, ../sass/screen.scss */
+/* line 739, ../sass/screen.scss */
 .windows .desktop .article .main .scale:hover {
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
   opacity: 0.5;
 }
-/* line 742, ../sass/screen.scss */
+/* line 743, ../sass/screen.scss */
 .windows .desktop .article .main .scale .toggle {
   content: '';
   cursor: pointer;
@@ -1689,30 +1692,30 @@ i {
   border-bottom: 10px solid transparent;
   border-right: 10px solid #333;
 }
-/* line 755, ../sass/screen.scss */
+/* line 756, ../sass/screen.scss */
 .windows .desktop .article .main .switch {
   display: none;
 }
-/* line 758, ../sass/screen.scss */
+/* line 759, ../sass/screen.scss */
 .windows .desktop .article .main .switch:checked ~ .side-bar {
   width: 0;
   height: 100%;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
   opacity: 0;
 }
-/* line 762, ../sass/screen.scss */
+/* line 763, ../sass/screen.scss */
 .windows .desktop .article .main .switch:checked ~ .scale .toggle {
   border-top: 10px solid transparent;
   border-bottom: 10px solid transparent;
   border-left: 10px solid #333;
   border-right: none;
 }
-/* line 768, ../sass/screen.scss */
+/* line 769, ../sass/screen.scss */
 .windows .desktop .article .main .switch:checked ~ .content {
   width: 98%;
   height: 100%;
 }
-/* line 773, ../sass/screen.scss */
+/* line 774, ../sass/screen.scss */
 .windows .desktop .article .main .content {
   float: right;
   overflow: auto;
@@ -1724,24 +1727,24 @@ i {
   -webkit-transition: width 0.3s ease-out;
   transition: width 0.3s ease-out;
 }
-/* line 781, ../sass/screen.scss */
+/* line 782, ../sass/screen.scss */
 .windows .desktop .article .main .content img {
   width: 100px;
 }
-/* line 787, ../sass/screen.scss */
+/* line 788, ../sass/screen.scss */
 .windows .desktop .article .foot {
   font-size: 0.5em;
   border-top: 1px dashed #ccc;
   width: 100%;
   height: 2.3%;
 }
-/* line 793, ../sass/screen.scss */
+/* line 794, ../sass/screen.scss */
 .windows .desktop .article .foot ul {
   padding: 3px 0;
   width: 100%;
   height: 100%;
 }
-/* line 797, ../sass/screen.scss */
+/* line 798, ../sass/screen.scss */
 .windows .desktop .article .foot ul li {
   white-space: nowrap;
   overflow: hidden;
@@ -1761,20 +1764,20 @@ i {
   						} */
 }
 @media screen and (min-width: 960px) {
-  /* line 819, ../sass/screen.scss */
+  /* line 820, ../sass/screen.scss */
   .windows .desktop {
     writing-mode: vertical-lr;
     -webkit-writing-mode: vertical-lr;
   }
 }
 @media (max-width: 959px) {
-  /* line 824, ../sass/screen.scss */
+  /* line 825, ../sass/screen.scss */
   .windows .desktop {
     text-align: center;
   }
 }
 
-/* line 830, ../sass/screen.scss */
+/* line 831, ../sass/screen.scss */
 .none {
   display: none;
 }

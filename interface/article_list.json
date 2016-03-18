@@ -7,6 +7,11 @@
 			"date": "2015/12/12 12:12:12"	
 		}, 
 		{
+			"title": "Ubuntu下安装LNMP", 
+			"content": "ubuntu14.0.4安装nginx之一路填坑\r\n 安装nginx最好就是要先安装好依赖，pcre、openssl、zlib\r\n 假如你幸运的话，上面的依赖库分别直接sudo apt-get install libpcre3 libpcre3-dev openssl libssl-dev zlib1g-dev，这将是一件非常美妙的事情，如果有提示类似unable to locate...的话，就先试试sudo apt-get update&&sudo apt-get upgrade，这样可能~只是可能会解决到问题，如果还是不行的话，还有办法是更新/etc/apt/sources.list里面的源（直接sudo gedit /etc/apt/sources.list，不过要先备份原来的），然后要删除原来安装的源rm -rf /var/lib/apt/lists/*，如果上面办法都用尽了，还是不能直接apt-get来安装上面的库，只能...\r\n 假如生活欺骗了你，你就必须都要自己手动下载再安装\r\n 安装pcre：\r\n 1.获取pcre编译安装包，在http://www.pcre.org/上可以获取当前最新的版本\r\n 2.解压缩pcre-xx.tar.gz包。（暂时不要选择pcre2的库）\r\n 3.进入解压缩目录，执行./configure。\r\n 4.sudo make && sudo make install\r\n \r\n 安装zlib：\r\n 1.获取zlib编译安装包，在http://www.zlib.net/上可以获取当前最新的版本。\r\n 2.解压缩openssl-xx.tar.gz包。\r\n 3.进入解压缩目录，执行./configure。\r\n 4.sudo make &&sudo make install\r\n 安装openssl：\r\n 1.获取openssl编译安装包，在http://www.openssl.org/source/上可以获取当前最新的版本。\r\n 2.解压缩openssl-xx.tar.gz包。\r\n 3.进入解压缩目录，执行./config。\r\n 4.sudo make &&sudo make install\r\n 最后就是安装nginx\r\n 1.获取nginx，在http://nginx.org/en/download.html上可以获取当前最新的版本。\r\n 2.解压缩nginx-xx.tar.gz包。\r\n 3.进入解压缩目录，执行./configure （这里最好加上参数依赖库--with-openssl=你安装openssl的硬路径 --with-zlib=你安装zlib的硬路径 --with-pcre=你安装pcre的硬路径）\r\n 4.sudo make &&sudo make install\r\n",
+			"date": "2016/03/17 10:10:10"
+		}, 
+		{
 			"title": "My First Day", 
 			"content": "What a good day!", 
 			"date": "2016/01/01 00:00:00"
