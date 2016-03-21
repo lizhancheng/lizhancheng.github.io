@@ -150,12 +150,13 @@
  			}
 
  			utils() {
- 				let [save, image, bold, italic, file] = [
+ 				let [save, image, bold, italic, file, edit] = [
  					angular.element(document.querySelector('.save')), 
  					angular.element(document.querySelector('.image')), 
  					angular.element(document.querySelector('.bold')), 
  					angular.element(document.querySelector('.italic')), 
- 					this.file
+ 					this.file, 
+ 					this.et
 				];
 				let self = this;
 
@@ -177,6 +178,12 @@
 
 				file.off('change').on('change', event => {
 					self.insertImage(event);
+				});
+
+				angular.element(document.querySelectorAll('.content'))
+				.off('paste')
+				.on('paste', event => {
+					self.pasteContent(event);
 				});
  			}
 
@@ -265,6 +272,17 @@
 	 				selector.innerHTML = re_text;
  				}
  			}
+
+ 			pasteContent(event) {
+ 				// event.preventDefault();
+ 				let $target = angular.element(event.target);
+ 				let [text, gr] = [$target.html(), this.gs.getRangeAt(0)];
+				event.clipboardData.items[0].getAsString((param) => {
+
+					$target.html(`${text}${param}`);
+				});
+ 			}
+
  		}
 
  		return Editor;

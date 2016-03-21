@@ -181,6 +181,7 @@ define(['app', 'zUtil'], function (app, ZU) {
         var bold = angular.element(document.querySelector('.bold'));
         var italic = angular.element(document.querySelector('.italic'));
         var file = this.file;
+        var edit = this.et;
 
         var self = this;
 
@@ -202,6 +203,10 @@ define(['app', 'zUtil'], function (app, ZU) {
 
         file.off('change').on('change', function (event) {
           self.insertImage(event);
+        });
+
+        angular.element(document.querySelectorAll('.content')).off('paste').on('paste', function (event) {
+          self.pasteContent(event);
         });
       }
     }, {
@@ -305,6 +310,19 @@ define(['app', 'zUtil'], function (app, ZU) {
 
           selector.innerHTML = re_text;
         }
+      }
+    }, {
+      key: 'pasteContent',
+      value: function pasteContent(event) {
+        // event.preventDefault();
+        var $target = angular.element(event.target);
+        var text = $target.html();
+        var gr = this.gs.getRangeAt(0);
+
+        event.clipboardData.items[0].getAsString(function (param) {
+
+          $target.html('' + text + param);
+        });
       }
     }]);
 
