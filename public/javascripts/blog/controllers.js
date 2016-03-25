@@ -135,5 +135,7 @@ define(['app', 'zUtil'], function (app, ZU) {
 		$scope.$emit('alter', { title: 'Photo Editor', status: '已启动' });
 	}]).controller('AppCtrl', ['$scope', function ($scope) {
 		console.log('AppCtrl loaded...');
+	}]).controller('StoreCtrl', ['$scope', function ($scope) {
+		console.log('StoreCtrl loaded...');
 	}]);
 });

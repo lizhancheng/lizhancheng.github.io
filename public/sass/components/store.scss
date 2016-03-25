@@ -1,0 +1,166 @@
+@import "compass/css3";
+
+@mixin setScale($width: auto, $height: auto) {
+	width: $width;
+	height: $height;
+}
+@mixin keyframes-compat($name) {
+	@keyframes #{$name} {
+		@content;
+	}
+	@-webkit-keyframes #{$name} {
+		@content;
+	}
+	@-moz-keyframes #{$name} {
+		@content;
+	}
+	@-o-keyframes #{$name} {
+		@content;
+	}
+	@-ms-keyframes #{$name} {
+		@content;
+	}
+}
+@mixin sword-in($left, $top: 0) {
+	from {
+		opacity: 0;
+		top: $top;
+		left: $left;
+	}
+} 
+
+$circle: 10px;
+
+.frame {
+	left: 0;
+	top: 0;
+
+	@include setScale(100%, 100%);
+	@include transform(translate(0, 0));
+
+	.frame-main {
+		@include setScale(100%, 100%);
+
+		[ui-view] {
+			@include setScale(100%, 100%);
+		}
+	}
+
+	.frame-header, .frame-footer {
+		display: none;
+	}
+}
+
+.windows .menubar {
+	display: none;
+}
+
+.main-frame {
+	white-space: nowrap;
+	overflow: hidden;
+	font-size: 0;
+
+	@include setScale(100%, 100%);
+
+	.nav {
+		position: fixed;
+		padding: 0 1%;
+		top: 50%;
+		right: 0;
+		text-align: center;
+		z-index: 2;
+
+		@include transform(translate(0, -50%));
+
+		.dot {
+			display: block;
+			margin: 5px 0;
+			border: 2px solid #A5A5A5;
+	
+			@include setScale($circle, $circle);
+			@include border-radius($circle);
+		}
+	}
+
+	.page {
+		z-index: 1;
+		
+		@include setScale(100%, 100%);
+		@include background(url('../../images/battle_bg.png') no-repeat center/100% 100%);
+
+		.battle-horse {
+			position: absolute;
+			@media (min-height: 737px) {
+				& {
+					top: 41%;
+				}
+			}
+			@media (max-height: 736px) {
+				& {
+					top: 29%;
+				}
+			}
+			@media (max-height: 667px) {
+				& {
+					top: 23%;
+				}
+			}
+			@media (max-height: 568px) {
+				& {
+					top: 17%;
+				}
+			}
+		}
+
+		.battle-addr {
+			position: absolute;
+			bottom: 0;
+			z-index: 3;
+
+			@include setScale(100%, 60%);
+			@include background(url('../../images/battle_addr_none.png') no-repeat center/100% 100%);
+
+			.sword1, .sword2, .sword3, .lance {
+				position: absolute;
+				z-index: 2;
+
+				@include animation(swordin 1s linear);
+			}
+			.sword1 {
+				left: 20%;
+				top: 50%;
+
+				@at-root {
+					@include keyframes-compat(swordin) {
+						@include sword-in(0);
+					}
+				}
+			}
+			.sword2 {
+				left: 21%;
+				top: 48%;
+
+				@at-root {
+					@include keyframes-compat(swordin) {
+						@include sword-in(40%, -20%);
+					}
+				}
+			}
+			.sword3 {
+				left: 46%;
+				top: 53%;
+				
+				@at-root {
+					@include keyframes-compat(swordin) {
+						@include sword-in(66%);
+					}
+				}
+			}
+			.lance {
+				right: 16%;
+				top: 24%;
+			}
+		}
+
+	}
+}

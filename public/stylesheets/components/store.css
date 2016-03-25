@@ -1,0 +1,240 @@
+/* line 34, ../../sass/components/store.scss */
+.frame {
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  -moz-transform: translate(0, 0);
+  -ms-transform: translate(0, 0);
+  -webkit-transform: translate(0, 0);
+  transform: translate(0, 0);
+}
+/* line 41, ../../sass/components/store.scss */
+.frame .frame-main {
+  width: 100%;
+  height: 100%;
+}
+/* line 44, ../../sass/components/store.scss */
+.frame .frame-main [ui-view] {
+  width: 100%;
+  height: 100%;
+}
+/* line 49, ../../sass/components/store.scss */
+.frame .frame-header, .frame .frame-footer {
+  display: none;
+}
+
+/* line 54, ../../sass/components/store.scss */
+.windows .menubar {
+  display: none;
+}
+
+/* line 58, ../../sass/components/store.scss */
+.main-frame {
+  white-space: nowrap;
+  overflow: hidden;
+  font-size: 0;
+  width: 100%;
+  height: 100%;
+}
+/* line 65, ../../sass/components/store.scss */
+.main-frame .nav {
+  position: fixed;
+  padding: 0 1%;
+  top: 50%;
+  right: 0;
+  text-align: center;
+  z-index: 2;
+  -moz-transform: translate(0, -50%);
+  -ms-transform: translate(0, -50%);
+  -webkit-transform: translate(0, -50%);
+  transform: translate(0, -50%);
+}
+/* line 75, ../../sass/components/store.scss */
+.main-frame .nav .dot {
+  display: block;
+  margin: 5px 0;
+  border: 2px solid #A5A5A5;
+  width: 10px;
+  height: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+/* line 85, ../../sass/components/store.scss */
+.main-frame .page {
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  background: url("../../images/battle_bg.png") no-repeat center/100% 100%;
+}
+/* line 91, ../../sass/components/store.scss */
+.main-frame .page .battle-horse {
+  position: absolute;
+}
+@media (min-height: 737px) {
+  /* line 94, ../../sass/components/store.scss */
+  .main-frame .page .battle-horse {
+    top: 41%;
+  }
+}
+@media (max-height: 736px) {
+  /* line 99, ../../sass/components/store.scss */
+  .main-frame .page .battle-horse {
+    top: 29%;
+  }
+}
+@media (max-height: 667px) {
+  /* line 104, ../../sass/components/store.scss */
+  .main-frame .page .battle-horse {
+    top: 23%;
+  }
+}
+@media (max-height: 568px) {
+  /* line 109, ../../sass/components/store.scss */
+  .main-frame .page .battle-horse {
+    top: 17%;
+  }
+}
+/* line 115, ../../sass/components/store.scss */
+.main-frame .page .battle-addr {
+  position: absolute;
+  bottom: 0;
+  z-index: 3;
+  width: 100%;
+  height: 60%;
+  background: url("../../images/battle_addr_none.png") no-repeat center/100% 100%;
+}
+/* line 123, ../../sass/components/store.scss */
+.main-frame .page .battle-addr .sword1, .main-frame .page .battle-addr .sword2, .main-frame .page .battle-addr .sword3, .main-frame .page .battle-addr .lance {
+  position: absolute;
+  z-index: 2;
+  -moz-animation: swordin 1s linear;
+  -webkit-animation: swordin 1s linear;
+  animation: swordin 1s linear;
+}
+/* line 129, ../../sass/components/store.scss */
+.main-frame .page .battle-addr .sword1 {
+  left: 20%;
+  top: 50%;
+}
+@keyframes swordin {
+  from {
+    opacity: 0;
+    top: 0;
+    left: 0;
+  }
+}
+@-webkit-keyframes swordin {
+  from {
+    opacity: 0;
+    top: 0;
+    left: 0;
+  }
+}
+@-moz-keyframes swordin {
+  from {
+    opacity: 0;
+    top: 0;
+    left: 0;
+  }
+}
+@-o-keyframes swordin {
+  from {
+    opacity: 0;
+    top: 0;
+    left: 0;
+  }
+}
+@-ms-keyframes swordin {
+  from {
+    opacity: 0;
+    top: 0;
+    left: 0;
+  }
+}
+/* line 139, ../../sass/components/store.scss */
+.main-frame .page .battle-addr .sword2 {
+  left: 21%;
+  top: 48%;
+}
+@keyframes swordin {
+  from {
+    opacity: 0;
+    top: -20%;
+    left: 40%;
+  }
+}
+@-webkit-keyframes swordin {
+  from {
+    opacity: 0;
+    top: -20%;
+    left: 40%;
+  }
+}
+@-moz-keyframes swordin {
+  from {
+    opacity: 0;
+    top: -20%;
+    left: 40%;
+  }
+}
+@-o-keyframes swordin {
+  from {
+    opacity: 0;
+    top: -20%;
+    left: 40%;
+  }
+}
+@-ms-keyframes swordin {
+  from {
+    opacity: 0;
+    top: -20%;
+    left: 40%;
+  }
+}
+/* line 149, ../../sass/components/store.scss */
+.main-frame .page .battle-addr .sword3 {
+  left: 46%;
+  top: 53%;
+}
+@keyframes swordin {
+  from {
+    opacity: 0;
+    top: 0;
+    left: 66%;
+  }
+}
+@-webkit-keyframes swordin {
+  from {
+    opacity: 0;
+    top: 0;
+    left: 66%;
+  }
+}
+@-moz-keyframes swordin {
+  from {
+    opacity: 0;
+    top: 0;
+    left: 66%;
+  }
+}
+@-o-keyframes swordin {
+  from {
+    opacity: 0;
+    top: 0;
+    left: 66%;
+  }
+}
+@-ms-keyframes swordin {
+  from {
+    opacity: 0;
+    top: 0;
+    left: 66%;
+  }
+}
+/* line 159, ../../sass/components/store.scss */
+.main-frame .page .battle-addr .lance {
+  right: 16%;
+  top: 24%;
+}

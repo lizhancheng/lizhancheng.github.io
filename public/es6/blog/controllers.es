@@ -152,6 +152,10 @@
 
 
 			}])
+			.controller('StoreCtrl', ['$scope', ($scope) => {
+				console.log('StoreCtrl loaded...');
+				
+			}])
 
 
 	});

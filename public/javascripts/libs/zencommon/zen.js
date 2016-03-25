@@ -18,12 +18,41 @@
     	 * @param {Bool} capture   useCapture
     	 */
     	function addEvent(obj, eventName, iterator, capture) {
-    		if(typeof attachEvent !== "undefined") {
-    			obj.attachEvent('on' + eventName, iterator);
-    		}else if(typeof addEventListener !== "undefined") {
-    			obj.addEventListener(eventName, iterator, capture ? capture : false);
-    		}else {
-    			obj['on' + eventName] = iterator;
+    		if( !isFunction( iterator ) ) return false;
+    		var eventArr = eventName.split(' ');
+    		var len = eventArr.length;
+    		obj.eventType = {};
+    		for(var i = 0;i < len;i ++) {
+	    		obj.eventType[eventArr[i]] = iterator;
+	    		if(typeof attachEvent !== "undefined") {
+	    			obj.attachEvent('on' + eventArr[i], obj.eventType[eventArr[i]]);
+	    		}else if(typeof addEventListener !== "undefined") {
+	    			obj.addEventListener(eventArr[i], obj.eventType[eventArr[i]], capture ? capture : false);
+	    		}else {
+	    			obj['on' + eventArr[i]] = obj.eventType[eventArr[i]];
+	    		}
+    		}
+    	}
+    	/**
+    	 * [removeEvent delete the event handler]
+    	 * @param  {Html Node} obj    document selector
+    	 * @param  {String} eventName event name
+    	 * @return {Void} 
+    	 */
+    	function removeEvent(obj, eventName) {
+    		if(!eventName) return false;
+    		var eventArr = eventName.split(' ');
+    		var len = eventArr.length;
+
+    		for(var i = 0;i < len;i ++) {
+    			if(typeof detachEvent !== "undefined") {
+    				obj.detachEvent('on' + eventArr[i], obj.eventType[eventArr[i]]);
+    			}else if(typeof removeEventListener !== "undefined") {
+    				obj.removeEventListener(eventArr, obj.eventType[eventArr[i]]);
+    			}else {
+    				obj['on' + eventArr[i]] = null;
+    			}
+    			obj.eventType[eventArr[i]] = null;
     		}
     	}
 /*String Function*/

@@ -95,6 +95,10 @@ define(['require', 'app', 'angular', 'angular-route', 'angular-ui-router', 'serv
 				url: '/app',
 				templateUrl: 'blog_template/app.html',
 				controller: 'AppCtrl'
+			}).state('index.window.store', {
+				url: '/store',
+				templateUrl: 'blog_template/store.html',
+				controller: 'StoreCtrl'
 			});
 		});
 
