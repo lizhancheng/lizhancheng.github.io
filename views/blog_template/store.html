@@ -1,6 +1,6 @@
 <link rel="stylesheet" type="text/css" href="../public/stylesheets/components/store.css" />
 <div class="main-frame">
-	<audio class="audio" ng-repeat="voice in voices">
+	<audio class="audio" ng-repeat="voice in voices" ng-src="{{voice.path}}">
 		<source ng-src="{{voice.path}}" type="audio/wav" />
 		<embed ng-src="{{voice.path}}" />
 	</audio>

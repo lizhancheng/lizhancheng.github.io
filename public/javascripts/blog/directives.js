@@ -232,14 +232,18 @@ define(['app', 'components/editor', 'components/photo'], function (app, CreateEd
 			link: function link($scope, element, attr) {
 				var $el = element;
 				$scope.playVoice = function (event) {
-					var $target = event.target;
+					var $target = event ? event.target : null;
 					var $au = $el.find('audio');
 					var $index = $target.getAttribute('voice-index');
 
-					if ($index) {
-						$au[$index].load();
-						$au[$index].play();
-					}
+					// if($index) {
+					// 	$au[$index].load();
+					// 	$au[$index].play();
+					// }
+					$au[0].play();
+					$au[1].play();
+					$au[2].play();
+					$au[3].play();
 				};
 
 				$el.on('animationstart webkitAnimationStart', function (event) {

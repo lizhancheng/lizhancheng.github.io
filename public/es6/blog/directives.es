@@ -231,19 +231,24 @@
 					link: ($scope, element, attr) => {
 						let $el = element;
 						$scope.playVoice = (event) => {
-							let $target = event.target;
+							let $target = event ? event.target : null;
 							let $au = $el.find('audio');
 							let $index = $target.getAttribute('voice-index');
 
-							if($index) {
-								$au[$index].load();
-								$au[$index].play();
-							}
+							// if($index) {
+							// 	$au[$index].load();
+							// 	$au[$index].play();
+							// }
+							$au[0].play();
+							$au[1].play();
+							$au[2].play();
+							$au[3].play();
 						};
 
 						$el.on('animationstart webkitAnimationStart', event => {
 							$scope.playVoice(event);
 						});
+
 					}
 				}
 			})
