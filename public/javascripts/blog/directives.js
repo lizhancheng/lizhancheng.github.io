@@ -226,5 +226,26 @@ define(['app', 'components/editor', 'components/photo'], function (app, CreateEd
 				$scope.load();
 			}
 		};
+	}).directive('mainFrame', function () {
+		return {
+			restrict: 'C',
+			link: function link($scope, element, attr) {
+				var $el = element;
+				$scope.playVoice = function (event) {
+					var $target = event.target;
+					var $au = $el.find('audio');
+					var $index = $target.getAttribute('voice-index');
+
+					if ($index) {
+						$au[$index].load();
+						$au[$index].play();
+					}
+				};
+
+				$el.on('animationstart webkitAnimationStart', function (event) {
+					$scope.playVoice(event);
+				});
+			}
+		};
 	});
 });

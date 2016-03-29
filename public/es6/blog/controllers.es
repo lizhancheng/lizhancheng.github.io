@@ -154,7 +154,26 @@
 			}])
 			.controller('StoreCtrl', ['$scope', ($scope) => {
 				console.log('StoreCtrl loaded...');
-				
+
+				let basedir = '../../public/voice/';
+				$scope.voices = [
+					{
+						name: "sword", 
+						path: `${basedir}sword.wav`
+					}, 
+					{
+						name: "horse", 
+						path: `${basedir}horse.wav`
+					}, 
+					{
+						name: "laser", 
+						path: `${basedir}laser.wav`
+					}, 
+					{
+						name: "brake", 
+						path: `${basedir}brake.wav`
+					}
+				];
 			}])
 
 

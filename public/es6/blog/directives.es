@@ -224,5 +224,27 @@
 						$scope.load();
 					}
 				}
-			});
+			})
+			.directive('mainFrame', () => {
+				return {
+					restrict: 'C', 
+					link: ($scope, element, attr) => {
+						let $el = element;
+						$scope.playVoice = (event) => {
+							let $target = event.target;
+							let $au = $el.find('audio');
+							let $index = $target.getAttribute('voice-index');
+
+							if($index) {
+								$au[$index].load();
+								$au[$index].play();
+							}
+						};
+
+						$el.on('animationstart webkitAnimationStart', event => {
+							$scope.playVoice(event);
+						});
+					}
+				}
+			})
 	});

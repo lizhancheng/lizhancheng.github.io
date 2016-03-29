@@ -1,21 +1,35 @@
 <link rel="stylesheet" type="text/css" href="../public/stylesheets/components/store.css" />
 <div class="main-frame">
+	<audio class="audio" ng-repeat="voice in voices">
+		<source ng-src="{{voice.path}}" type="audio/wav" />
+		<embed ng-src="{{voice.path}}" />
+	</audio>
+	<div class="close-store">
+		<a ui-sref="index" class="close" tips="关闭">&times;</a>
+	</div>
 	<div class="nav">
-		<a href="javascript:void(0);" class="dot"></a>
+		<a href="javascript:void(0);" class="dot active"></a>
 		<a href="javascript:void(0);" class="dot"></a>
 		<a href="javascript:void(0);" class="dot"></a>
 	</div>
 	<div class="page">
+		<div class="battle-title">
+			<img src="../public/images/battle_zn.png" alt="battle_zn" class="battle-zn" voice-index="2" />
+			<img src="../public/images/battle_en.png" alt="battle_en" class="battle-en" />
+		</div>
+		<div class="battle-face" voice-index="3">
+			<img src="../public/images/start.png" alt="start" />
+		</div>
 
-		<div class="battle-horse">
+		<div class="battle-horse" voice-index="1">
 			<img src="../public/images/horse.png" alt="horse" class="horse" />
 		</div>
 
 		<div class="battle-addr">
-			<img src="../public/images/sword1.png" alt="sword1" class="sword1" />
-			<img src="../public/images/sword2.png" alt="sword1" class="sword2" />
-			<img src="../public/images/sword3.png" alt="sword1" class="sword3" />
-			<img src="../public/images/lance.png" alt="lance" class="lance" />
+			<img src="../public/images/sword1.png" alt="sword1" class="sword1" voice-index="0" />
+			<img src="../public/images/sword2.png" alt="sword1" class="sword2" voice-index="0" />
+			<img src="../public/images/sword3.png" alt="sword1" class="sword3" voice-index="0" />
+			<img src="../public/images/lance.png" alt="lance" class="lance" voice-index="0" />
 		</div>
 	</div>
 	<div class="page">

@@ -137,5 +137,20 @@ define(['app', 'zUtil'], function (app, ZU) {
 		console.log('AppCtrl loaded...');
 	}]).controller('StoreCtrl', ['$scope', function ($scope) {
 		console.log('StoreCtrl loaded...');
+
+		var basedir = '../../public/voice/';
+		$scope.voices = [{
+			name: "sword",
+			path: basedir + 'sword.wav'
+		}, {
+			name: "horse",
+			path: basedir + 'horse.wav'
+		}, {
+			name: "laser",
+			path: basedir + 'laser.wav'
+		}, {
+			name: "brake",
+			path: basedir + 'brake.wav'
+		}];
 	}]);
 });

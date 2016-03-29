@@ -4,6 +4,12 @@
 	width: $width;
 	height: $height;
 }
+@mixin transformOrigin($value) {
+	transform-origin: $value;
+	-webkit-transform-origin: $value;
+	-moz-transform-origin: $value;
+	-o-transform-origin: $value;
+}
 @mixin keyframes-compat($name) {
 	@keyframes #{$name} {
 		@content;
@@ -36,6 +42,50 @@
 	}
 	to {
 		@include opacity(1);
+	}
+}
+@mixin run-in {
+	@for $i  from 0 through 5 {
+		#{$i * 20}% {
+			@if $i == 0 {
+				@include opacity(0);
+			} @else if $i == 5 {
+				@include opacity(1);
+			} 
+			@include transform(scale($i * 0.2));
+		}
+	}
+}
+@mixin rotate-in {
+	20% {
+		@include transform(rotateY(0deg));
+		@include opacity(1);
+	}
+	21% {
+		@include transform(rotateY(0deg));
+		@include opacity(0);
+	}
+	100% {
+		@include transform(rotateY(0deg));
+		@include opacity(1);
+	}
+}
+@mixin drive-in {
+	0% {
+		left: -100%;
+	}
+	50% {
+		@include transform(translate(-50%) skew(40deg));
+	}
+	90% {
+		@include transform(translate(-50%) skew(-15deg));
+	}
+	95% {
+		left: 50%;
+	}
+	100% {
+		left: 50%;
+		@include transform(translate(-50%) skew(0deg));
 	}
 }
 
@@ -78,7 +128,7 @@ $circle: 10px;
 		top: 50%;
 		right: 0;
 		text-align: center;
-		z-index: 2;
+		z-index: 4;
 
 		@include transform(translate(0, -50%));
 
@@ -89,6 +139,10 @@ $circle: 10px;
 	
 			@include setScale($circle, $circle);
 			@include border-radius($circle);
+
+			&.active {
+				@include background(#F5F5F5);
+			}
 		}
 	}
 
@@ -98,8 +152,63 @@ $circle: 10px;
 		@include setScale(100%, 100%);
 		@include background(url('../../images/battle_bg.png') no-repeat center/100% 100%);
 
-		.battle-horse {
+		.battle-title, .battle-face, .battle-horse, .battle-addr {
 			position: absolute;
+		}
+
+		.battle-title {
+			top: 5%;
+			right: 5%;
+
+			@include perspective(10px);
+
+			.battle-zn, .battle-en {
+				display: block;
+
+				@include opacity(0);
+				@include animation(rotatein 3s cubic-bezier(0.34, 0.75, 0.76, 0.46) 5s forwards);
+
+				&.battle-zn {
+					@include transform(rotateY(90deg));
+				}
+
+				&.battle-en {
+					@include transform(rotateY(-90deg));
+				}
+
+				@at-root {
+					@include keyframes-compat(rotatein) {
+						@include rotate-in;
+					}
+				}
+			}
+		}
+
+		.battle-face {
+			left: -100%;
+			top: 3%;
+
+			@include transform(translate(-50%));
+			@include animation(drivein 1s cubic-bezier(0, 1, 1, 1) 6s forwards);
+			@media (max-width: 320px) {
+				& {
+					width: 20%;
+
+					img {
+						width: 100%;
+					}
+				}
+			}
+
+			@at-root {
+				@include keyframes-compat(drivein) {
+					@include drive-in;
+				}
+			}
+		}
+
+		.battle-horse {
+			@include transformOrigin(50% 100%);
 			@media (min-height: 737px) {
 				& {
 					top: 41%;
@@ -122,23 +231,29 @@ $circle: 10px;
 			}
 
 			@include opacity(0);
-			@include animation(fadein 0.8s ease-out 2.4s forwards);
+			@include animation(runin 4.8s cubic-bezier(0.34, 0.75, 0.76, 0.46) 1s forwards);
+
+			@at-root {
+				@include keyframes-compat(runin) {
+					@include run-in;
+				}
+			}
+		}
+
+		.battle-addr {
+			bottom: 0;
+			z-index: 3;
+
+			@include setScale(100%, 60%);
+			@include background(url('../../images/battle_addr_none.png') no-repeat center/100% 100%);
+			@include animation(fadein 1s linear forwards);
 
 			@at-root {
 				@include keyframes-compat(fadein) {
 					@include fade-in;
 				}
 			}
-		}
-
-		.battle-addr {
-			position: absolute;
-			bottom: 0;
-			z-index: 3;
-
-			@include setScale(100%, 60%);
-			@include background(url('../../images/battle_addr_none.png') no-repeat center/100% 100%);
-			@include animation(fadein 1s linear);
+			
 
 			.sword1, .sword2, .sword3, .lance {
 				position: absolute;
