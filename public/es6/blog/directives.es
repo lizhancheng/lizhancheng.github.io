@@ -3,7 +3,7 @@
  */
 
 
-	define(['app', 'components/editor','components/photo'], (app, CreateEditor, Photo) => {
+	define(['app', 'zUtil', 'components/editor','components/photo'], (app, ZU, CreateEditor, Photo) => {
 
 		'use strict';
 		app
@@ -230,6 +230,7 @@
 					restrict: 'C', 
 					link: ($scope, element, attr) => {
 						let $el = element;
+						let oy, dy, fy, times = [0, 0, 2];
 						$scope.playVoice = (event) => {
 							let $target = event ? event.target : null;
 							let $au = $el.find('audio');
@@ -240,11 +241,59 @@
 								$au[$index].play();
 							}
 						};
+						$scope.setOrigin = (event) => {
+							oy = event.touches[0].clientY || event.touches[0].pageY;
+						};
+						$scope.movePage = (event) => {
+							let height = parseInt(ZU.getStyle($el[0], 'height'));
+							dy = event.changedTouches[0].clientY || event.changedTouches[0].pageY;
+							fy = dy - oy;
+
+							$el.css('marginTop', fy - height * times[0] + 'px');
+						};
+						$scope.alterPage = () => {
+							let height = parseInt(ZU.getStyle($el[0], 'height'));
+							if(fy <= 50 && fy >= -50) {
+								$el.css('marginTop', - times[0] * height + 'px');
+							}else if(fy > 50){
+								times[0] = times[0] > times[1] ? -- times[0] : times[0];
+								$el.css('marginTop', - times[0] * height + 'px').children().removeClass('active').eq(times[0] + 5).addClass('active');
+							}else if(fy < -50) {
+								times[0] = times[0] < times[2] ? ++ times[0] : times[0];
+								$el.css('marginTop', - times[0] * height + 'px').children().removeClass('active').eq(times[0] + 5).addClass('active');
+							}
+							$scope.setNav(times[0]);
+						}
+						$scope.setNav = (serial) => {
+							let classArr = [
+								['active', '', ''], 
+								['leave-down', 'active', ''], 
+								['leave-down', 'leave-down', 'active'], 
+							];
+							angular.forEach(angular.element(ZU.getSelector('.dot')), (item, index) => {
+								item.removeClass('leave-down active')
+								item.addClass(classArr[serial][index]);
+							});
+						}
 
 						$el.on('animationstart webkitAnimationStart', event => {
 							$scope.playVoice(event);
 						});
 
+
+						$el
+						.bind('touchstart', $scope.setOrigin)
+						.bind('touchmove', $scope.movePage)
+						.bind('touchend', $scope.alterPage);
+
+					}
+				}
+			})
+			.directive('page', () => {
+				return {
+					restrict: 'C', 
+					link: ($scope, element, attr) => {
+						
 					}
 				}
 			})

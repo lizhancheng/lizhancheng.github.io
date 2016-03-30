@@ -55,6 +55,23 @@
     			obj.eventType[eventArr[i]] = null;
     		}
     	}
+/*Selector Function */
+		function getSelector(selector) {
+			return typeof selector === 'string' 
+					? selector.indexOf('#') > -1  
+						? document.getElementById(selector)  
+						: selector.indexOf('.') > -1  
+							? document.getElementsByClassName(selector) 
+							: document.getElementsByTagName(selector)
+					: selector;
+		}
+
+/*CSS Function*/
+		function getStyle(selector, property) {
+			var $selector = getSelector(selector);
+			return getComputedStyle($selector)[property] || $selector.currentStyle[property];
+		}
+
 /*String Function*/
 		/**
 		 * toUnicode make all string into unicode or hex style
@@ -241,6 +258,8 @@
     		escapeHtml  : escapeHtml, 
     		aLert       : aLert, 
     		loadFile    : loadFile, 
-    		addEvent    : addEvent
+    		addEvent    : addEvent, 
+    		getSelector : getSelector, 
+    		getStyle    : getStyle
     	};
     });

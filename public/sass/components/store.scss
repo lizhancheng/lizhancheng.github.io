@@ -99,6 +99,7 @@ $circle: 10px;
 	@include transform(translate(0, 0));
 
 	.frame-main {
+		overflow: hidden;
 		@include setScale(100%, 100%);
 
 		[ui-view] {
@@ -117,7 +118,6 @@ $circle: 10px;
 
 .main-frame {
 	white-space: nowrap;
-	overflow: hidden;
 	font-size: 0;
 
 	@include setScale(100%, 100%);
@@ -136,176 +136,212 @@ $circle: 10px;
 			display: block;
 			margin: 5px 0;
 			border: 2px solid #A5A5A5;
+			overflow: hidden;
 	
 			@include setScale($circle, $circle);
 			@include border-radius($circle);
 
-			&.active {
-				@include background(#F5F5F5);
+			a {
+				margin-top: -100%;
+				display: block; 
+				@include transition(margin-top 0.5s ease-in);
+				@include setScale(100%, 100%);
+				@include background(#F5F5F5); 
+				@include border-radius(100%);
+			}
+
+			&.active a{
+				margin-top: 0;
+			}
+			&:nth-child(1).leave-down a, &:nth-child(2).leave-down a {
+				margin-top: 100%;
 			}
 		}
 	}
 
 	.page {
 		z-index: 1;
+		position: relative;
 		
 		@include setScale(100%, 100%);
 		@include background(url('../../images/battle_bg.png') no-repeat center/100% 100%);
 
-		.battle-title, .battle-face, .battle-horse, .battle-addr {
-			position: absolute;
+		& * {
+			visibility: hidden;
 		}
 
-		.battle-title {
-			top: 5%;
-			right: 5%;
-
-			@include perspective(10px);
-
-			.battle-zn, .battle-en {
-				display: block;
-
-				@include opacity(0);
-				@include animation(rotatein 3s cubic-bezier(0.34, 0.75, 0.76, 0.46) 5s forwards);
-
-				&.battle-zn {
-					@include transform(rotateY(90deg));
-				}
-
-				&.battle-en {
-					@include transform(rotateY(-90deg));
-				}
-
-				@at-root {
-					@include keyframes-compat(rotatein) {
-						@include rotate-in;
-					}
-				}
-			}
+		&:nth-of-type(1).active *, &:nth-of-type(3).active *, &:nth-of-type(4).active * {
+			visibility: visible;
 		}
 
-		.battle-face {
-			left: -100%;
-			top: 3%;
+		&:nth-of-type(1).active {
 
-			@include transform(translate(-50%));
-			@include animation(drivein 1s cubic-bezier(0, 1, 1, 1) 6s forwards);
-			@media (max-width: 320px) {
-				& {
-					width: 20%;
-
-					img {
-						width: 100%;
-					}
-				}
-			}
-
-			@at-root {
-				@include keyframes-compat(drivein) {
-					@include drive-in;
-				}
-			}
-		}
-
-		.battle-horse {
-			@include transformOrigin(50% 100%);
-			@media (min-height: 737px) {
-				& {
-					top: 41%;
-				}
-			}
-			@media (max-height: 736px) {
-				& {
-					top: 29%;
-				}
-			}
-			@media (max-height: 667px) {
-				& {
-					top: 23%;
-				}
-			}
-			@media (max-height: 568px) {
-				& {
-					top: 17%;
-				}
-			}
-
-			@include opacity(0);
-			@include animation(runin 4.8s cubic-bezier(0.34, 0.75, 0.76, 0.46) 1s forwards);
-
-			@at-root {
-				@include keyframes-compat(runin) {
-					@include run-in;
-				}
-			}
-		}
-
-		.battle-addr {
-			bottom: 0;
-			z-index: 3;
-
-			@include setScale(100%, 60%);
-			@include background(url('../../images/battle_addr_none.png') no-repeat center/100% 100%);
-			@include animation(fadein 1s linear forwards);
-
-			@at-root {
-				@include keyframes-compat(fadein) {
-					@include fade-in;
-				}
-			}
-			
-
-			.sword1, .sword2, .sword3, .lance {
+			.battle-title, .battle-face, .battle-horse, .battle-addr {
 				position: absolute;
-				z-index: 2;
+			}
+
+			.battle-title {
+				top: 5%;
+				right: 5%;
+
+				@include perspective(10px);
+
+				.battle-zn, .battle-en {
+					display: block;
+
+					@include opacity(0);
+					@include animation(rotatein 3s cubic-bezier(0.34, 0.75, 0.76, 0.46) 5s forwards);
+
+					&.battle-zn {
+						@include transform(rotateY(90deg));
+					}
+
+					&.battle-en {
+						@include transform(rotateY(-90deg));
+					}
+
+					@at-root {
+						@include keyframes-compat(rotatein) {
+							@include rotate-in;
+						}
+					}
+				}
+			}
+
+			.battle-face {
+				left: -100%;
+				top: 3%;
+
+				@include transform(translate(-50%));
+				@include animation(drivein 1s cubic-bezier(0, 1, 1, 1) 6s forwards);
+				@media (max-width: 320px) {
+					& {
+						width: 20%;
+
+						img {
+							width: 100%;
+						}
+					}
+				}
+
+				@at-root {
+					@include keyframes-compat(drivein) {
+						@include drive-in;
+					}
+				}
+			}
+
+			.battle-horse {
+				@include transformOrigin(50% 100%);
+				@media (min-height: 737px) {
+					& {
+						top: 41%;
+					}
+				}
+				@media (max-height: 736px) {
+					& {
+						top: 29%;
+					}
+				}
+				@media (max-height: 667px) {
+					& {
+						top: 23%;
+					}
+				}
+				@media (max-height: 568px) {
+					& {
+						top: 17%;
+					}
+				}
 
 				@include opacity(0);
-			}
-			.sword1 {
-				left: 20%;
-				top: 50%;
+				@include animation(runin 4.8s cubic-bezier(0.34, 0.75, 0.76, 0.46) 1s forwards);
 
-				@include animation(swordin-one 0.6s ease-in 1.1s forwards);
 				@at-root {
-					@include keyframes-compat(swordin-one) {
-						@include sword-in(0);
+					@include keyframes-compat(runin) {
+						@include run-in;
 					}
 				}
 			}
-			.sword2 {
-				left: 21%;
-				top: 48%;
 
-				@include animation(swordin-two 0.6s ease-in 1.8s forwards);
+			.battle-addr {
+				bottom: 0;
+				z-index: 3;
+
+				@include setScale(100%, 60%);
+				@include background(url('../../images/battle_addr_none.png') no-repeat center/100% 100%);
+				@include animation(fadein 1s linear forwards);
+
 				@at-root {
-					@include keyframes-compat(swordin-two) {
-						@include sword-in(40%, -20%);
+					@include keyframes-compat(fadein) {
+						@include fade-in;
 					}
 				}
-			}
-			.sword3 {
-				left: 46%;
-				top: 53%;
 				
-				@include animation(swordin-three 0.6s ease-in 1.4s forwards);
-				@at-root {
-					@include keyframes-compat(swordin-three) {
-						@include sword-in(66%);
-					}
-				}
-			}
-			.lance {
-				left: 84%;
-				top: 24%;
 
-				@include animation(lancein 0.6s ease-in 1.35s forwards);
-				@at-root {
-					@include keyframes-compat(lancein) {
-						@include sword-in(66%, -50%);
+				.sword1, .sword2, .sword3, .lance {
+					position: absolute;
+					z-index: 2;
+
+					@include opacity(0);
+				}
+				.sword1 {
+					left: 20%;
+					top: 50%;
+
+					@include animation(swordin-one 0.6s ease-in 1.1s forwards);
+					@at-root {
+						@include keyframes-compat(swordin-one) {
+							@include sword-in(0);
+						}
+					}
+				}
+				.sword2 {
+					left: 21%;
+					top: 48%;
+
+					@include animation(swordin-two 0.6s ease-in 1.8s forwards);
+					@at-root {
+						@include keyframes-compat(swordin-two) {
+							@include sword-in(40%, -20%);
+						}
+					}
+				}
+				.sword3 {
+					left: 46%;
+					top: 53%;
+					
+					@include animation(swordin-three 0.6s ease-in 1.4s forwards);
+					@at-root {
+						@include keyframes-compat(swordin-three) {
+							@include sword-in(66%);
+						}
+					}
+				}
+				.lance {
+					left: 84%;
+					top: 24%;
+
+					@include animation(lancein 0.6s ease-in 1.35s forwards);
+					@at-root {
+						@include keyframes-compat(lancein) {
+							@include sword-in(66%, -50%);
+						}
 					}
 				}
 			}
+		}
+
+		&:nth-of-type(3).active {
+
 		}
 
 	}
+}
+.close-store {
+	font-size: 1rem;
+	position: fixed;
+	top: 0;
+	right: 0;
+	z-index: 4; 
 }

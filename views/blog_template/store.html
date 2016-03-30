@@ -4,15 +4,12 @@
 		<source ng-src="{{voice.path}}" type="audio/wav" />
 		<embed ng-src="{{voice.path}}" />
 	</audio>
-	<div class="close-store">
-		<a ui-sref="index" class="close" tips="关闭">&times;</a>
-	</div>
-	<div class="nav">
-		<a href="javascript:void(0);" class="dot active"></a>
-		<a href="javascript:void(0);" class="dot"></a>
-		<a href="javascript:void(0);" class="dot"></a>
-	</div>
-	<div class="page">
+	<ul class="nav">
+		<li class="dot active"><a href="javascript:void(0);"></a></li>
+		<li class="dot"><a href="javascript:void(0);"></a></li>
+		<li class="dot"><a href="javascript:void(0);"></a></li>
+	</ul>
+	<div class="page active">
 		<div class="battle-title">
 			<img src="../public/images/battle_zn.png" alt="battle_zn" class="battle-zn" voice-index="2" />
 			<img src="../public/images/battle_en.png" alt="battle_en" class="battle-en" />
@@ -38,4 +35,7 @@
 		</svg>
 	</div>
 	<div class="page"></div>
+</div>
+<div class="close-store">
+	<a ui-sref="index" class="close" tips="关闭">&times;</a>
 </div>

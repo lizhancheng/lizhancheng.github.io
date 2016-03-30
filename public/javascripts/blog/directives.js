@@ -4,7 +4,7 @@
 
 'use strict';
 
-define(['app', 'components/editor', 'components/photo'], function (app, CreateEditor, Photo) {
+define(['app', 'zUtil', 'components/editor', 'components/photo'], function (app, ZU, CreateEditor, Photo) {
 
 	'use strict';
 	app.directive('desktop', function () {
@@ -231,6 +231,10 @@ define(['app', 'components/editor', 'components/photo'], function (app, CreateEd
 			restrict: 'C',
 			link: function link($scope, element, attr) {
 				var $el = element;
+				var oy = undefined,
+				    dy = undefined,
+				    fy = undefined,
+				    times = [0, 0, 2];
 				$scope.playVoice = function (event) {
 					var $target = event ? event.target : null;
 					var $au = $el.find('audio');
@@ -241,11 +245,48 @@ define(['app', 'components/editor', 'components/photo'], function (app, CreateEd
 						$au[$index].play();
 					}
 				};
+				$scope.setOrigin = function (event) {
+					oy = event.touches[0].clientY || event.touches[0].pageY;
+				};
+				$scope.movePage = function (event) {
+					var height = parseInt(ZU.getStyle($el[0], 'height'));
+					dy = event.changedTouches[0].clientY || event.changedTouches[0].pageY;
+					fy = dy - oy;
+
+					$el.css('marginTop', fy - height * times[0] + 'px');
+				};
+				$scope.alterPage = function () {
+					var height = parseInt(ZU.getStyle($el[0], 'height'));
+					if (fy <= 50 && fy >= -50) {
+						$el.css('marginTop', -times[0] * height + 'px');
+					} else if (fy > 50) {
+						times[0] = times[0] > times[1] ? --times[0] : times[0];
+						$el.css('marginTop', -times[0] * height + 'px').children().removeClass('active').eq(times[0] + 5).addClass('active');
+					} else if (fy < -50) {
+						times[0] = times[0] < times[2] ? ++times[0] : times[0];
+						$el.css('marginTop', -times[0] * height + 'px').children().removeClass('active').eq(times[0] + 5).addClass('active');
+					}
+					$scope.setNav(times[0]);
+				};
+				$scope.setNav = function (serial) {
+					var classArr = [['active', '', ''], ['leave-down', 'active', ''], ['leave-down', 'leave-down', 'active']];
+					angular.forEach(angular.element(ZU.getSelector('.dot')), function (item, index) {
+						item.removeClass('leave-down active');
+						item.addClass(classArr[serial][index]);
+					});
+				};
 
 				$el.on('animationstart webkitAnimationStart', function (event) {
 					$scope.playVoice(event);
 				});
+
+				$el.bind('touchstart', $scope.setOrigin).bind('touchmove', $scope.movePage).bind('touchend', $scope.alterPage);
 			}
+		};
+	}).directive('page', function () {
+		return {
+			restrict: 'C',
+			link: function link($scope, element, attr) {}
 		};
 	});
 });
