@@ -59,9 +59,9 @@
 		function getSelector(selector) {
 			return typeof selector === 'string' 
 					? selector.indexOf('#') > -1  
-						? document.getElementById(selector)  
+						? document.getElementById(selector.slice(1))  
 						: selector.indexOf('.') > -1  
-							? document.getElementsByClassName(selector) 
+							? document.getElementsByClassName(selector.slice(1)) 
 							: document.getElementsByTagName(selector)
 					: selector;
 		}
@@ -139,6 +139,10 @@
 	    function isFunction(fn) {
 		    return (!!fn && !fn.nodename && fn.constructor != String && fn.constructor != RegExp && fn.constructor != Array && /function/i.test(fn+"")) || (Object.prototype.toString.call(fn) === '[object Function]' && typeof fn === 'function');
 		}
+
+		function isArray(val) {
+			return toString.apply(val) === '[object Array]' && val instanceof Array;
+		}
 /*Time Function*/
     	// format number
     	function format(t) {
@@ -186,6 +190,31 @@
     	function aLert(string) {
     		alert(string);
     	}
+/*Image Function*/
+		function showProgress(imgs, iterator) {
+			function handle(img, total, index) {
+				addEvent(img, 'load', function () {
+					if(img.complete === true) {
+						var percent = (++ num) * 100 / total;
+						iterator(percent);
+					}
+				});
+				if(!Number.isNaN(index) && imgs[++ index]) {
+					handle(imgs[index], total, index);
+				}
+			}
+
+			if(!isFunction(iterator)) return;
+			var num = 0;
+			if(imgs && imgs.length && imgs.length > 0) {
+				var len = imgs.length;
+				handle(imgs[0], len, 0);
+			}else if(imgs) {
+				handle(img, 1);
+			}
+
+		}
+
 /*File Function*/
     	/**
     	 * loadFile a tool to load the local file, eg: image, pdf, etc
@@ -260,6 +289,7 @@
     		loadFile    : loadFile, 
     		addEvent    : addEvent, 
     		getSelector : getSelector, 
-    		getStyle    : getStyle
+    		getStyle    : getStyle, 
+    		showProgress: showProgress
     	};
     });

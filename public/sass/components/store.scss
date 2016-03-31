@@ -170,7 +170,7 @@ $circle: 10px;
 			visibility: hidden;
 		}
 
-		&:nth-of-type(1).active *, &:nth-of-type(3).active *, &:nth-of-type(4).active * {
+		&:nth-of-type(1).active *, &:nth-of-type(2).active *, &:nth-of-type(3).active * {
 			visibility: visible;
 		}
 
@@ -332,8 +332,8 @@ $circle: 10px;
 			}
 		}
 
-		&:nth-of-type(3).active {
-
+		&:nth-of-type(2), &:nth-of-type(2).active {
+			@include background(url('../../images/universe.jpg') no-repeat center/100% 100%);
 		}
 
 	}
@@ -344,4 +344,17 @@ $circle: 10px;
 	top: 0;
 	right: 0;
 	z-index: 4; 
+}
+.loading-frame {
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: 10;
+
+	@include setScale(100%, 100%);
+	@include background(rgba(0, 0, 0, 0.4));
+
+	svg {
+		@include setScale(100%, 100%);
+	}
 }

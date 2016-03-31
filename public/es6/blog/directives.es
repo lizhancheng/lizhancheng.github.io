@@ -242,9 +242,11 @@
 							}
 						};
 						$scope.setOrigin = (event) => {
+							event.preventDefault();
 							oy = event.touches[0].clientY || event.touches[0].pageY;
 						};
 						$scope.movePage = (event) => {
+							event.preventDefault();
 							let height = parseInt(ZU.getStyle($el[0], 'height'));
 							dy = event.changedTouches[0].clientY || event.changedTouches[0].pageY;
 							fy = dy - oy;
@@ -252,6 +254,7 @@
 							$el.css('marginTop', fy - height * times[0] + 'px');
 						};
 						$scope.alterPage = () => {
+							event.preventDefault();
 							let height = parseInt(ZU.getStyle($el[0], 'height'));
 							if(fy <= 50 && fy >= -50) {
 								$el.css('marginTop', - times[0] * height + 'px');
@@ -270,22 +273,25 @@
 								['leave-down', 'active', ''], 
 								['leave-down', 'leave-down', 'active'], 
 							];
-							angular.forEach(angular.element(ZU.getSelector('.dot')), (item, index) => {
-								item.removeClass('leave-down active')
-								item.addClass(classArr[serial][index]);
+							angular.forEach(ZU.getSelector('.dot'), (item, index) => {
+								let it = angular.element(item);
+								it.removeClass('leave-down active');
+								it.addClass(classArr[serial][index]);
 							});
 						}
 
-						$el.on('animationstart webkitAnimationStart', event => {
-							$scope.playVoice(event);
-						});
-
-
 						$el
+						.on('animationstart webkitAnimationStart', $scope.playVoice)
 						.bind('touchstart', $scope.setOrigin)
 						.bind('touchmove', $scope.movePage)
 						.bind('touchend', $scope.alterPage);
 
+						ZU.showProgress($el.find('img'), function(percent) {
+							if(percent === 100) {
+								angular.element(ZU.getSelector('.loading-frame')[0]).remove();
+								angular.element(ZU.getSelector('.page')[0]).addClass('active');
+							}
+						});
 					}
 				}
 			})
