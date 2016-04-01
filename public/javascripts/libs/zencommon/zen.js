@@ -193,12 +193,22 @@
 /*Image Function*/
 		function showProgress(imgs, iterator) {
 			function handle(img, total, index) {
-				addEvent(img, 'load', function () {
-					if(img.complete === true) {
-						var percent = (++ num) * 100 / total;
-						iterator(percent);
-					}
-				});
+				var percent;
+				if(img.onreadystatechange) {
+					addEvent(img, 'readystatechange', function () {
+						if(img.readyState === 'complete' || img.readyState === 'loaded') {
+							percent = (++ num) * 100 / total;
+							iterator(percent);
+						}
+					});
+				}else {
+					addEvent(img, 'load', function () {
+						if(img.complete === true) {
+							percent = (++ num) * 100 / total;
+							iterator(percent);
+						}
+					});
+				}
 				if(!Number.isNaN(index) && imgs[++ index]) {
 					handle(imgs[index], total, index);
 				}

@@ -233,8 +233,18 @@ define(['app', 'zUtil', 'components/editor', 'components/photo'], function (app,
 				var $el = element;
 				var oy = undefined,
 				    dy = undefined,
-				    fy = undefined,
+				    fy = 0,
 				    times = [0, 0, 2];
+				function alterTranslate(value) {
+					$el.css({
+						'transform': 'translate(0, ' + value + 'px)',
+						'webkitTransform': 'translate(0, ' + value + 'px)',
+						'mozTransform': 'translate(0, ' + value + 'px)',
+						'oTransform': 'translate(0, ' + value + 'px)',
+						'msTransform': 'translate(0, ' + value + 'px)'
+					});
+					return $el;
+				}
 				$scope.playVoice = function (event) {
 					var $target = event ? event.target : null;
 					var $au = $el.find('audio');
@@ -247,30 +257,40 @@ define(['app', 'zUtil', 'components/editor', 'components/photo'], function (app,
 				};
 				$scope.setOrigin = function (event) {
 					event.preventDefault();
-					oy = event.touches[0].clientY || event.touches[0].pageY;
+					$el.removeClass('transition');
+					oy = event.clientY || event.pageY || event.touches[0].clientY || event.touches[0].pageY;
 				};
 				$scope.movePage = function (event) {
 					event.preventDefault();
 					var height = parseInt(ZU.getStyle($el[0], 'height'));
-					dy = event.changedTouches[0].clientY || event.changedTouches[0].pageY;
-					fy = dy - oy;
-
-					$el.css('marginTop', fy - height * times[0] + 'px');
+					if (event.type === 'mousemove' && event.which) {
+						fy += event.movementY;
+						alterTranslate(fy - height * times[0]);
+					} else if (event.type === 'touchmove') {
+						dy = event.changedTouches[0].clientY || event.changedTouches[0].pageY;
+						fy = dy - oy;
+						alterTranslate(fy - height * times[0]);
+					}
 				};
 				$scope.alterPage = function () {
 					event.preventDefault();
 					var height = parseInt(ZU.getStyle($el[0], 'height'));
 					if (fy <= 50 && fy >= -50) {
-						$el.css('marginTop', -times[0] * height + 'px');
+						alterTranslate(-times[0] * height);
 					} else if (fy > 50) {
 						times[0] = times[0] > times[1] ? --times[0] : times[0];
-						$el.css('marginTop', -times[0] * height + 'px').children().removeClass('active').eq(times[0] + 5).addClass('active');
+						alterTranslate(-times[0] * height).children().removeClass('active').eq(times[0] + 4).addClass('active');
 					} else if (fy < -50) {
 						times[0] = times[0] < times[2] ? ++times[0] : times[0];
-						$el.css('marginTop', -times[0] * height + 'px').children().removeClass('active').eq(times[0] + 5).addClass('active');
+						alterTranslate(-times[0] * height).children().removeClass('active').eq(times[0] + 4).addClass('active');
 					}
+					fy = 0;
 					$scope.setNav(times[0]);
 				};
+				$scope.wheelPage = function (event) {
+					(event.wheelDeltaY > 0 ? fy = 51 : fy = -51) && $el.addClass('transition').triggerHandler('mouseup');
+				};
+
 				$scope.setNav = function (serial) {
 					var classArr = [['active', '', ''], ['leave-down', 'active', ''], ['leave-down', 'leave-down', 'active']];
 					angular.forEach(ZU.getSelector('.dot'), function (item, index) {
@@ -279,8 +299,13 @@ define(['app', 'zUtil', 'components/editor', 'components/photo'], function (app,
 						it.addClass(classArr[serial][index]);
 					});
 				};
+				$scope.toggle = function (event) {
+					var $li = angular.element(event.target);
+					// $this.children().removeClass('active');
+					$li.addClass('active');
+				};
 
-				$el.on('animationstart webkitAnimationStart', $scope.playVoice).bind('touchstart', $scope.setOrigin).bind('touchmove', $scope.movePage).bind('touchend', $scope.alterPage);
+				$el.on('animationstart webkitAnimationStart', $scope.playVoice).bind('touchstart mousedown', $scope.setOrigin).bind('touchmove mousemove', $scope.movePage).bind('touchend mouseup', $scope.alterPage).bind('mousewheel', $scope.wheelPage);
 
 				ZU.showProgress($el.find('img'), function (percent) {
 					if (percent === 100) {
