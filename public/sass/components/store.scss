@@ -82,6 +82,12 @@
 		@include transform(translate(-50%) skew(0deg));
 	}
 }
+@mixin move-out {
+	to {
+		left: 100%;
+		top: 100%;
+	}
+}
 
 $circle: 10px;
 
@@ -339,6 +345,20 @@ $circle: 10px;
 		}
 		&:nth-of-type(2).active {
 			@include animation(fadein 1s linear forwards);
+
+			svg {
+				position: absolute;
+				left: 0;
+				top: 0;
+
+				@include setScale(86px, 116px);
+				@include animation(moveout 10s linear forwards);
+				@at-root {
+					@include keyframes-compat(moveout) {
+						@include move-out;
+					}
+				}
+			}
 		}
 
 	}

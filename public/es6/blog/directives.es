@@ -304,6 +304,24 @@
 							// $this.children().removeClass('active');
 							$li.addClass('active');
 						}
+						$scope.setDirection = () => {
+							let [width, height] = [parseInt(ZU.getStyle(document.documentElement, 'width')), parseInt(ZU.getStyle(document.documentElement, 'height'))];
+							let degree = 180 + 180 / Math.PI * Math.atan(- width / height);
+							let $plane = angular.element(ZU.getSelector('#svg_spaceship'));
+							$plane
+							.css({
+								transform: `rotate(${degree}deg)`, 
+								webkitTransform: `rotate(${degree}deg)`, 
+								mozTransform: `rotate(${degree}deg)`, 
+								oTransform: `rotate(${degree}deg)`, 
+								msTransform: `rotate(${degree}deg)`, 
+							});
+						}
+
+						$scope
+						.$on('$viewContentLoaded', () => {
+							$scope.setDirection();
+						});
 
 						$el
 						.on('animationstart webkitAnimationStart', $scope.playVoice)

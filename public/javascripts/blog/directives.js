@@ -304,6 +304,24 @@ define(['app', 'zUtil', 'components/editor', 'components/photo'], function (app,
 					// $this.children().removeClass('active');
 					$li.addClass('active');
 				};
+				$scope.setDirection = function () {
+					var width = parseInt(ZU.getStyle(document.documentElement, 'width'));
+					var height = parseInt(ZU.getStyle(document.documentElement, 'height'));
+
+					var degree = 180 + 180 / Math.PI * Math.atan(-width / height);
+					var $plane = angular.element(ZU.getSelector('#svg_spaceship'));
+					$plane.css({
+						transform: 'rotate(' + degree + 'deg)',
+						webkitTransform: 'rotate(' + degree + 'deg)',
+						mozTransform: 'rotate(' + degree + 'deg)',
+						oTransform: 'rotate(' + degree + 'deg)',
+						msTransform: 'rotate(' + degree + 'deg)'
+					});
+				};
+
+				$scope.$on('$viewContentLoaded', function () {
+					$scope.setDirection();
+				});
 
 				$el.on('animationstart webkitAnimationStart', $scope.playVoice).bind('touchstart mousedown', $scope.setOrigin).bind('touchmove mousemove', $scope.movePage).bind('touchend mouseup', $scope.alterPage).bind('mousewheel', $scope.wheelPage);
 
