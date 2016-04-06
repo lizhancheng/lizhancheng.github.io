@@ -298,16 +298,20 @@
 								it.removeClass('leave-down active');
 								it.addClass(classArr[serial][index]);
 							});
+							if(serial > times[1] && serial < times[2]) {
+								$scope.movePlane();
+							}
 						}
 						$scope.toggle = (event) => {
 							let $li = angular.element(event.target);
 							// $this.children().removeClass('active');
 							$li.addClass('active');
 						}
-						$scope.setDirection = () => {
+						$scope.movePlane = () => {
 							let [width, height] = [parseInt(ZU.getStyle(document.documentElement, 'width')), parseInt(ZU.getStyle(document.documentElement, 'height'))];
 							let degree = 180 + 180 / Math.PI * Math.atan(- width / height);
-							let $plane = angular.element(ZU.getSelector('#svg_spaceship'));
+							let [$motion, $fill] = [ZU.getSelector('#spaceship-motion'), ZU.getSelector('#spaceship-fill')];
+							let $plane = angular.element(ZU.getSelector('#spaceship'));
 							$plane
 							.css({
 								transform: `rotate(${degree}deg)`, 
@@ -316,11 +320,18 @@
 								oTransform: `rotate(${degree}deg)`, 
 								msTransform: `rotate(${degree}deg)`, 
 							});
+							$motion.setAttribute('path', `M0 0 L${width} ${height} M${width} ${height} Z`);
+							// begin the animation
+							$motion.beginElement();
+
+							Array.prototype.forEach.call(document.querySelectorAll('animate'), (item, index) => {
+								item.beginElement();
+							});
 						}
 
 						$scope
 						.$on('$viewContentLoaded', () => {
-							$scope.setDirection();
+							// dom加载完后的事件
 						});
 
 						$el

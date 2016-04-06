@@ -72,6 +72,10 @@
 			return getComputedStyle($selector)[property] || $selector.currentStyle[property];
 		}
 
+		function setKeyframes($kf, progress, value) {
+			$kf.deleteRule(progress);
+			$kf.appendRule(value);
+		}
 /*String Function*/
 		/**
 		 * toUnicode make all string into unicode or hex style
@@ -300,6 +304,7 @@
     		addEvent    : addEvent, 
     		getSelector : getSelector, 
     		getStyle    : getStyle, 
+    		setKeyframes: setKeyframes, 
     		showProgress: showProgress
     	};
     });

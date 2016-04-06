@@ -84,8 +84,7 @@
 }
 @mixin move-out {
 	to {
-		left: 100%;
-		top: 100%;
+		transform: translate(100%, 100%);
 	}
 }
 
@@ -350,12 +349,15 @@ $circle: 10px;
 				position: absolute;
 				left: 0;
 				top: 0;
+				@include setScale(100%, 100%);
 
-				@include setScale(86px, 116px);
-				@include animation(moveout 10s linear forwards);
-				@at-root {
-					@include keyframes-compat(moveout) {
-						@include move-out;
+				#spaceship {
+					@include transformOrigin(50% 50%);
+					// @include animation(moveout 10s linear forwards);
+					@at-root {
+						@include keyframes-compat(moveout) {
+							@include move-out;
+						}
 					}
 				}
 			}

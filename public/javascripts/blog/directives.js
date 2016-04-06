@@ -298,18 +298,24 @@ define(['app', 'zUtil', 'components/editor', 'components/photo'], function (app,
 						it.removeClass('leave-down active');
 						it.addClass(classArr[serial][index]);
 					});
+					if (serial > times[1] && serial < times[2]) {
+						$scope.movePlane();
+					}
 				};
 				$scope.toggle = function (event) {
 					var $li = angular.element(event.target);
 					// $this.children().removeClass('active');
 					$li.addClass('active');
 				};
-				$scope.setDirection = function () {
+				$scope.movePlane = function () {
 					var width = parseInt(ZU.getStyle(document.documentElement, 'width'));
 					var height = parseInt(ZU.getStyle(document.documentElement, 'height'));
 
 					var degree = 180 + 180 / Math.PI * Math.atan(-width / height);
-					var $plane = angular.element(ZU.getSelector('#svg_spaceship'));
+					var $motion = ZU.getSelector('#spaceship-motion');
+					var $fill = ZU.getSelector('#spaceship-fill');
+
+					var $plane = angular.element(ZU.getSelector('#spaceship'));
 					$plane.css({
 						transform: 'rotate(' + degree + 'deg)',
 						webkitTransform: 'rotate(' + degree + 'deg)',
@@ -317,10 +323,17 @@ define(['app', 'zUtil', 'components/editor', 'components/photo'], function (app,
 						oTransform: 'rotate(' + degree + 'deg)',
 						msTransform: 'rotate(' + degree + 'deg)'
 					});
+					$motion.setAttribute('path', 'M0 0 L' + width + ' ' + height + ' M' + width + ' ' + height + ' Z');
+					// begin the animation
+					$motion.beginElement();
+
+					Array.prototype.forEach.call(document.querySelectorAll('animate'), function (item, index) {
+						item.beginElement();
+					});
 				};
 
 				$scope.$on('$viewContentLoaded', function () {
-					$scope.setDirection();
+					// dom加载完后的事件
 				});
 
 				$el.on('animationstart webkitAnimationStart', $scope.playVoice).bind('touchstart mousedown', $scope.setOrigin).bind('touchmove mousemove', $scope.movePage).bind('touchend mouseup', $scope.alterPage).bind('mousewheel', $scope.wheelPage);
