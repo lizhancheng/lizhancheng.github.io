@@ -51,30 +51,59 @@
 					<feGaussianBlur result="blurOut" in="offOut" stdDeviation="10" />  
 					<feBlend in="SourceGraphic" in2="blurOut" mode="normal" />  
 				</filter>  
-			</defs>  
+			</defs> 
 			<g id="spaceship">
 				<title>plane</title>
 				<path stroke="#9CF3C7" d="m42.53908,1.4975c-0.87991,0 -1.66276,0.49762 -2.32328,1.40025c-0.65996,0.90189 -1.20585,2.19424 -1.66009,3.80823c-0.90837,3.22754 -1.46715,7.76149 -1.77279,13.19133c-0.30505,5.41939 -0.35645,11.72976 -0.22972,18.48489c-10.86904,6.14292 -32.91347,18.82641 -34.68432,21.65837c-2.35769,3.77043 -1.59592,8.09155 -0.64584,10.96008l36.24038,-10.16181c0.76604,13.24258 1.85524,26.35865 2.80439,36.6361c-3.54409,1.42897 -10.15976,4.25052 -11.52531,6.00021c-1.88117,2.41034 -1.88115,10.19446 -1.88115,10.19446l14.83251,-1.66197c0.34934,3.35535 0.56781,5.31317 0.56781,5.31317l0.02168,0.17667l0.11703,0l0.27306,0l0.11703,0l0.02168,-0.17667c0,0 0.21805,-1.95786 0.5678,-5.31317l14.83685,1.66197c0,0 0.00002,-7.78413 -1.88116,-10.19446c-1.36607,-1.75036 -7.98656,-4.57832 -11.52965,-6.00679c0.94719,-10.24591 2.03447,-23.3118 2.80006,-36.51171l35.81562,10.044c0.95007,-2.86854 1.71619,-7.18966 -0.6415,-10.96008c-1.74895,-2.79691 -23.2607,-15.1983 -34.26388,-21.42283c0.13147,-6.84269 0.08314,-13.23906 -0.22539,-18.72043l0,-0.01309c-0.3058,-5.42385 -0.86517,-9.95339 -1.77278,-13.17824c-0.45412,-1.61355 -0.99556,-2.90602 -1.65576,-3.80823c-0.66053,-0.90264 -1.44336,-1.40025 -2.32327,-1.40025l-0.00002,0z" stroke-opacity="null" stroke-width="1.5" fill="transparent" stroke-dashoffset="-420" stroke-dasharray="420">
 					<animate id="spaceship-fill" attributeName="stroke-dashoffset" to="0" dur="2s" keySplines="0.215, 0.61, 0.355, 1" fill="freeze" />
 				</path>
 				<animateMotion id="spaceship-motion" begin="0s" dur="10s" fill="freeze" />
-			 </g>
-			 <g class="html-per">
-				<circle cx="24%" cy="20%" r="10%" stroke="#9CF3C7" stroke-width="4" fill="none" stroke-dasharray="31%">	
-					<animate attributeName="stroke-dasharray" to="0" dur="1.33s" fill="freeze"></animate>
+			</g>
+			<g class="html-per">
+				<circle cx="24%" cy="20%" r="5%" stroke="rgba(152, 253, 192, 0.62)" stroke-width="4" fill="none" stroke-dasharray="31%">	
+					<animate attributeName="r" from="5%" to="5%" fill="freeze" />
+					<animate attributeName="r" from="5%" to="11%" fill="freeze" xbegin="1.33s" dur="0.13s" keySplines="0.215, 0.61, 0.355, 1" />
+					<animate attributeName="r" from="11%" to="8%" fill="freeze" xbegin="1.46s" dur="0.1s" keySplines="0.215, 0.61, 0.355, 1" />
+					<animate attributeName="r" from="8%" to="10%" fill="freeze" xbegin="1.56s" dur="0.1s" keySplines="0.215, 0.61, 0.355, 1" />
+					<animate attributeName="stroke-dasharray" to="0" dur="1.33s" fill="freeze" />
+					<animate attributeName="stroke-dasharray" to="8%" xbegin="1.66" dur="1.33s" fill="freeze" />
 				</circle>
-			 </g>
-			 <g class="css-per">
-				<circle cx="50%" cy="50%" r="10%" stroke="#9CF3C7" stroke-width="4" fill="none" stroke-dasharray="31%">
-					<animate attributeName="stroke-dasharray" to="0" dur="5.33s" fill="freeze"></animate>
+				<text x="16%" y="22%" fill="#F72865" stroke="#F5ABAB" stroke-width="1" class="text" stroke-opacity="0" fill-opacity="0">
+					<animate attributeName="stroke-opacity" to="1" dur="5s" fill="freeze" />
+					<animate attributeName="fill-opacity" to="1" dur="5s" fill="freeze" />
+				    HTML
+				</text>
+			</g>
+			<g class="css-per">
+				<circle cx="50%" cy="50%" r="5%" stroke="rgba(152, 253, 192, 0.62)" stroke-width="4" fill="none" stroke-dasharray="31%">
+					<animate attributeName="r" from="5%" to="5%" fill="freeze" />
+					<animate attributeName="r" from="5%" to="11%" fill="freeze" xbegin="5.33s" dur="0.13s" keySplines="0.215, 0.61, 0.355, 1" />
+					<animate attributeName="r" from="11%" to="8%" fill="freeze" xbegin="5.46s" dur="0.1s" keySplines="0.215, 0.61, 0.355, 1" />
+					<animate attributeName="r" from="8%" to="10%" fill="freeze" xbegin="5.56s" dur="0.1s" keySplines="0.215, 0.61, 0.355, 1" />
+					<animate attributeName="stroke-dasharray" to="0" dur="5.33s" fill="freeze" />
+					<animate attributeName="stroke-dasharray" to="8%" xbegin="5.66" dur="1.33s" fill="freeze" />
 				</circle>
-
-			 </g>
-			 <g class="js-per">
-				<circle cx="80%" cy="80%" r="10%" stroke="#9CF3C7" stroke-width="4" fill="none" stroke-dasharray="31%">
-					<animate attributeName="stroke-dasharray" to="0" dur="8.33s" fill="freeze"></animate>
+				<text x="44%" y="52%" fill="#49AAFF" stroke="#0098FF" stroke-width="1" class="text" stroke-opacity="0" fill-opacity="0">
+					<animate attributeName="stroke-opacity" to="1" dur="8s" fill="freeze" />
+					<animate attributeName="fill-opacity" to="1" dur="8s" fill="freeze" />
+				    CSS
+				</text>
+			</g>
+			<g class="js-per">
+				<circle cx="80%" cy="80%" r="5%" stroke="rgba(152, 253, 192, 0.62)" stroke-width="4" fill="none" stroke-dasharray="31%">
+					<animate attributeName="r" from="5%" to="5%" fill="freeze" />
+					<animate attributeName="r" from="5%" to="11%" fill="freeze" xbegin="8.33s" dur="0.13s" keySplines="0.215, 0.61, 0.355, 1" />
+					<animate attributeName="r" from="11%" to="8%" fill="freeze" xbegin="8.46s" dur="0.1s" keySplines="0.215, 0.61, 0.355, 1" />
+					<animate attributeName="r" from="8%" to="10%" fill="freeze" xbegin="8.56s" dur="0.1s" keySplines="0.215, 0.61, 0.355, 1" />
+					<animate attributeName="stroke-dasharray" to="0" dur="8.33s" fill="freeze" />
+					<animate attributeName="stroke-dasharray" to="8%" xbegin="8.66s" dur="1.33s" fill="freeze" />
 				</circle>
-			 </g>
+				<text x="65%" y="81.5%" fill="#B2F9D3" stroke="#CEE9FF" stroke-width="1" class="text" stroke-opacity="0" fill-opacity="0">
+					<animate attributeName="stroke-opacity" to="1" dur="12s" fill="freeze" />
+					<animate attributeName="fill-opacity" to="1" dur="12s" fill="freeze" />
+				    Javascript
+				</text>
+			</g>
 		</svg>
 	</div>
 	<div class="page"></div>

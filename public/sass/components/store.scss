@@ -360,6 +360,11 @@ $circle: 10px;
 						}
 					}
 				}
+
+				.text {
+					font-size: 24px;
+					@include transform(translate(-50%, -50%));
+				}
 			}
 		}
 

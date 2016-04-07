@@ -324,8 +324,13 @@
 							// begin the animation
 							$motion.beginElement();
 
-							Array.prototype.forEach.call(document.querySelectorAll('animate'), (item, index) => {
-								item.beginElement();
+							Array.prototype.forEach.call(document.getElementsByTagName('animate'), (item, index) => {
+								let s = parseFloat(item.getAttribute('xbegin'));
+								if(s) {
+									item.beginElementAt(s);
+								}else {
+									item.beginElement();
+								}
 							});
 						}
 

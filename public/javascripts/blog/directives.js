@@ -327,8 +327,13 @@ define(['app', 'zUtil', 'components/editor', 'components/photo'], function (app,
 					// begin the animation
 					$motion.beginElement();
 
-					Array.prototype.forEach.call(document.querySelectorAll('animate'), function (item, index) {
-						item.beginElement();
+					Array.prototype.forEach.call(document.getElementsByTagName('animate'), function (item, index) {
+						var s = parseFloat(item.getAttribute('xbegin'));
+						if (s) {
+							item.beginElementAt(s);
+						} else {
+							item.beginElement();
+						}
 					});
 				};
 
