@@ -6,13 +6,15 @@
  	define(['app', 'zUtil'], (app, ZU) => {
 
  		'use strict';
+ 		let $  = angular.element;
+
  		class EditorTest {
 
  			constructor(textarea_id, editor_id, auto) {
  				// textarea jqLite-object
- 				this.tt = angular.element(document.querySelector(textarea_id));
+ 				this.tt = $(document.querySelector(textarea_id));
  				// div jqLite-object
- 				this.et = angular.element(document.querySelector(editor_id));
+ 				this.et = $(document.querySelector(editor_id));
  				// whether bind events automatically
  				this.auto = auto;
  				// getSelection method
@@ -90,10 +92,10 @@
 
  			utils() {
  				let [save, image, bold, italic] = [
- 					angular.element(document.querySelector('.save')), 
- 					angular.element(document.querySelector('.image')), 
- 					angular.element(document.querySelector('.bold')), 
- 					angular.element(document.querySelector('.italic'))
+ 					$(document.querySelector('.save')), 
+ 					$(document.querySelector('.image')), 
+ 					$(document.querySelector('.bold')), 
+ 					$(document.querySelector('.italic'))
 				];
 				let self = this;
 
@@ -120,9 +122,9 @@
 
  			constructor(et, file, multi) {
  				// pre jqLite-object
- 				this.et = angular.element(document.querySelector(et));
+ 				this.et = $(document.querySelector(et));
  				// file jqLite-object
- 				this.file = angular.element(document.querySelector(file));
+ 				this.file = $(document.querySelector(file));
  				// multiply the editable area
  				this.multi = multi;
  				// pre children
@@ -151,10 +153,10 @@
 
  			utils() {
  				let [save, image, bold, italic, file, edit] = [
- 					angular.element(document.querySelector('.save')), 
- 					angular.element(document.querySelector('.image')), 
- 					angular.element(document.querySelector('.bold')), 
- 					angular.element(document.querySelector('.italic')), 
+ 					$(document.querySelector('.save')), 
+ 					$(document.querySelector('.image')), 
+ 					$(document.querySelector('.bold')), 
+ 					$(document.querySelector('.italic')), 
  					this.file, 
  					this.et
 				];
@@ -180,7 +182,7 @@
 					self.insertImage(event);
 				});
 
-				angular.element(document.querySelectorAll('.content'))
+				$(document.querySelectorAll('.content'))
 				.off('paste')
 				.on('paste', event => {
 					self.pasteContent(event);
@@ -223,7 +225,7 @@
  							url.revokeObjectURL(img_node.src);
  						}
  						let nodeName = self.gs.focusNode;
-	 					if(nodeName.parentNode.nodeName !== "PRE" && nodeName.nodeName !== "PRE") {
+	 					if(nodeName.parentNode.nodeName.toLowerCase() !== "pre" && nodeName.nodeName.toLowerCase() !== "pre") {
 		 					if(self.multi) {
 		 						document.querySelector(`${self.selector}:not([class~=ng-hide])`).appendChild(img_node);
 		 					}else {
@@ -275,7 +277,7 @@
 
  			pasteContent(event) {
  				// event.preventDefault();
- 				let $target = angular.element(event.target);
+ 				let $target = $(event.target);
  				let [text, gr] = [$target.html(), this.gs.getRangeAt(0)];
 				event.clipboardData.items[0].getAsString((param) => {
 

@@ -56,17 +56,29 @@
     		}
     	}
 /*Selector Function */
+		/**
+		 * [getSelector light selector function]
+		 * @param  {String|Object} selector if it is a string, uses getting selector function.Otherwise, return the selector
+		 * @return {DOMObject} a selector
+		 */
 		function getSelector(selector) {
+			var slice = Array.prototype.slice;
 			return typeof selector === 'string' 
 					? selector.indexOf('#') > -1  
 						? document.getElementById(selector.slice(1))  
 						: selector.indexOf('.') > -1  
-							? document.getElementsByClassName(selector.slice(1)) 
-							: document.getElementsByTagName(selector)
+							? slice.call(document.getElementsByClassName(selector.slice(1))) 
+							: slice.call(document.getElementsByTagName(selector))
 					: selector;
 		}
 
 /*CSS Function*/
+		/**
+		 * [getStyle get the current style of the selector's property]
+		 * @param  {String|Object} selector DOM Node
+		 * @param  {String} property CSS property to pass
+		 * @return {String} The value of passing property's value
+		 */
 		function getStyle(selector, property) {
 			var $selector = getSelector(selector);
 			return getComputedStyle($selector)[property] || $selector.currentStyle[property];
@@ -133,6 +145,14 @@
 			array = array.slice(length);
 			return array.join('');
 		}
+		/**
+		 * trim is a function that remove the space from two side
+		 * @param  {String} string need to be passed value
+		 * @return {String}        the string that be cut without the two side space
+		 */
+		function trim(string) {
+			return string.replace(/^\s*|\s*$/g, '');
+		}
 
 /*Boolean Function*/
 	    /**
@@ -143,7 +163,11 @@
 	    function isFunction(fn) {
 		    return (!!fn && !fn.nodename && fn.constructor != String && fn.constructor != RegExp && fn.constructor != Array && /function/i.test(fn+"")) || (Object.prototype.toString.call(fn) === '[object Function]' && typeof fn === 'function');
 		}
-
+		/**
+		 * [isArray judge array]
+		 * @param  {All}  val the pass value
+		 * @return {Boolean} whether it is an array
+		 */
 		function isArray(val) {
 			return toString.apply(val) === '[object Array]' && val instanceof Array;
 		}
@@ -195,6 +219,12 @@
     		alert(string);
     	}
 /*Image Function*/
+		/**
+		 * [showProgress the images loading progress]
+		 * @param  {ImgObject} imgs  It must be an object of image type
+		 * @param  {Function} iterator to handle each function of the images object
+		 * @return {Void}
+		 */
 		function showProgress(imgs, iterator) {
 			function handle(img, total, index) {
 				var percent;

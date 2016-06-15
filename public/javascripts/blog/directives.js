@@ -263,7 +263,7 @@ define(['app', 'zUtil', 'components/editor', 'components/photo'], function (app,
 				$scope.movePage = function (event) {
 					event.preventDefault();
 					var height = parseInt(ZU.getStyle($el[0], 'height'));
-					if (event.type === 'mousemove' && event.which) {
+					if (event.type === 'mousemove' && event.buttons && event.which) {
 						fy += event.movementY;
 						alterTranslate(fy - height * times[0]);
 					} else if (event.type === 'touchmove') {
@@ -272,7 +272,7 @@ define(['app', 'zUtil', 'components/editor', 'components/photo'], function (app,
 						alterTranslate(fy - height * times[0]);
 					}
 				};
-				$scope.alterPage = function () {
+				$scope.alterPage = function (event) {
 					event.preventDefault();
 					var height = parseInt(ZU.getStyle($el[0], 'height'));
 					if (fy <= 50 && fy >= -50) {
@@ -288,7 +288,8 @@ define(['app', 'zUtil', 'components/editor', 'components/photo'], function (app,
 					$scope.setNav(times[0]);
 				};
 				$scope.wheelPage = function (event) {
-					(event.wheelDeltaY > 0 ? fy = 51 : fy = -51) && $el.addClass('transition').triggerHandler('mouseup');
+					var deltaY = event.wheelDeltaY || -event.deltaY;
+					(deltaY > 0 ? fy = 51 : fy = -51) && $el.addClass('transition').triggerHandler('mouseup');
 				};
 
 				$scope.setNav = function (serial) {
@@ -314,8 +315,9 @@ define(['app', 'zUtil', 'components/editor', 'components/photo'], function (app,
 					var degree = 180 + 180 / Math.PI * Math.atan(-width / height);
 					var $motion = ZU.getSelector('#spaceship-motion');
 					var $fill = ZU.getSelector('#spaceship-fill');
-
+					var $svg = ZU.getSelector('#svg_spaceship');
 					var $plane = angular.element(ZU.getSelector('#spaceship'));
+
 					$plane.css({
 						transform: 'rotate(' + degree + 'deg)',
 						webkitTransform: 'rotate(' + degree + 'deg)',
@@ -323,6 +325,7 @@ define(['app', 'zUtil', 'components/editor', 'components/photo'], function (app,
 						oTransform: 'rotate(' + degree + 'deg)',
 						msTransform: 'rotate(' + degree + 'deg)'
 					});
+					$svg.unpauseAnimations();
 					$motion.setAttribute('path', 'M0 0 L' + width + ' ' + height + ' M' + width + ' ' + height + ' Z');
 					// begin the animation
 					$motion.beginElement();
@@ -339,9 +342,10 @@ define(['app', 'zUtil', 'components/editor', 'components/photo'], function (app,
 
 				$scope.$on('$viewContentLoaded', function () {
 					// dom加载完后的事件
+					ZU.getSelector('#svg_spaceship').pauseAnimations();
 				});
 
-				$el.on('animationstart webkitAnimationStart', $scope.playVoice).bind('touchstart mousedown', $scope.setOrigin).bind('touchmove mousemove', $scope.movePage).bind('touchend mouseup', $scope.alterPage).bind('mousewheel', $scope.wheelPage);
+				$el.on('animationstart webkitAnimationStart', $scope.playVoice).bind('touchstart mousedown', $scope.setOrigin).bind('touchmove mousemove', $scope.movePage).bind('touchend mouseup', $scope.alterPage).bind('mousewheel wheel', $scope.wheelPage);
 
 				ZU.showProgress($el.find('img'), function (percent) {
 					if (percent === 100) {

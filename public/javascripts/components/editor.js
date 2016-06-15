@@ -12,15 +12,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 define(['app', 'zUtil'], function (app, ZU) {
 
   'use strict';
+  var $ = angular.element;
 
   var EditorTest = (function () {
     function EditorTest(textarea_id, editor_id, auto) {
       _classCallCheck(this, EditorTest);
 
       // textarea jqLite-object
-      this.tt = angular.element(document.querySelector(textarea_id));
+      this.tt = $(document.querySelector(textarea_id));
       // div jqLite-object
-      this.et = angular.element(document.querySelector(editor_id));
+      this.et = $(document.querySelector(editor_id));
       // whether bind events automatically
       this.auto = auto;
       // getSelection method
@@ -107,10 +108,10 @@ define(['app', 'zUtil'], function (app, ZU) {
     }, {
       key: 'utils',
       value: function utils() {
-        var save = angular.element(document.querySelector('.save'));
-        var image = angular.element(document.querySelector('.image'));
-        var bold = angular.element(document.querySelector('.bold'));
-        var italic = angular.element(document.querySelector('.italic'));
+        var save = $(document.querySelector('.save'));
+        var image = $(document.querySelector('.image'));
+        var bold = $(document.querySelector('.bold'));
+        var italic = $(document.querySelector('.italic'));
 
         var self = this;
 
@@ -140,9 +141,9 @@ define(['app', 'zUtil'], function (app, ZU) {
       _classCallCheck(this, Editor);
 
       // pre jqLite-object
-      this.et = angular.element(document.querySelector(et));
+      this.et = $(document.querySelector(et));
       // file jqLite-object
-      this.file = angular.element(document.querySelector(file));
+      this.file = $(document.querySelector(file));
       // multiply the editable area
       this.multi = multi;
       // pre children
@@ -176,10 +177,10 @@ define(['app', 'zUtil'], function (app, ZU) {
     }, {
       key: 'utils',
       value: function utils() {
-        var save = angular.element(document.querySelector('.save'));
-        var image = angular.element(document.querySelector('.image'));
-        var bold = angular.element(document.querySelector('.bold'));
-        var italic = angular.element(document.querySelector('.italic'));
+        var save = $(document.querySelector('.save'));
+        var image = $(document.querySelector('.image'));
+        var bold = $(document.querySelector('.bold'));
+        var italic = $(document.querySelector('.italic'));
         var file = this.file;
         var edit = this.et;
 
@@ -205,7 +206,7 @@ define(['app', 'zUtil'], function (app, ZU) {
           self.insertImage(event);
         });
 
-        angular.element(document.querySelectorAll('.content')).off('paste').on('paste', function (event) {
+        $(document.querySelectorAll('.content')).off('paste').on('paste', function (event) {
           self.pasteContent(event);
         });
       }
@@ -255,7 +256,7 @@ define(['app', 'zUtil'], function (app, ZU) {
               url.revokeObjectURL(img_node.src);
             };
             var nodeName = self.gs.focusNode;
-            if (nodeName.parentNode.nodeName !== "PRE" && nodeName.nodeName !== "PRE") {
+            if (nodeName.parentNode.nodeName.toLowerCase() !== "pre" && nodeName.nodeName.toLowerCase() !== "pre") {
               if (self.multi) {
                 document.querySelector(self.selector + ':not([class~=ng-hide])').appendChild(img_node);
               } else {
@@ -315,7 +316,7 @@ define(['app', 'zUtil'], function (app, ZU) {
       key: 'pasteContent',
       value: function pasteContent(event) {
         // event.preventDefault();
-        var $target = angular.element(event.target);
+        var $target = $(event.target);
         var text = $target.html();
         var gr = this.gs.getRangeAt(0);
 

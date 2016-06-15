@@ -259,7 +259,7 @@
 						$scope.movePage = (event) => {
 							event.preventDefault();
 							let height = parseInt(ZU.getStyle($el[0], 'height'));
-							if(event.type === 'mousemove' && event.which) {
+							if(event.type === 'mousemove' && event.buttons && event.which) {
 								fy += event.movementY;
 								alterTranslate(fy - height * times[0]);
 							}else if(event.type === 'touchmove'){
@@ -268,7 +268,7 @@
 								alterTranslate(fy - height * times[0]);
 							}
 						};
-						$scope.alterPage = () => {
+						$scope.alterPage = (event) => {
 							event.preventDefault();
 							let height = parseInt(ZU.getStyle($el[0], 'height'));
 							if(fy <= 50 && fy >= -50) {
@@ -284,7 +284,8 @@
 							$scope.setNav(times[0]);
 						}
 						$scope.wheelPage = (event) => {
-							(event.wheelDeltaY > 0 ? fy = 51 : fy = -51) && $el.addClass('transition').triggerHandler('mouseup');
+							let deltaY = event.wheelDeltaY ||  - event.deltaY;
+							(deltaY > 0 ? fy = 51 : fy = -51) && $el.addClass('transition').triggerHandler('mouseup');
 						}
 
 						$scope.setNav = (serial) => {
@@ -311,7 +312,7 @@
 							let [width, height] = [parseInt(ZU.getStyle(document.documentElement, 'width')), parseInt(ZU.getStyle(document.documentElement, 'height'))];
 							let degree = 180 + 180 / Math.PI * Math.atan(- width / height);
 							let [$motion, $fill] = [ZU.getSelector('#spaceship-motion'), ZU.getSelector('#spaceship-fill')];
-							let $plane = angular.element(ZU.getSelector('#spaceship'));
+							let [$svg, $plane] = [ZU.getSelector('#svg_spaceship'), angular.element(ZU.getSelector('#spaceship'))];
 							$plane
 							.css({
 								transform: `rotate(${degree}deg)`, 
@@ -320,6 +321,7 @@
 								oTransform: `rotate(${degree}deg)`, 
 								msTransform: `rotate(${degree}deg)`, 
 							});
+							$svg.unpauseAnimations();
 							$motion.setAttribute('path', `M0 0 L${width} ${height} M${width} ${height} Z`);
 							// begin the animation
 							$motion.beginElement();
@@ -337,6 +339,7 @@
 						$scope
 						.$on('$viewContentLoaded', () => {
 							// dom加载完后的事件
+							ZU.getSelector('#svg_spaceship').pauseAnimations();
 						});
 
 						$el
@@ -344,7 +347,7 @@
 						.bind('touchstart mousedown', $scope.setOrigin)
 						.bind('touchmove mousemove', $scope.movePage)
 						.bind('touchend mouseup', $scope.alterPage)
-						.bind('mousewheel', $scope.wheelPage);
+						.bind('mousewheel wheel', $scope.wheelPage);
 
 						ZU.showProgress($el.find('img'), function(percent) {
 							if(percent === 100) {

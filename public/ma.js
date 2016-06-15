@@ -43,7 +43,7 @@
 	it.next();
 	
 /**
- * Project detination path
+ * Project destination path
  * initialize the target file or folder
  * @param null
  * @return void
